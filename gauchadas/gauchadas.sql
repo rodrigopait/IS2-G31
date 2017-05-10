@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.5.2
+-- http://www.phpmyadmin.net
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 10-05-2017 a las 20:46:00
--- Versión del servidor: 10.1.21-MariaDB
--- Versión de PHP: 5.6.30
+-- Servidor: localhost
+-- Tiempo de generación: 11-05-2017 a las 00:48:44
+-- Versión del servidor: 10.1.16-MariaDB
+-- Versión de PHP: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `gauchadas`
+-- Base de datos: `gauchada`
 --
 
 -- --------------------------------------------------------
@@ -27,10 +27,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `calificacion` (
-  `id_usuario` text CHARACTER SET utf8 NOT NULL,
-  `comentario` text CHARACTER SET utf8 NOT NULL,
+  `id_usuario` text NOT NULL,
+  `comentario` text NOT NULL,
   `id_rango` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -76,7 +76,8 @@ INSERT INTO `categoria` (`id_cat`, `descripcion`) VALUES
 (5, 'instrumentos musicales'),
 (6, 'salud'),
 (7, 'trabajo'),
-(8, 'construccion');
+(8, 'construccion'),
+(9, 'Musica');
 
 -- --------------------------------------------------------
 
@@ -85,7 +86,7 @@ INSERT INTO `categoria` (`id_cat`, `descripcion`) VALUES
 --
 
 CREATE TABLE `compra` (
-  `nro_compra` int(11) NOT NULL,
+  `id_compra` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `total` int(11) NOT NULL,
   `cant_creditos` int(11) NOT NULL
@@ -115,18 +116,19 @@ CREATE TABLE `gauchada` (
   `ciudad` text CHARACTER SET utf8 NOT NULL,
   `fecha_ini` date NOT NULL,
   `fecha_fin` date NOT NULL,
-  `id_foto` int(11) DEFAULT NULL
+  `id_foto` int(11) DEFAULT NULL,
+  `id_registrado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `gauchada`
 --
 
-INSERT INTO `gauchada` (`id_gauchada`, `titulo`, `descripcion`, `ciudad`, `fecha_ini`, `fecha_fin`, `id_foto`) VALUES
-(1, 'Busco acompañante de viaje\r\n\r\n', 'Soy camionero y busco una persona que me acompañe en mi viaje hasta Rawson porque sufro problemas de sueño.\r\n\r\nSaldriamos el primer fin de semana de octubre y retornariamos el fin de semana siguiente.\r\n\r\n* Condicion fundamental: debe cebar buenos mates', 'La Plata', '2017-05-08', '2017-10-05', NULL),
-(2, 'se busca dueño para cachorritos.', 'mi perra tuvo cachorros y no los puedo mantener, se busca familioa responsable.', 'la plata', '2017-05-10', '2017-05-19', NULL),
-(3, 'necesito viajar hasta Bariloche', 'busco gente que viaje para el sur y le sobre un lugar en el vehiculo.', 'Rosario', '2017-05-12', '2017-05-31', NULL),
-(4, 'se necesita cocinera', 'nuestra cocinera se enfermo y necesitamos ayuda para mantener alimentados a los chicos del comedor.', 'Villa Gessel', '2017-05-29', '2017-05-31', NULL);
+INSERT INTO `gauchada` (`id_gauchada`, `titulo`, `descripcion`, `ciudad`, `fecha_ini`, `fecha_fin`, `id_foto`, `id_registrado`) VALUES
+(1, 'Busco acompañante de viaje\r\n\r\n', 'Soy camionero y busco una persona que me acompañe en mi viaje hasta Rawson porque sufro problemas de sueño.\r\n\r\nSaldriamos el primer fin de semana de octubre y retornariamos el fin de semana siguiente.\r\n\r\n* Condicion fundamental: debe cebar buenos mates', 'La Plata', '2017-05-08', '2017-10-05', NULL, 5),
+(2, 'se busca dueño para cachorritos.', 'mi perra tuvo cachorros y no los puedo mantener, se busca familioa responsable.', 'la plata', '2017-05-10', '2017-05-19', NULL, 1),
+(3, 'necesito viajar hasta Bariloche', 'busco gente que viaje para el sur y le sobre un lugar en el vehiculo.', 'Rosario', '2017-05-12', '2017-05-31', NULL, 3),
+(4, 'se necesita cocinera', 'nuestra cocinera se enfermo y necesitamos ayuda para mantener alimentados a los chicos del comedor.', 'Villa Gessel', '2017-05-29', '2017-05-31', NULL, 4);
 
 -- --------------------------------------------------------
 
@@ -135,7 +137,7 @@ INSERT INTO `gauchada` (`id_gauchada`, `titulo`, `descripcion`, `ciudad`, `fecha
 --
 
 CREATE TABLE `postula` (
-  `id_usuario` int(11) NOT NULL,
+  `id_registrado` int(11) NOT NULL,
   `id_gauchada` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -143,9 +145,9 @@ CREATE TABLE `postula` (
 -- Volcado de datos para la tabla `postula`
 --
 
-INSERT INTO `postula` (`id_usuario`, `id_gauchada`) VALUES
+INSERT INTO `postula` (`id_registrado`, `id_gauchada`) VALUES
 (1, 1),
-(2, 2),
+(3, 2),
 (3, 3),
 (4, 4);
 
@@ -181,7 +183,7 @@ CREATE TABLE `registrado` (
   `ciudad` text CHARACTER SET utf8 NOT NULL,
   `creditos` int(11) NOT NULL,
   `telefono` int(13) DEFAULT NULL,
-  `nro_compra` int(11) NOT NULL,
+  `id_compra` int(11) NOT NULL,
   `id_rep` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -189,7 +191,7 @@ CREATE TABLE `registrado` (
 -- Volcado de datos para la tabla `registrado`
 --
 
-INSERT INTO `registrado` (`id_usuario`, `nombre_usu`, `ciudad`, `creditos`, `telefono`, `nro_compra`, `id_rep`) VALUES
+INSERT INTO `registrado` (`id_usuario`, `nombre_usu`, `ciudad`, `creditos`, `telefono`, `id_compra`, `id_rep`) VALUES
 (1, 'facundomedero', 'laplata', 0, 6546464, 0, 0),
 (3, 'francotagliero', 'la plata', 0, 35464, 1, 1),
 (4, 'federicosanchez', 'rosario', 0, 654846156, 2, 2),
@@ -257,8 +259,8 @@ ALTER TABLE `categoria`
 -- Indices de la tabla `compra`
 --
 ALTER TABLE `compra`
-  ADD PRIMARY KEY (`nro_compra`),
-  ADD UNIQUE KEY `nro_compra` (`nro_compra`);
+  ADD PRIMARY KEY (`id_compra`),
+  ADD UNIQUE KEY `nro_compra` (`id_compra`);
 
 --
 -- Indices de la tabla `foto`
@@ -276,7 +278,7 @@ ALTER TABLE `gauchada`
 -- Indices de la tabla `postula`
 --
 ALTER TABLE `postula`
-  ADD PRIMARY KEY (`id_usuario`,`id_gauchada`);
+  ADD PRIMARY KEY (`id_registrado`,`id_gauchada`);
 
 --
 -- Indices de la tabla `rango`
@@ -311,12 +313,12 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id_cat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_cat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `nro_compra` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_compra` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `foto`
 --

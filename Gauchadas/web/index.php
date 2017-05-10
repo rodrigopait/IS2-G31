@@ -2,7 +2,7 @@
 <html lang="en">
 <?php include("conexion.php");?>
 <head>
-
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -87,23 +87,32 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <div class="post-preview">
+                <?php $gauchada = mysql_query("SELECT * FROM gauchada"); ?>
                     <a href="post.php">
-                        <h2 class="post-title"></h2>
-                        <h3 class="post-subtitle">
+                        <h2 class="post-title">
                             <?php
-                            $result = mysql_query("SELECT * FROM Gauchada"); 
-                            $tupla = mysql_fetch_array($result);
-                            echo $tupla['titulo']; 
+                            $tupla = mysql_fetch_array($gauchada);
+                            echo $tupla['titulo'];
                             ?>
-                        </h3>
+                        </h2>
+                        <h3 class="post-subtitle"></h3>
                     </a>
-                    <p class="post-meta">Posted by <a href="#">Gabriel Medina</a> on September 24, 2017</p>
+                    <p class="post-meta">Posted by 
+                    <a href="#">
+                        <?php $vari = $tupla['id_registrado']; 
+                        $consul_usuario = mysql_query("SELECT nombre_usu FROM gauchada INNER JOIN registrado ON gauchada.id_registrado=registrado.id_usuario WHERE id_registrado = '$vari'");
+                        $tabla = mysql_fetch_array($consul_usuario);
+                        echo $tabla[0]?> 
+                    </a> on September 24, 2017</p>
                 </div>
                 <hr>
                 <div class="post-preview">
                     <a href="post.php">
                         <h2 class="post-title">
-                            I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
+                            <?php
+                            $tupla = mysql_fetch_array($gauchada);
+                            echo $tupla['titulo']; 
+                            ?>
                         </h2>
                     </a>
                     <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 18, 2017</p>
