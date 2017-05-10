@@ -88,12 +88,13 @@
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <div class="post-preview">
                     <a href="post.php">
-                        <h2 class="post-title">
-                            <?$result = mysql_query("SELECT * FROM Gauchada"); $tupla = mysql_fetch_array($result);
-                            echo $tupla['titulo']; ?>
-                        </h2>
+                        <h2 class="post-title"></h2>
                         <h3 class="post-subtitle">
-                            Soy camionero y necesito ir desde BsAs hasta Rawson
+                            <?php
+                            $result = mysql_query("SELECT * FROM Gauchada"); 
+                            $tupla = mysql_fetch_array($result);
+                            echo $tupla['titulo']; 
+                            ?>
                         </h3>
                     </a>
                     <p class="post-meta">Posted by <a href="#">Gabriel Medina</a> on September 24, 2017</p>
