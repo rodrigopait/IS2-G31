@@ -1,0 +1,17 @@
+Logueo de apps de Gauchadas:
+
+MAIl:
+	usuario: gauchadas@hotmail.com
+	contraseña: Cocacolatmpsa
+
+FACEBOOK:
+	usuario: gauchadas@hotmail.com
+	contraseña: Cocacolatmpsa
+
+TWITTER:
+	usuario: gauchadas@hotmail.com / @GauchadasTMPsa
+	contraseña: Cocacolatmpsa
+
+GITHUB:
+	usuario: gauchadas@hotmail.com / Gauchadas
+	contraseña: Cocacolatmpsa1

@@ -158,7 +158,9 @@
                             </a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted">Copyright &copy; Your Website 2017</p>
+                    <p class="copyright text-muted" style="background-image: url(img/TMP.png);
+                    background-repeat: no-repeat; background-position-x: 35%;
+                    background-size: contain;"> Copyright &copy; TMP S.A. 2017</p>
                 </div>
             </div>
         </div>

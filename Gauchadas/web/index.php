@@ -86,20 +86,16 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                <?php $consul_gauchada = mysql_query("SELECT * FROM gauchada");?>
                 <div class="post-preview">
-                <?php $gauchada = mysql_query("SELECT * FROM gauchada"); ?>
                     <a href="post.php">
                         <h2 class="post-title">
-                            <?php
-                            $tupla = mysql_fetch_array($gauchada);
-                            echo $tupla['titulo'];
-                            ?>
+                            <?php $tupla = mysql_fetch_array($consul_gauchada); 
+                            echo $tupla['titulo'];?>
                         </h2>
                         <h3 class="post-subtitle"></h3>
                     </a>
-                    <p class="post-meta">Posted by 
-                    <a href="#">
-                        <?php $vari = $tupla['id_registrado']; 
+                    <p class="post-meta">Posted by <a href="#"><?php $vari = $tupla['id_registrado']; 
                         $consul_usuario = mysql_query("SELECT nombre_usu FROM gauchada INNER JOIN registrado ON gauchada.id_registrado=registrado.id_usuario WHERE id_registrado = '$vari'");
                         $tabla = mysql_fetch_array($consul_usuario);
                         echo $tabla[0]?> 
@@ -109,42 +105,36 @@
                 <div class="post-preview">
                     <a href="post.php">
                         <h2 class="post-title">
-                            <?php
-                            $tupla = mysql_fetch_array($gauchada);
-                            echo $tupla['titulo']; 
-                            ?>
+                            <?php $tupla = mysql_fetch_array($consul_gauchada);
+                            echo $tupla['titulo'];?>
                         </h2>
                     </a>
-                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 18, 2017</p>
+                    <p class="post-meta">Posted by <a href="#"><?php $vari = $tupla['id_registrado']; 
+                        $consul_usuario = mysql_query("SELECT nombre_usu FROM gauchada INNER JOIN registrado ON gauchada.id_registrado=registrado.id_usuario WHERE id_registrado = '$vari'");
+                        $tabla = mysql_fetch_array($consul_usuario);
+                        echo $tabla[0]?> 
+                    </a> on September 18, 2017</p>
                 </div>
                 <hr>
-                <div class="post-preview">
+               <div class="post-preview">
                     <a href="post.php">
                         <h2 class="post-title">
-                            Science has not yet mastered prophecy
+                            <?php $tupla = mysql_fetch_array($consul_gauchada);
+                            echo $tupla['titulo'];?>
                         </h2>
                         <h3 class="post-subtitle">
-                            We predict too much for the next year and yet far too little for the next ten.
                         </h3>
                     </a>
-                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on August 24, 2017</p>
+                    <p class="post-meta">Posted by <a href="#"><?php $vari = $tupla['id_registrado']; 
+                        $consul_usuario = mysql_query("SELECT nombre_usu FROM gauchada INNER JOIN registrado ON gauchada.id_registrado=registrado.id_usuario WHERE id_registrado = '$vari'");
+                        $tabla = mysql_fetch_array($consul_usuario);
+                        echo $tabla[0]?> 
+                    </a> on August 24, 2017</p>
                 </div>
-                <hr>
-                <div class="post-preview">
-                    <a href="post.php">
-                        <h2 class="post-title">
-                            Failure is not an option
-                        </h2>
-                        <h3 class="post-subtitle">
-                            Many say exploration is part of our destiny, but it’s actually our duty to future generations.
-                        </h3>
-                    </a>
-                    <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on July 8, 2017</p>
-                </div>
-                <hr>
+               <hr>
                 <!-- Pager -->
-                <div class="clearfix">
-                    <a class="btn btn-secondary float-right" href="#">Older Posts &rarr;</a>
+               <div class="clearfix">
+                    <a class="btn btn-secondary float-right" href="all-post.php">ver mas &rarr;</a>
                 </div>
             </div>
         </div>
@@ -159,7 +149,7 @@
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                     <ul class="list-inline text-center">
                         <li class="list-inline-item">
-                            <a href="index.php">
+                            <a href="https://twitter.com/GauchadasTMPsa">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
@@ -167,7 +157,7 @@
                             </a>
                         </li>
                         <li class="list-inline-item">
-                            <a href="index.php">
+                            <a href="https://www.facebook.com/Gauchadas-764417733736740/">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -175,7 +165,7 @@
                             </a>
                         </li>
                         <li class="list-inline-item">
-                            <a href="index.php">
+                            <a href="https://github.com/gauchadas">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -183,7 +173,9 @@
                             </a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted">Copyright &copy; Your Website 2017</p>
+                    <p class="copyright text-muted" style="background-image: url(img/TMP.png);
+                    background-repeat: no-repeat; background-position-x: 35%;
+                    background-size: contain;"> Copyright &copy; TMP S.A. 2017</p>
                 </div>
             </div>
         </div>
