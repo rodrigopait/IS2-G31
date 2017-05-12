@@ -64,14 +64,13 @@
     </nav>
 
     <!-- Page Header -->
-    <header class="intro-header" style="background-image: url('img/post-bg.jpg')">
+    <header class="intro-header" style="background-image: url('img/Valle.JPG');">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                    <div class="post-heading">
+                    <div class="post-heading" style="text-align: center;">
                         <h1>Busco acompañante de viaje</h1>
-                        <h2 class="subheading">Soy camionero y necesito ir desde BsAs hasta Rawso</h2>
-                        <span class="meta">Posted by <a href="#">Gabriel Medina</a> on August 24, 2017</span>
+                        <h2 class="subheading"></h2>
                     </div>
                 </div>
             </div>
