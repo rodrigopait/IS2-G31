@@ -88,10 +88,12 @@
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <?php $consul_gauchada = mysql_query("SELECT * FROM gauchada");?>
                 <div class="post-preview">
-                    <a href="post.php">
+                    <a name="view-post" method="GET" action="post.php">
                         <h2 class="post-title">
                             <?php $tupla = mysql_fetch_array($consul_gauchada); 
-                            echo $tupla['titulo'];?>
+                            echo $tupla['titulo'];
+                            $id_gauchada = $tupla['id_gauchada'];?>
+                            <a type="text" name="nombre" value="'$id_gauchada'">
                         </h2>
                         <h3 class="post-subtitle"></h3>
                     </a>

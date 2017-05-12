@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php include("conexion.php");?>
 <head>
 
     <meta charset="utf-8">
@@ -69,7 +69,7 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                     <div class="post-heading" style="text-align: center;">
-                        <h1>Busco acompañante de viaje</h1>
+                        <h1> <?php $titulo = $_GET['nombre']; echo $titulo;?> </h1>
                         <h2 class="subheading"></h2>
                     </div>
                 </div>
