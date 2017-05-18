@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 11-05-2017 a las 00:48:44
+-- Tiempo de generación: 18-05-2017 a las 19:58:51
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -126,9 +126,9 @@ CREATE TABLE `gauchada` (
 
 INSERT INTO `gauchada` (`id_gauchada`, `titulo`, `descripcion`, `ciudad`, `fecha_ini`, `fecha_fin`, `id_foto`, `id_registrado`) VALUES
 (1, 'Busco acompañante de viaje\r\n\r\n', 'Soy camionero y busco una persona que me acompañe en mi viaje hasta Rawson porque sufro problemas de sueño.\r\n\r\nSaldriamos el primer fin de semana de octubre y retornariamos el fin de semana siguiente.\r\n\r\n* Condicion fundamental: debe cebar buenos mates', 'La Plata', '2017-05-08', '2017-10-05', NULL, 5),
-(2, 'se busca dueño para cachorritos.', 'mi perra tuvo cachorros y no los puedo mantener, se busca familioa responsable.', 'la plata', '2017-05-10', '2017-05-19', NULL, 1),
-(3, 'necesito viajar hasta Bariloche', 'busco gente que viaje para el sur y le sobre un lugar en el vehiculo.', 'Rosario', '2017-05-12', '2017-05-31', NULL, 3),
-(4, 'se necesita cocinera', 'nuestra cocinera se enfermo y necesitamos ayuda para mantener alimentados a los chicos del comedor.', 'Villa Gessel', '2017-05-29', '2017-05-31', NULL, 4);
+(2, 'Se busca dueño para cachorritos', 'Mi perra tuvo cachorros y no los puedo mantener, se busca familioa responsable', 'La Plata', '2017-05-10', '2017-05-19', NULL, 1),
+(3, 'Necesito viajar hasta Bariloche', 'busco gente que viaje para el sur y le sobre un lugar en el vehiculo.', 'Rosario', '2017-05-12', '2017-05-31', NULL, 3),
+(4, 'Se necesita cocinera', 'nuestra cocinera se enfermo y necesitamos ayuda para mantener alimentados a los chicos del comedor.', 'Villa Gessel', '2017-05-29', '2017-05-31', NULL, 4);
 
 -- --------------------------------------------------------
 
@@ -180,6 +180,7 @@ INSERT INTO `rango` (`id_rango`, `descripcion`) VALUES
 CREATE TABLE `registrado` (
   `id_usuario` int(11) NOT NULL,
   `nombre_usu` text CHARACTER SET utf8 NOT NULL,
+  `mail` text CHARACTER SET utf8 NOT NULL,
   `ciudad` text CHARACTER SET utf8 NOT NULL,
   `creditos` int(11) NOT NULL,
   `telefono` int(13) DEFAULT NULL,
@@ -191,11 +192,12 @@ CREATE TABLE `registrado` (
 -- Volcado de datos para la tabla `registrado`
 --
 
-INSERT INTO `registrado` (`id_usuario`, `nombre_usu`, `ciudad`, `creditos`, `telefono`, `id_compra`, `id_rep`) VALUES
-(1, 'facundomedero', 'laplata', 0, 6546464, 0, 0),
-(3, 'francotagliero', 'la plata', 0, 35464, 1, 1),
-(4, 'federicosanchez', 'rosario', 0, 654846156, 2, 2),
-(5, 'rodrigopait', 'mar de ajo', 0, 4876848, 3, 3);
+INSERT INTO `registrado` (`id_usuario`, `nombre_usu`, `mail`, `ciudad`, `creditos`, `telefono`, `id_compra`, `id_rep`) VALUES
+(1, 'facundomedero', 'facumedero@hotmail.com', 'laplata', 0, 6546464, 0, 2),
+(3, 'francotagliero', 'francotagliero@hotmail.com', 'la plata', 0, 35464, 1, 2),
+(4, 'federicosanchez', 'fedesanchez@gmail.com', 'rosario', 0, 654846156, 2, 3),
+(5, 'rodrigopait', 'rodripait@hotmail.com', 'mar de ajo', 0, 4876848, 3, 3),
+(6, 'camila', 'cami@hotmail.com', 'mar de ajo', 0, NULL, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -205,8 +207,21 @@ INSERT INTO `registrado` (`id_usuario`, `nombre_usu`, `ciudad`, `creditos`, `tel
 
 CREATE TABLE `reputacion` (
   `id_rep` int(11) NOT NULL,
-  `descripcion` int(11) NOT NULL
+  `rango` int(11) NOT NULL,
+  `descripcion` text CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `reputacion`
+--
+
+INSERT INTO `reputacion` (`id_rep`, `rango`, `descripcion`) VALUES
+(1, -1, 'Irresponsable'),
+(2, 0, 'Observador'),
+(3, 1, 'Cuplidor'),
+(4, 11, 'Solidario'),
+(5, 21, 'Profesional'),
+(6, 31, 'Experto');
 
 -- --------------------------------------------------------
 
@@ -338,12 +353,12 @@ ALTER TABLE `rango`
 -- AUTO_INCREMENT de la tabla `registrado`
 --
 ALTER TABLE `registrado`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `reputacion`
 --
 ALTER TABLE `reputacion`
-  MODIFY `id_rep` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_rep` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
