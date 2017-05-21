@@ -88,12 +88,10 @@
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <?php $consul_gauchada = mysql_query("SELECT * FROM gauchada");?>
                 <div class="post-preview">
-                    <a name="view-post" method="GET" action="post.php">
+                    <?php $tupla = mysql_fetch_array($consul_gauchada);?>
+                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>">
                         <h2 class="post-title">
-                            <?php $tupla = mysql_fetch_array($consul_gauchada); 
-                            echo $tupla['titulo'];
-                            $id_gauchada = $tupla['id_gauchada'];?>
-                            <a type="text" name="nombre" value="'$id_gauchada'">
+                            <?php echo $tupla['titulo'];?>
                         </h2>
                         <h3 class="post-subtitle"></h3>
                     </a>
@@ -105,11 +103,11 @@
                 </div>
                 <hr>
                 <div class="post-preview">
-                    <a href="post.php">
+                    <?php $tupla = mysql_fetch_array($consul_gauchada);?>
+                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>">
                         <h2 class="post-title">
-                            <?php $tupla = mysql_fetch_array($consul_gauchada);
-                            echo $tupla['titulo'];?>
-                        </h2>
+                            <?php echo $tupla['titulo'];?>
+                        </h2 >
                     </a>
                     <p class="post-meta">Posted by <a href="#"><?php $vari = $tupla['id_registrado']; 
                         $consul_usuario = mysql_query("SELECT nombre_usu FROM gauchada INNER JOIN registrado ON gauchada.id_registrado=registrado.id_usuario WHERE id_registrado = '$vari'");
@@ -119,13 +117,12 @@
                 </div>
                 <hr>
                <div class="post-preview">
-                    <a href="post.php">
-                        <h2 class="post-title">
-                            <?php $tupla = mysql_fetch_array($consul_gauchada);
-                            echo $tupla['titulo'];?>
+                    <?php $tupla = mysql_fetch_array($consul_gauchada);?>
+                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>">
+                        <h2 class="post-title">   
+                            <?php echo $tupla['titulo'];?>
                         </h2>
-                        <h3 class="post-subtitle">
-                        </h3>
+                        <h3 class="post-subtitle"></h3>
                     </a>
                     <p class="post-meta">Posted by <a href="#"><?php $vari = $tupla['id_registrado']; 
                         $consul_usuario = mysql_query("SELECT nombre_usu FROM gauchada INNER JOIN registrado ON gauchada.id_registrado=registrado.id_usuario WHERE id_registrado = '$vari'");

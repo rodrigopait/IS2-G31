@@ -64,12 +64,15 @@
     </nav>
 
     <!-- Page Header -->
-    <header class="intro-header" style="background-image: url('img/Valle.JPG');background-position-y:0 ">
+    <header class="intro-header" style="background-image: url('img/Valle.JPG')">
+        <?php $id = ($_GET['variable']);
+        $consulta = mysql_query("SELECT * FROM gauchada WHERE id_gauchada = '$id'");
+        $tabla = mysql_fetch_array($consulta);?>
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                     <div class="post-heading" style="text-align: center;">
-                        <h1> BIGOTE </h1>
+                        <h1> <?php echo $tabla['titulo'];?> </h1>
                         <h2 class="subheading"></h2>
                     </div>
                 </div>
@@ -81,39 +84,17 @@
     <article>
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                    <p>Soy camionero y busco una persona que me acompañe en mi viaje hasta Rawson porque sufro problemas de sueño.</p>
-
-                    <p>Saldríamos el primer fin de semana de octubre y retornaríamos el fin de semana siguiente.</p>
-
-                    <p>* Condición fundamental: debe cebar buenos mates</p>
-
-            
-
-                    <h2 class="section-heading">The Final Frontier</h2>
-
-                    <p>There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.</p>
-
-                    <p>There can be no thought of finishing for ‘aiming for the stars.’ Both figuratively and literally, it is a task to occupy the generations. And no matter how much progress one makes, there is always the thrill of just beginning.</p>
-
-                    <blockquote class="blockquote">The dreams of yesterday are the hopes of today and the reality of tomorrow. Science has not yet mastered prophecy. We predict too much for the next year and yet far too little for the next ten.</blockquote>
-
-                    <p>Spaceflights cannot be stopped. This is not the work of any one man or even a group of men. It is a historical process which mankind is carrying out in accordance with the natural laws of human development.</p>
-
-                    <h2 class="section-heading">Reaching for the Stars</h2>
-
-                    <p>As we got further and further away, it [the Earth] diminished in size. Finally it shrank to the size of a marble, the most beautiful you can imagine. That beautiful, warm, living object looked so fragile, so delicate, that if you touched it with a finger it would crumble and fall apart. Seeing this has to change a man.</p>
-
-                    <a href="#">
+                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1" style="text-align: justify;line-height: 2;">
+                    <p class="caption text-muted" style="text-align: left;"> Fecha de creación:
+                        <?php echo $tabla['fecha_ini']?></p>
+                    <?php echo $tabla['descripcion']?>
+                    <br />
+                    <a href="post.php?variable=<?php echo $tabla['id_gauchada'];?>">
                         <img class="img-responsive" src="img/post-sample-image.jpg" alt="">
                     </a>
                     <span class="caption text-muted">To go places and do things that have never been done before – that’s what living is all about.</span>
-
-                    <p>Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.</p>
-
-                    <p>As I stand out here in the wonders of the unknown at Hadley, I sort of realize there’s a fundamental truth to our nature, Man must explore, and this is exploration at its greatest.</p>
-
-                    <p>Placeholder text by <a href="http://spaceipsum.com/">Space Ipsum</a>. Photographs by <a href="https://www.flickr.com/photos/nasacommons/">NASA on The Commons</a>.</p>
+                    <p style="text-align: right;"> Fecha de cierre:
+                        <?php echo $tabla['fecha_fin']?> </p>
                 </div>
             </div>
         </div>
