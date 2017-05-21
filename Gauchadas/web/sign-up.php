@@ -97,14 +97,14 @@
                             required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">
                         </div>
                     </div>
-<!--                     <div class="control-group">
+                    <div class="control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>Telefono</label>
                             <input type="tel" class="form-control" placeholder="Telefono" optional
                             pattern="[0-9]+" tittle="Por favor ingrese su numero de telefono" name="phone" value="">
                         </div>
                     </div>
- -->                    <div class="control-group">
+                    <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
                             <label>Ciudad</label>
                             <input type="text" class="form-control" placeholder="Ciudad" required
