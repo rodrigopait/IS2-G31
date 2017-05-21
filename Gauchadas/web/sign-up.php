@@ -43,20 +43,11 @@
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="index.php">Start Bootstrap</a>
+            <a class="navbar-brand page-scroll" href="index.php">Gauchadas</a>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="index.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="about.php">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="post.php">Sample Post</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="contact.php">Contact</a>
+                        <a class="nav-link page-scroll" href="index.php">Iniciar Sesión</a>
                     </li>
                 </ul>
             </div>
@@ -69,9 +60,9 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                     <div class="page-heading">
-                        <h1>Contact Me</h1>
+                        <h1>Gauchadas</h1>
                         <hr class="small">
-                        <span class="subheading">Have questions? I have answers (maybe).</span>
+                        <span class="subheading">Regístrate y mira las gauchadas de tus amigos.</span>
                     </div>
                 </div>
             </div>
@@ -82,43 +73,49 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                <p>Want to get in touch with me? Fill out the form below to send me a message and I will try to get back to you within 24 hours!</p>
-                <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
-                <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
-                <!-- NOTE: To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
-                <form name="sentMessage" id="contactForm" novalidate>
+                <form name="registrerUser" method="POST" action="sign-up-check.php">
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
-                            <label>Name</label>
-                            <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <div class="form-group floating-label-form-group controls">
-                            <label>Email Address</label>
-                            <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
-                            <p class="help-block text-danger"></p>
+                            <label>Nombre de usuario</label>
+                            <input type="text" class="form-control" placeholder="Nombre de usuario" 
+                            name="name" value="" pattern="[a-z]{3,15}" 
+                            title="Por favor ingrese su nombre en miniscula de al menos tres (3) y maximo quince (15) caracteres">
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label>Phone Number</label>
-                            <input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
-                            <p class="help-block text-danger"></p>
+                            <label>Contraseña</label>
+                            <input type="password" class="form-control" placeholder="Contraseña" name="pw" value=""
+                            pattern=".{6,}" title="Por favor ingrese su contraseña de al menos seis (6) caracteres.">
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
-                            <label>Message</label>
-                            <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
-                            <p class="help-block text-danger"></p>
+                            <label>Correo electrónico</label>
+                            <input type="email" class="form-control" placeholder="Correo electrónico" 
+                            name="email" value="" title="Por favor ingrese algo como ejemplo@gauchadas.com"
+                            required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">
+                        </div>
+                    </div>
+<!--                     <div class="control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Telefono</label>
+                            <input type="tel" class="form-control" placeholder="Telefono" optional
+                            pattern="[0-9]+" tittle="Por favor ingrese su numero de telefono" name="phone" value="">
+                        </div>
+                    </div>
+ -->                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls">
+                            <label>Ciudad</label>
+                            <input type="text" class="form-control" placeholder="Ciudad" required
+                            title="Por favor ingrese su ciudad" name="city" value="">
                         </div>
                     </div>
                     <br>
                     <div id="success"></div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-secondary">Send</button>
+                        <button type="submit" class="btn btn-secondary">Regístrate</button>
+                        <button type="reset" class="btn btn-secondary">Restablecer</button>
                     </div>
                 </form>
             </div>
