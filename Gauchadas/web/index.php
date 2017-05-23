@@ -64,9 +64,6 @@ $nombre=$_SESSION['nombreUsuario'];?>
                         <a class="nav-link page-scroll" href="comprar-creditos.php">Comprar Creditos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="contact.php">Contact</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link page-scroll" href="logout.php">Logout</a>
                 </ul>
             </div>

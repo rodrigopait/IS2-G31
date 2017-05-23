@@ -78,15 +78,14 @@
                         <div class="form-group floating-label-form-group controls">
                             <label>Nombre de usuario</label>
                             <input type="text" class="form-control" placeholder="Nombre de usuario" 
-                            name="nombreUsuario" value="" pattern="[a-z]{3,15}" 
+                            name="nombreUsuario" value="" pattern="[a-z]{3,15}" required
                             title="Por favor ingrese su nombre en miniscula de al menos tres (3) y maximo quince (15) caracteres">
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>Contraseña</label>
-                            <input type="password" class="form-control" placeholder="Contraseña" name="pw" value=""
-                            pattern=".{6,}" title="Por favor ingrese su contraseña de al menos seis (6) caracteres.">
+                            <input type="password" class="form-control" required placeholder="Contraseña" name="pw" value="" pattern=".{6,}" title="Por favor ingrese su contraseña de al menos seis (6) caracteres.">
                         </div>
                     </div>
                     <br>

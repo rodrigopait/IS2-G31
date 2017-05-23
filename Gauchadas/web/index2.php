@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php   include("conexion.php");
-        include("funciones.php")?>
+        include("funciones.php");?>
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8">
