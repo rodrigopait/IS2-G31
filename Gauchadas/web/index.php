@@ -2,9 +2,9 @@
 <html lang="en">
 <?php 
 include("conexion.php");
-include("funciones.php");
-comprobarSession("index.php");
-?>
+include("sign-in-check.php");
+$nombre=$_SESSION['nombreUsuario'];?>
+
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8">
@@ -20,7 +20,6 @@ comprobarSession("index.php");
     <!-- Additional fonts for this theme -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='css/fonts.css' rel='stylesheet' type='text/css'>
-    <!--Awesome fonts-->
 
     <!-- Custom styles for this theme -->
     <link href="css/clean-blog.min.css" rel="stylesheet">
@@ -43,7 +42,7 @@ comprobarSession("index.php");
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar fixed-top navbar-toggleable-md navbar-light" id="mainNav" 
+     <nav class="navbar fixed-top navbar-toggleable-md navbar-light" id="mainNav" 
     style="background-image: linear-gradient(180deg,rgba(0,0,0,.4) 0,transparent); border: none;">
         <div class="container">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,6 +73,7 @@ comprobarSession("index.php");
         </div>
     </nav>
 
+
     <!-- Page Header -->
     <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: contain;
     background-position-y: 0; height: 333px;">
@@ -98,12 +98,10 @@ comprobarSession("index.php");
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <?php $consul_gauchada = mysql_query("SELECT * FROM gauchada");?>
                 <div class="post-preview">
-                    <a name="view-post" method="GET" action="post.php">
+                    <?php $tupla = mysql_fetch_array($consul_gauchada);?>
+                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=false">
                         <h2 class="post-title">
-                            <?php $tupla = mysql_fetch_array($consul_gauchada); 
-                            echo $tupla['titulo'];
-                            $id_gauchada = $tupla['id_gauchada'];?>
-                            <a type="text" name="nombre" value="'$id_gauchada'">
+                            <?php echo $tupla['titulo'];?>
                         </h2>
                         <h3 class="post-subtitle"></h3>
                     </a>
@@ -115,11 +113,11 @@ comprobarSession("index.php");
                 </div>
                 <hr>
                 <div class="post-preview">
-                    <a href="post.php">
+                    <?php $tupla = mysql_fetch_array($consul_gauchada);?>
+                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=false">
                         <h2 class="post-title">
-                            <?php $tupla = mysql_fetch_array($consul_gauchada);
-                            echo $tupla['titulo'];?>
-                        </h2>
+                            <?php echo $tupla['titulo'];?>
+                        </h2 >
                     </a>
                     <p class="post-meta">Posted by <a href="#"><?php $vari = $tupla['id_registrado']; 
                         $consul_usuario = mysql_query("SELECT nombre_usu FROM gauchada INNER JOIN registrado ON gauchada.id_registrado=registrado.id_usuario WHERE id_registrado = '$vari'");
@@ -129,13 +127,12 @@ comprobarSession("index.php");
                 </div>
                 <hr>
                <div class="post-preview">
-                    <a href="post.php">
-                        <h2 class="post-title">
-                            <?php $tupla = mysql_fetch_array($consul_gauchada);
-                            echo $tupla['titulo'];?>
+                    <?php $tupla = mysql_fetch_array($consul_gauchada);?>
+                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=false">
+                        <h2 class="post-title">   
+                            <?php echo $tupla['titulo'];?>
                         </h2>
-                        <h3 class="post-subtitle">
-                        </h3>
+                        <h3 class="post-subtitle"></h3>
                     </a>
                     <p class="post-meta">Posted by <a href="#"><?php $vari = $tupla['id_registrado']; 
                         $consul_usuario = mysql_query("SELECT nombre_usu FROM gauchada INNER JOIN registrado ON gauchada.id_registrado=registrado.id_usuario WHERE id_registrado = '$vari'");
