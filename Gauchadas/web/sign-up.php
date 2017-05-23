@@ -47,7 +47,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="index.php">Iniciar Sesión</a>
+                        <a class="nav-link page-scroll" href="sign-in.php">Iniciar Sesión</a>
                     </li>
                 </ul>
             </div>

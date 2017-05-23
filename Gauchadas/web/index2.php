@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php 
-include("conexion.php");
-include("funciones.php");
-comprobarSession("index.php");
-?>
+<?php   include("conexion.php");
+        include("funciones.php")?>
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8">
@@ -12,7 +9,7 @@ comprobarSession("index.php");
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Gauchadas</title>
+    <title>Gauchadas - Comparte tu gauchada</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -20,7 +17,6 @@ comprobarSession("index.php");
     <!-- Additional fonts for this theme -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='css/fonts.css' rel='stylesheet' type='text/css'>
-    <!--Awesome fonts-->
 
     <!-- Custom styles for this theme -->
     <link href="css/clean-blog.min.css" rel="stylesheet">
@@ -56,19 +52,14 @@ comprobarSession("index.php");
                         <a class="nav-link page-scroll" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="about.php">Perfil</a>
+                        <a class="nav-link page-scroll" href="about.php">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="post.php">Publicar Gauchada</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="comprar-creditos.php">Comprar Creditos</a>
+                        <a class="nav-link page-scroll" href="post.php">Sample Post</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link page-scroll" href="contact.php">Contact</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="logout.php">Logout</a>
                 </ul>
             </div>
         </div>
@@ -96,53 +87,9 @@ comprobarSession("index.php");
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                <?php $consul_gauchada = mysql_query("SELECT * FROM gauchada");?>
-                <div class="post-preview">
-                    <a name="view-post" method="GET" action="post.php">
-                        <h2 class="post-title">
-                            <?php $tupla = mysql_fetch_array($consul_gauchada); 
-                            echo $tupla['titulo'];
-                            $id_gauchada = $tupla['id_gauchada'];?>
-                            <a type="text" name="nombre" value="'$id_gauchada'">
-                        </h2>
-                        <h3 class="post-subtitle"></h3>
-                    </a>
-                    <p class="post-meta">Posted by <a href="#"><?php $vari = $tupla['id_registrado']; 
-                        $consul_usuario = mysql_query("SELECT nombre_usu FROM gauchada INNER JOIN registrado ON gauchada.id_registrado=registrado.id_usuario WHERE id_registrado = '$vari'");
-                        $tabla = mysql_fetch_array($consul_usuario);
-                        echo $tabla[0]?> 
-                    </a> on September 24, 2017</p>
-                </div>
-                <hr>
-                <div class="post-preview">
-                    <a href="post.php">
-                        <h2 class="post-title">
-                            <?php $tupla = mysql_fetch_array($consul_gauchada);
-                            echo $tupla['titulo'];?>
-                        </h2>
-                    </a>
-                    <p class="post-meta">Posted by <a href="#"><?php $vari = $tupla['id_registrado']; 
-                        $consul_usuario = mysql_query("SELECT nombre_usu FROM gauchada INNER JOIN registrado ON gauchada.id_registrado=registrado.id_usuario WHERE id_registrado = '$vari'");
-                        $tabla = mysql_fetch_array($consul_usuario);
-                        echo $tabla[0]?> 
-                    </a> on September 18, 2017</p>
-                </div>
-                <hr>
-               <div class="post-preview">
-                    <a href="post.php">
-                        <h2 class="post-title">
-                            <?php $tupla = mysql_fetch_array($consul_gauchada);
-                            echo $tupla['titulo'];?>
-                        </h2>
-                        <h3 class="post-subtitle">
-                        </h3>
-                    </a>
-                    <p class="post-meta">Posted by <a href="#"><?php $vari = $tupla['id_registrado']; 
-                        $consul_usuario = mysql_query("SELECT nombre_usu FROM gauchada INNER JOIN registrado ON gauchada.id_registrado=registrado.id_usuario WHERE id_registrado = '$vari'");
-                        $tabla = mysql_fetch_array($consul_usuario);
-                        echo $tabla[0]?> 
-                    </a> on August 24, 2017</p>
-                </div>
+                <?php $consul_gauchada = mysql_query("SELECT * FROM gauchada");
+                mostrarGauchadas();
+                ?>
                <hr>
                 <!-- Pager -->
                <div class="clearfix">
@@ -155,7 +102,44 @@ comprobarSession("index.php");
     <hr>
 
     <!-- Footer -->
-    <?php include("footer.php");?>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                    <ul class="list-inline text-center">
+                        <li class="list-inline-item">
+                            <a href="https://twitter.com/GauchadasTMPsa">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://www.facebook.com/Gauchadas-764417733736740/">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://github.com/gauchadas">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted" style="background-image: url(img/TMP.png);
+                    background-repeat: no-repeat; background-position-x: 35%;
+                    background-size: contain;"> Copyright &copy; TMP S.A. 2017</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <!-- jQuery Version 3.1.1 -->
     <script src="js/jquery.js"></script>
 

@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php 
+include("conexion.php");
+include("funciones.php");
+comprobarSession("index.php");
+?>
 <head>
 
     <meta charset="utf-8">
@@ -8,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Gauchadas</title>
+    <title>Gauchadas - Comprar Creditos</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -38,26 +42,29 @@
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar fixed-top navbar-toggleable-md navbar-light" id="mainNav">
+    <nav class="navbar fixed-top navbar-toggleable-md navbar-light" id="mainNav" 
+    style="background-image: linear-gradient(180deg,rgba(0,0,0,.4) 0,transparent); border: none;">
         <div class="container">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="index.php">Start Bootstrap</a>
+            <a class="navbar-brand page-scroll" href="index.php">Gauchadas</a>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link page-scroll" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="about.php">About</a>
+                        <a class="nav-link page-scroll" href="about.php">Perfil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="post.php">Sample Post</a>
+                        <a class="nav-link page-scroll" href="post.php">Publicar Gauchada</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="contact.php">Contact</a>
+                        <a class="nav-link page-scroll" href="comprar-creditos.php">Comprar Creditos</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="logout.php">Logout</a>
                 </ul>
             </div>
         </div>
@@ -69,9 +76,9 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                     <div class="page-heading">
-                        <h1>Contact Me</h1>
+                        <h1>Comprar Creditos</h1>
                         <hr class="small">
-                        <span class="subheading">Have questions? I have answers (maybe).</span>
+                        <span class="subheading">Comprá creditos para poder publicar una gauchada</span>
                     </div>
                 </div>
             </div>
@@ -89,32 +96,17 @@
                 <form name="sentMessage" id="contactForm" novalidate>
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
-                            <label>Name</label>
-                            <input type="text" class="form-control" placeholder="Name" id="name" required data-validation-required-message="Please enter your name.">
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <div class="form-group floating-label-form-group controls">
-                            <label>Email Address</label>
-                            <input type="email" class="form-control" placeholder="Email Address" id="email" required data-validation-required-message="Please enter your email address.">
+                            <label>Tarjeta de credito</label>
+                            <input type="text" class="form-control" placeholder="Tarjeta de Credito" id="tarjetaDeCredito" required data-validation-required-message="Please enter your email address.">
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label>Phone Number</label>
-                            <input type="tel" class="form-control" placeholder="Phone Number" id="phone" required data-validation-required-message="Please enter your phone number.">
+                            <label>Creditos</label>
+                            <input type="tel" class="form-control" placeholder="Cantidad de creditos" id="creditos" required data-validation-required-message="Please enter your phone number.">
                             <p class="help-block text-danger"></p>
                         </div>
-                    </div>
-                    <div class="control-group">
-                        <div class="form-group floating-label-form-group controls">
-                            <label>Message</label>
-                            <textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>
-                            <p class="help-block text-danger"></p>
-                        </div>
-                    </div>
                     <br>
                     <div id="success"></div>
                     <div class="form-group">
