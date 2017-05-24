@@ -38,7 +38,7 @@
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar fixed-top navbar-toggleable-md navbar-light" id="mainNav" 
+     <nav class="navbar fixed-top navbar-toggleable-md navbar-light" id="mainNav" 
     style="background-image: linear-gradient(180deg,rgba(0,0,0,.4) 0,transparent); border: none;">
         <div class="container">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,14 +51,16 @@
                         <a class="nav-link page-scroll" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="about.php">About</a>
+                        <a class="nav-link page-scroll" href="about.php">Perfil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="post.php">Sample Post</a>
+                        <a class="nav-link page-scroll" href="post.php">Publicar Gauchada</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="contact.php">Contact</a>
+                        <a class="nav-link page-scroll" href="comprar-creditos.php">Comprar Creditos</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="logout.php">Logout</a>
                 </ul>
             </div>
         </div>
