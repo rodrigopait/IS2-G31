@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include("conexion.php");?>
+<?php include("conexion.php");
+session_start();?>
 <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <title>Gauchadas</title>
 
     <!-- Bootstrap Core CSS -->
@@ -38,41 +38,25 @@
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar fixed-top navbar-toggleable-md navbar-light" id="mainNav">
-        <div class="container">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                Menu <i class="fa fa-bars"></i>
-            </button>
-            <a class="navbar-brand page-scroll" href="index.php">Gauchadas</a>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="index.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="about.php">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="post.php">Sample Post</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="contact.php">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php
+    if(isset($_SESSION['nombreUsuario'])){
+        include("navbar.php");    
+    }
+    else{
+        include("navbarObservador.php");
+    }?>
 
     <!-- Page Header -->
-    <header class="intro-header" style="background-image: url('img/Valle.JPG')">
+    <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: contain;
+    background-position-y: 0; height: 333px;">
         <?php $id = ($_GET['variable']);
-        $consulta = mysql_query("SELECT * FROM gauchada WHERE id_gauchada = '$id'");
+        $consulta = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE id_gauchada = '$id'");
         $tabla = mysql_fetch_array($consulta);?>
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                     <div class="post-heading" style="text-align: center;">
-                        <h1> <?php echo $tabla['titulo'];?> </h1>
+                        <h1 style="text-shadow: black;color: #fff;text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"> <?php echo $tabla['titulo'];?> </h1>
                         <h2 class="subheading"></h2>
                     </div>
                 </div>
@@ -89,18 +73,18 @@
                         <?php echo $tabla['fecha_ini']?></p>
                         <?php echo $tabla['descripcion']?>
                     <br />
-                    <a href="post.php?variable=<?php echo $tabla['id_gauchada'];?>&&postulado=FALSE">
-                        <img class="img-responsive" src="img/post-sample-image.jpg" alt="">
+                    <a href="post.php?variable=<?php echo $tabla['id_gauchada'];?>&&postulado=0">
+                        <img class="img-responsive" style="margin-bottom: 2%;" src="<?php echo $tabla['foto'];?>">
                     </a>
-                    <span class="caption text-muted">To go places and do things that have never been done before – that’s what living is all about.</span>
                     <div class="clearfix">
                         <a style="text-align: left;"> Fecha de cierre: <?php echo $tabla['fecha_fin']?></a>
-<!--                         <?php $boolean = ($_GET['postulado']); if($boolean){?>
-                        <a class="btn btn-secondary float-right" href="post.php?variable=<?php echo $tabla['id_gauchada'];?>&&postulado=TRUE">Postularse  <span class="glyphicon glyphicon-plus-sign"></span></a>
+                        <?php if (isset($_SESSION['nombreUsuario'])){ ?>
+                        <?php $boolean = ($_GET['postulado']); if($boolean == 0){?>
+                        <a class="btn btn-secondary float-right" href="post.php?variable=<?php echo $tabla['id_gauchada'];?>&&postulado=1">Postularse  <i class="fa fa-plus" aria-hidden="true"></i></a>
                         <?php } else { ?>
-                        <a class="btn btn-secondary float-right" href="post.php?variable=<?php echo $tabla['id_gauchada'];?>&&postulado=TRUE">Postulado  <span class="glyphicon glyphicon-ok-sign"></span></a>
-                        <?php }?> 
- -->                   </div>
+                        <a class="btn btn-secondary float-right" style="background-color: #F27321;">Postulado  <i class="fa fa-check" aria-hidden="true"></i></span></a>
+                        <?php }}?> 
+                   </div>
                 </div>
             </div>
         </div>

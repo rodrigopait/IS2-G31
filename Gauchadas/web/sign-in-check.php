@@ -12,7 +12,6 @@
 			session_start();
 			$_SESSION['id_usuario'] = $res['id_usuario'];
 			$_SESSION['nombreUsuario'] = $nombreUsuario;
-			/*setcookie("nombreUsuario", $nombreUsuario, time()+3600);  /* expira en una hora */
 			header("location:index.php");
 		}	
 	}
