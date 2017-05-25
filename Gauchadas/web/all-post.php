@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include("conexion.php");?>
+<?php include("conexion.php");
+session_start();?>
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8">
@@ -36,36 +37,14 @@
 </head>
 
 <body>
-
-    <!-- Navigation -->
-     <nav class="navbar fixed-top navbar-toggleable-md navbar-light" id="mainNav" 
-    style="background-image: linear-gradient(180deg,rgba(0,0,0,.4) 0,transparent); border: none;">
-        <div class="container">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                Menu <i class="fa fa-bars"></i>
-            </button>
-            <a class="navbar-brand page-scroll" href="index.php">Gauchadas</a>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="index.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="about.php">Perfil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="post.php">Publicar Gauchada</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="comprar-creditos.php">Comprar Creditos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="logout.php">Logout</a>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+    <?php
+    if(isset($_SESSION['nombreUsuario'])){
+        include("navbar.php");    
+    }
+    else{
+        include("navbarObservador.php");
+    }?>
+    
     <!-- Page Header -->
     <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: contain;
     background-position-y: 0; height: 333px;">
@@ -88,42 +67,37 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                <?php $consul_gauchada = mysql_query("SELECT * FROM gauchada");
+                <?php $string = "SELECT * FROM registrado INNER JOIN gauchada ON registrado.id_usuario = gauchada.id_registrado INNER JOIN foto ON gauchada.id_foto = foto.id_foto";
+                $consul_gauchada = mysql_query($string);
                 while ($tupla = mysql_fetch_array($consul_gauchada)){ ?>
                 <div class="post-preview">
-                    <a href="post.php">
+                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=0">
                         <h2 class="post-title">
-                            <?php echo $tupla['titulo'];?>
-                        </h2>
-                        <h3 class="post-subtitle"></h3>
-                    </a>
-                    <p class="post-meta">Posted by <a href="#"><?php $vari = $tupla['id_registrado']; 
-                        $consul_usuario = mysql_query("SELECT nombre_usu FROM gauchada INNER JOIN registrado ON gauchada.id_registrado=registrado.id_usuario WHERE id_registrado = '$vari'");
-                        $tabla = mysql_fetch_array($consul_usuario);
-                        echo $tabla[0]?> 
-                    </a> on September 24, 2017</p>
-                </div>
-                <hr>
-                <?php $tupla = mysql_fetch_array($consul_gauchada);?>
-                <div class="post-preview">
-                    <a href="post.php">
-                        <h2 class="post-title">
-<<<<<<< HEAD
                             <?php echo $tupla['titulo'];?>
                             <img href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=0" 
                             src="<?php echo $tupla['foto']?>" width="120" height="100" style="position: absolute;
                             right: 40px;">
-=======
-                            <?php $tupla = mysql_fetch_array($consul_gauchada);
-                            echo $tupla['titulo'];?>
->>>>>>> origin/Gauchada
+                        </h2>
+                        <h3 class="post-subtitle"></h3>
+                    </a>
+                    <p class="post-meta">Publicado en 
+                        <?php echo $tupla['ciudad'];?> el <?php echo $tupla['fecha_ini']; ?>
+                    </p>
+                </div>
+                <hr>
+                <?php $tupla = mysql_fetch_array($consul_gauchada);?>
+                <div class="post-preview">
+                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=0">
+                        <h2 class="post-title">
+                            <?php echo $tupla['titulo'];?>
+                            <img href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=0" 
+                            src="<?php echo $tupla['foto']?>" width="120" height="100" style="position: absolute;
+                            right: 40px;">
                         </h2>
                     </a>
-                    <p class="post-meta">Posted by <a href="#"><?php $vari = $tupla['id_registrado']; 
-                        $consul_usuario = mysql_query("SELECT nombre_usu FROM gauchada INNER JOIN registrado ON gauchada.id_registrado=registrado.id_usuario WHERE id_registrado = '$vari'");
-                        $tabla = mysql_fetch_array($consul_usuario);
-                        echo $tabla[0]?> 
-                    </a> on September 18, 2017</p>
+                    <p class="post-meta">Publicado en 
+                        <?php echo $tupla['ciudad'];?> el <?php echo $tupla['fecha_ini']; ?>
+                    </p>
                 </div>
                 <hr><?php } ?>
                 <!-- Pager -->
