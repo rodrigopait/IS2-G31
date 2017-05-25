@@ -102,6 +102,20 @@ comprobarSession("index.php");
                         </div>
                     </div>
                     <div class="control-group">
+                        <div class="form-group floating-label-form-group controls">
+                            <label>Vencimiento</label>
+                            <input type="date" class="form-control" placeholder="Vencimiento" id="vencimiento" required data-validation-required-message="Please enter your email address.">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls">
+                            <label>Codigo</label>
+                            <input type="text" class="form-control" placeholder="Codigo de seguridad" id="codigoSeguridad" required data-validation-required-message="Please enter your email address.">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>Creditos</label>
                             <input type="tel" class="form-control" placeholder="Cantidad de creditos" id="creditos" required data-validation-required-message="Please enter your phone number.">
