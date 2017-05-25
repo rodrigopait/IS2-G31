@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 25-05-2017 a las 16:37:19
+-- Tiempo de generación: 25-05-2017 a las 19:20:56
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -89,15 +89,28 @@ CREATE TABLE `compra` (
   `id_compra` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `total` int(11) NOT NULL,
-  `cant_creditos` int(11) NOT NULL
+  `cant_creditos` int(11) NOT NULL,
+  `id_credito` int(11) NOT NULL,
+  `id_registrado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `compra`
 --
 
-INSERT INTO `compra` (`id_compra`, `fecha`, `total`, `cant_creditos`) VALUES
-(1, '0000-00-00', 0, 0);
+INSERT INTO `compra` (`id_compra`, `fecha`, `total`, `cant_creditos`, `id_credito`, `id_registrado`) VALUES
+(1, '0000-00-00', 0, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `credito`
+--
+
+CREATE TABLE `credito` (
+  `id_credito` int(11) NOT NULL,
+  `valor` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -109,6 +122,14 @@ CREATE TABLE `foto` (
   `id_foto` int(11) NOT NULL,
   `foto` text CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `foto`
+--
+
+INSERT INTO `foto` (`id_foto`, `foto`) VALUES
+(1, 'img/post-sample-image.jpg'),
+(2, 'img/logo-gauchada.jpg');
 
 -- --------------------------------------------------------
 
@@ -132,10 +153,10 @@ CREATE TABLE `gauchada` (
 --
 
 INSERT INTO `gauchada` (`id_gauchada`, `titulo`, `descripcion`, `ciudad`, `fecha_ini`, `fecha_fin`, `id_foto`, `id_registrado`) VALUES
-(1, 'Busco acompañante de viaje\r\n\r\n', 'Soy camionero y busco una persona que me acompañe en mi viaje hasta Rawson porque sufro problemas de sueño.\r\n\r\nSaldriamos el primer fin de semana de octubre y retornariamos el fin de semana siguiente.\r\n\r\n* Condicion fundamental: debe cebar buenos mates', 'La Plata', '2017-05-08', '2017-10-05', NULL, 5),
-(2, 'Se busca dueño para cachorritos', 'Mi perra tuvo cachorros y no los puedo mantener, se busca familia responsable.', 'La Plata', '2017-05-10', '2017-05-19', NULL, 1),
-(3, 'Necesito viajar hasta Bariloche', 'busco gente que viaje para el sur y le sobre un lugar en el vehiculo.', 'Rosario', '2017-05-12', '2017-05-31', NULL, 3),
-(4, 'Se necesita cocinera', 'nuestra cocinera se enfermo y necesitamos ayuda para mantener alimentados a los chicos del comedor.', 'Villa Gessel', '2017-05-29', '2017-05-31', NULL, 4);
+(1, 'Busco acompañante de viaje\r\n\r\n', 'Soy camionero y busco una persona que me acompañe en mi viaje hasta Rawson porque sufro problemas de sueño.\r\n\r\nSaldriamos el primer fin de semana de octubre y retornariamos el fin de semana siguiente.\r\n\r\n* Condicion fundamental: debe cebar buenos mates', 'La Plata', '2017-05-08', '2017-10-05', 1, 5),
+(2, 'Se busca dueño para cachorritos', 'Mi perra tuvo cachorros y no los puedo mantener, se busca familia responsable.', 'La Plata', '2017-05-10', '2017-05-19', 2, 1),
+(3, 'Necesito viajar hasta Bariloche', 'busco gente que viaje para el sur y le sobre un lugar en el vehiculo.', 'Rosario', '2017-05-12', '2017-05-31', 2, 3),
+(4, 'Se necesita cocinera', 'nuestra cocinera se enfermo y necesitamos ayuda para mantener alimentados a los chicos del comedor.', 'Villa Gessel', '2017-05-29', '2017-05-31', 2, 4);
 
 -- --------------------------------------------------------
 
@@ -192,7 +213,6 @@ CREATE TABLE `registrado` (
   `ciudad` text CHARACTER SET utf8 NOT NULL,
   `creditos` int(11) NOT NULL,
   `telefono` int(13) DEFAULT NULL,
-  `id_compra` int(11) NOT NULL,
   `id_rep` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -200,14 +220,14 @@ CREATE TABLE `registrado` (
 -- Volcado de datos para la tabla `registrado`
 --
 
-INSERT INTO `registrado` (`id_usuario`, `nombre_usu`, `password`, `mail`, `ciudad`, `creditos`, `telefono`, `id_compra`, `id_rep`) VALUES
-(1, 'facundomedero', '', 'facumedero@hotmail.com', 'laplata', 0, 6546464, 1, 2),
-(3, 'francotagliero', '', 'francotagliero@hotmail.com', 'la plata', 0, 35464, 1, 2),
-(4, 'federicosanchez', '', 'fedesanchez@gmail.com', 'rosario', 0, 654846156, 1, 3),
-(5, 'rodrigopait', '', 'rodripait@hotmail.com', 'mar de ajo', 0, 4876848, 1, 3),
-(6, 'camila', '', 'cami@hotmail.com', 'mar de ajo', 0, NULL, 1, 2),
-(7, 'pai', 'pai', 'pai@gauchadas.com', 'la plata', 0, NULL, 1, 2),
-(9, 'gauchada', 'gauchada', 'gauchada@gaucahda.com', 'la plata', 0, 0, 1, 2);
+INSERT INTO `registrado` (`id_usuario`, `nombre_usu`, `password`, `mail`, `ciudad`, `creditos`, `telefono`, `id_rep`) VALUES
+(1, 'facundomedero', '', 'facumedero@hotmail.com', 'laplata', 0, 6546464, 2),
+(3, 'francotagliero', '', 'francotagliero@hotmail.com', 'la plata', 0, 35464, 2),
+(4, 'federicosanchez', '', 'fedesanchez@gmail.com', 'rosario', 0, 654846156, 3),
+(5, 'rodrigopait', '', 'rodripait@hotmail.com', 'mar de ajo', 0, 4876848, 3),
+(6, 'camila', '', 'cami@hotmail.com', 'mar de ajo', 0, NULL, 2),
+(7, 'pai', 'pai', 'pai@gauchadas.com', 'la plata', 0, 123, 2),
+(9, 'gauchada', 'gauchada', 'gauchada@gaucahda.com', 'la plata', 0, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -288,6 +308,12 @@ ALTER TABLE `compra`
   ADD UNIQUE KEY `nro_compra` (`id_compra`);
 
 --
+-- Indices de la tabla `credito`
+--
+ALTER TABLE `credito`
+  ADD PRIMARY KEY (`id_credito`);
+
+--
 -- Indices de la tabla `foto`
 --
 ALTER TABLE `foto`
@@ -345,10 +371,15 @@ ALTER TABLE `categoria`
 ALTER TABLE `compra`
   MODIFY `id_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT de la tabla `credito`
+--
+ALTER TABLE `credito`
+  MODIFY `id_credito` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT de la tabla `foto`
 --
 ALTER TABLE `foto`
-  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `gauchada`
 --
