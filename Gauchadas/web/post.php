@@ -74,7 +74,8 @@ session_start();?>
                         <?php echo $tabla['descripcion']?>
                     <br />
                     <a href="post.php?variable=<?php echo $tabla['id_gauchada'];?>&&postulado=0">
-                        <img class="img-responsive" style="margin-bottom: 2%;" src="<?php echo $tabla['foto'];?>">
+                        <img class="img-responsive" style="margin-bottom: 2%; max-width: 750px; max-height: 850px;" 
+                        src="<?php echo $tabla['foto'];?>">
                     </a>
                     <div class="clearfix">
                         <a style="text-align: left;"> Fecha de cierre: <?php echo $tabla['fecha_fin']?></a>

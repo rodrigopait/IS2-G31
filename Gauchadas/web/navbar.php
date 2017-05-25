@@ -11,10 +11,10 @@
                         <a class="nav-link page-scroll" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="about.php">Perfil</a>
+                        <a class="nav-link page-scroll" href="">Perfil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="">Publicar Gauchada</a>
+                        <a class="nav-link page-scroll" href="public.php">Publicar Gauchada</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link page-scroll" href="comprar-creditos.php">Comprar Creditos</a>
