@@ -48,9 +48,11 @@ session_start();
     }
     else{
         include("navbarObservador.php");
-    }?>
-
-    <!-- Page Header -->
+    }
+    
+    ?>
+    
+        <!-- Page Header -->
     <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: contain;
     background-position-y: 0; height: 333px;">
         <div class="container">
@@ -67,57 +69,54 @@ session_start();
             </div>
         </div>
     </header>
-
+    
     <!-- Main Content -->
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                <?php $consul_gauchada = mysql_query("SELECT * FROM registrado INNER JOIN gauchada ON registrado.id_usuario = gauchada.id_registrado INNER JOIN foto ON gauchada.id_foto = foto.id_foto");?>
+                <?php $consul_gauchada = mysql_query("SELECT * FROM gauchada");?>
                 <div class="post-preview">
                     <?php $tupla = mysql_fetch_array($consul_gauchada);?>
-                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=0">
+                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=false">
                         <h2 class="post-title">
-                            <?php echo $tupla['titulo'];?> 
-                            <img href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=0" 
-                            src="<?php echo $tupla['foto']?>" width="120" height="100" style="position: absolute;
-                            right: 40px;">
+                            <?php echo $tupla['titulo'];?>
                         </h2>
                         <h3 class="post-subtitle"></h3>
                     </a>
-                    <p class="post-meta">Publicado en 
-                        <?php echo $tupla['ciudad'];?> el <?php echo $tupla['fecha_ini']; ?>
-                    </p>
+                    <p class="post-meta">Posted by <a href="#"><?php $vari = $tupla['id_registrado']; 
+                        $consul_usuario = mysql_query("SELECT nombre_usu FROM gauchada INNER JOIN registrado ON gauchada.id_registrado=registrado.id_usuario WHERE id_registrado = '$vari'");
+                        $tabla = mysql_fetch_array($consul_usuario);
+                        echo $tabla[0]?> 
+                    </a> on September 24, 2017</p>
                 </div>
                 <hr>
                 <div class="post-preview">
                     <?php $tupla = mysql_fetch_array($consul_gauchada);?>
-                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=0">
+                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=false">
                         <h2 class="post-title">
                             <?php echo $tupla['titulo'];?>
-                            <img href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=0" 
-                            src="<?php echo $tupla['foto']?>" width="120" height="100" style="position: absolute;
-                            right: 40px;">
                         </h2 >
                     </a>
-                     <p class="post-meta">Publicado en 
-                        <?php echo $tupla['ciudad'];?> el <?php echo $tupla['fecha_ini']; ?>
-                    </p>
+                    <p class="post-meta">Posted by <a href="#"><?php $vari = $tupla['id_registrado']; 
+                        $consul_usuario = mysql_query("SELECT nombre_usu FROM gauchada INNER JOIN registrado ON gauchada.id_registrado=registrado.id_usuario WHERE id_registrado = '$vari'");
+                        $tabla = mysql_fetch_array($consul_usuario);
+                        echo $tabla[0]?> 
+                    </a> on September 18, 2017</p>
                 </div>
                 <hr>
                <div class="post-preview">
                     <?php $tupla = mysql_fetch_array($consul_gauchada);?>
-                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=0">
+                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=false">
                         <h2 class="post-title">   
                             <?php echo $tupla['titulo'];?>
-                            <img href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=0" 
-                            src="<?php echo $tupla['foto']?>" width="120" height="100" style="position: absolute;
-                            right: 40px;">
                         </h2>
                         <h3 class="post-subtitle"></h3>
                     </a>
-                    <p class="post-meta">Publicado en 
-                        <?php echo $tupla['ciudad'];?> el <?php echo $tupla['fecha_ini']; ?>
-                    </p>
+                    <p class="post-meta">Posted by <a href="#"><?php $vari = $tupla['id_registrado']; 
+                        $consul_usuario = mysql_query("SELECT nombre_usu FROM gauchada INNER JOIN registrado ON gauchada.id_registrado=registrado.id_usuario WHERE id_registrado = '$vari'");
+                        $tabla = mysql_fetch_array($consul_usuario);
+                        echo $tabla[0]?> 
+                    </a> on August 24, 2017</p>
                 </div>
                <hr>
                 <!-- Pager -->

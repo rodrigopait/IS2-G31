@@ -14,7 +14,11 @@
                         <a class="nav-link page-scroll" href="">Perfil</a>
                     </li>
                     <li class="nav-item">
+<<<<<<< HEAD
                         <a class="nav-link page-scroll" href="public.php">Publicar Gauchada</a>
+=======
+                        <a class="nav-link page-scroll" href="post.php">Publicar Gauchada</a>
+>>>>>>> origin/Gauchada
                     </li>
                     <li class="nav-item">
                         <a class="nav-link page-scroll" href="comprar-creditos.php">Comprar Creditos</a>
@@ -25,3 +29,5 @@
             </div>
         </div>
     </nav>
+
+

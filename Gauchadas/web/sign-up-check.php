@@ -25,7 +25,7 @@
 			$mensaje = "El usuario ha sido registrado correctamente! Ya puede iniciar sesion con su nombre de usuario y contraseña";
 			echo "<script>";
 			echo "alert('$mensaje');";
-			echo "window.location = 'sign-in.php'";
+			echo "window.location = 'index.php'";
 			echo "</script>";
 		}
 	}
