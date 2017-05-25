@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 18-05-2017 a las 19:58:51
+-- Tiempo de generación: 25-05-2017 a las 16:37:19
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `calificacion` (
-  `id_usuario` text NOT NULL,
+  `id_registrado` int(11) NOT NULL,
   `comentario` text NOT NULL,
   `id_rango` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -41,7 +41,7 @@ CREATE TABLE `calificacion` (
 CREATE TABLE `cate-gau` (
   `id_categoria` int(11) NOT NULL,
   `id_gauchada` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
 --
 -- Volcado de datos para la tabla `cate-gau`
@@ -92,6 +92,13 @@ CREATE TABLE `compra` (
   `cant_creditos` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `compra`
+--
+
+INSERT INTO `compra` (`id_compra`, `fecha`, `total`, `cant_creditos`) VALUES
+(1, '0000-00-00', 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -100,7 +107,7 @@ CREATE TABLE `compra` (
 
 CREATE TABLE `foto` (
   `id_foto` int(11) NOT NULL,
-  `foto` int(11) NOT NULL
+  `foto` text CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -126,7 +133,7 @@ CREATE TABLE `gauchada` (
 
 INSERT INTO `gauchada` (`id_gauchada`, `titulo`, `descripcion`, `ciudad`, `fecha_ini`, `fecha_fin`, `id_foto`, `id_registrado`) VALUES
 (1, 'Busco acompañante de viaje\r\n\r\n', 'Soy camionero y busco una persona que me acompañe en mi viaje hasta Rawson porque sufro problemas de sueño.\r\n\r\nSaldriamos el primer fin de semana de octubre y retornariamos el fin de semana siguiente.\r\n\r\n* Condicion fundamental: debe cebar buenos mates', 'La Plata', '2017-05-08', '2017-10-05', NULL, 5),
-(2, 'Se busca dueño para cachorritos', 'Mi perra tuvo cachorros y no los puedo mantener, se busca familioa responsable', 'La Plata', '2017-05-10', '2017-05-19', NULL, 1),
+(2, 'Se busca dueño para cachorritos', 'Mi perra tuvo cachorros y no los puedo mantener, se busca familia responsable.', 'La Plata', '2017-05-10', '2017-05-19', NULL, 1),
 (3, 'Necesito viajar hasta Bariloche', 'busco gente que viaje para el sur y le sobre un lugar en el vehiculo.', 'Rosario', '2017-05-12', '2017-05-31', NULL, 3),
 (4, 'Se necesita cocinera', 'nuestra cocinera se enfermo y necesitamos ayuda para mantener alimentados a los chicos del comedor.', 'Villa Gessel', '2017-05-29', '2017-05-31', NULL, 4);
 
@@ -180,6 +187,7 @@ INSERT INTO `rango` (`id_rango`, `descripcion`) VALUES
 CREATE TABLE `registrado` (
   `id_usuario` int(11) NOT NULL,
   `nombre_usu` text CHARACTER SET utf8 NOT NULL,
+  `password` text CHARACTER SET utf8 NOT NULL,
   `mail` text CHARACTER SET utf8 NOT NULL,
   `ciudad` text CHARACTER SET utf8 NOT NULL,
   `creditos` int(11) NOT NULL,
@@ -192,12 +200,14 @@ CREATE TABLE `registrado` (
 -- Volcado de datos para la tabla `registrado`
 --
 
-INSERT INTO `registrado` (`id_usuario`, `nombre_usu`, `mail`, `ciudad`, `creditos`, `telefono`, `id_compra`, `id_rep`) VALUES
-(1, 'facundomedero', 'facumedero@hotmail.com', 'laplata', 0, 6546464, 0, 2),
-(3, 'francotagliero', 'francotagliero@hotmail.com', 'la plata', 0, 35464, 1, 2),
-(4, 'federicosanchez', 'fedesanchez@gmail.com', 'rosario', 0, 654846156, 2, 3),
-(5, 'rodrigopait', 'rodripait@hotmail.com', 'mar de ajo', 0, 4876848, 3, 3),
-(6, 'camila', 'cami@hotmail.com', 'mar de ajo', 0, NULL, 0, 2);
+INSERT INTO `registrado` (`id_usuario`, `nombre_usu`, `password`, `mail`, `ciudad`, `creditos`, `telefono`, `id_compra`, `id_rep`) VALUES
+(1, 'facundomedero', '', 'facumedero@hotmail.com', 'laplata', 0, 6546464, 1, 2),
+(3, 'francotagliero', '', 'francotagliero@hotmail.com', 'la plata', 0, 35464, 1, 2),
+(4, 'federicosanchez', '', 'fedesanchez@gmail.com', 'rosario', 0, 654846156, 1, 3),
+(5, 'rodrigopait', '', 'rodripait@hotmail.com', 'mar de ajo', 0, 4876848, 1, 3),
+(6, 'camila', '', 'cami@hotmail.com', 'mar de ajo', 0, NULL, 1, 2),
+(7, 'pai', 'pai', 'pai@gauchadas.com', 'la plata', 0, NULL, 1, 2),
+(9, 'gauchada', 'gauchada', 'gauchada@gaucahda.com', 'la plata', 0, 0, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -232,7 +242,7 @@ INSERT INTO `reputacion` (`id_rep`, `rango`, `descripcion`) VALUES
 CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL,
   `nombre_usu` text CHARACTER SET utf8 NOT NULL,
-  `passworld` text CHARACTER SET utf8 NOT NULL,
+  `password` text CHARACTER SET utf8 NOT NULL,
   `mail` text CHARACTER SET utf8 NOT NULL,
   `tipo_adm` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -241,7 +251,7 @@ CREATE TABLE `usuario` (
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `nombre_usu`, `passworld`, `mail`, `tipo_adm`) VALUES
+INSERT INTO `usuario` (`id_usuario`, `nombre_usu`, `password`, `mail`, `tipo_adm`) VALUES
 (1, 'rodrigopait', 'rodri', 'rpait@gmail.com', 0),
 (2, 'facundomedero', 'facu', 'fmedero@gmail.com', 0),
 (3, 'francotagliero', 'fran', 'ftagliero@gmail.com', 0),
@@ -255,7 +265,7 @@ INSERT INTO `usuario` (`id_usuario`, `nombre_usu`, `passworld`, `mail`, `tipo_ad
 -- Indices de la tabla `calificacion`
 --
 ALTER TABLE `calificacion`
-  ADD PRIMARY KEY (`id_usuario`(50));
+  ADD PRIMARY KEY (`id_registrado`);
 ALTER TABLE `calificacion` ADD FULLTEXT KEY `comentario` (`comentario`);
 
 --
@@ -333,7 +343,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `id_compra` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `foto`
 --
@@ -353,7 +363,7 @@ ALTER TABLE `rango`
 -- AUTO_INCREMENT de la tabla `registrado`
 --
 ALTER TABLE `registrado`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `reputacion`
 --
