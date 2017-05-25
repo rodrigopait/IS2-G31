@@ -89,42 +89,41 @@ comprobarSession("index.php");
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                <p>Want to get in touch with me? Fill out the form below to send me a message and I will try to get back to you within 24 hours!</p>
                 <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
                 <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
                 <!-- NOTE: To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
-                <form name="sentMessage" id="contactForm" novalidate>
+                <form method="POST" action="comprar-creditos-check.php">
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
                             <label>Tarjeta de credito</label>
-                            <input type="text" class="form-control" placeholder="Tarjeta de Credito" id="tarjetaDeCredito" required data-validation-required-message="Please enter your email address.">
+                            <input type="number" name="tarjetaDeCredito" value="" pattern="[0-9]{13,16}" title="Por favor ingrese un numero entre 13 y 16 caracteres" class="form-control" placeholder="Tarjeta de Credito" id="tarjetaDeCredito" required data-validation-required-message="Please enter your email address.">
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
                             <label>Vencimiento</label>
-                            <input type="date" class="form-control" placeholder="Vencimiento" id="vencimiento" required data-validation-required-message="Please enter your email address.">
+                            <input type="date" class="form-control" name="vencimiento" value="" placeholder="Vencimiento" id="vencimiento" required data-validation-required-message="Please enter your email address.">
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
                             <label>Codigo</label>
-                            <input type="text" class="form-control" placeholder="Codigo de seguridad" id="codigoSeguridad" required data-validation-required-message="Please enter your email address.">
+                            <input type="number" class="form-control" name="codigo" placeholder="Codigo de seguridad" value="" id="codigoSeguridad" required data-validation-required-message="Please enter your email address.">
                             <p class="help-block text-danger"></p>
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
                             <label>Creditos</label>
-                            <input type="tel" class="form-control" placeholder="Cantidad de creditos" id="creditos" required data-validation-required-message="Please enter your phone number.">
+                            <input type="number" name="cantCreditos" class="form-control" placeholder="Cantidad de creditos" value="" id="creditos" required data-validation-required-message="Please enter your phone number.">
                             <p class="help-block text-danger"></p>
                         </div>
                     <br>
                     <div id="success"></div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-secondary">Send</button>
+                        <button type="submit" class="btn btn-secondary">Comprar</button>
                     </div>
                 </form>
             </div>

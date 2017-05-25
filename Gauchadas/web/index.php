@@ -44,13 +44,32 @@ session_start();
     <!-- Navigation -->
     <?php
     if(isset($_SESSION['nombreUsuario'])){
-        include("header.php");    
+        include("navbar.php");    
     }
     else{
-        include("headerObservador.php");
+        include("navbarObservador.php");
     }
     
     ?>
+    
+        <!-- Page Header -->
+    <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: contain;
+    background-position-y: 0; height: 333px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                    <div class="site-heading" style="background-image: url(img/logo-gauchadas.png);
+                    background-repeat: repeat-x; background-position: center; width: 90%; margin-left: 7%;
+                    padding-bottom: 16%;">
+                        <h1>Gauchadas</h1>
+                        <span class="subheading" style="font-weight: bold; padding-top: 1%">
+                            Un Blog Donde Encuentras Gauchadas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
     <!-- Main Content -->
     <div class="container">
         <div class="row">

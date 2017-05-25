@@ -12,12 +12,12 @@
 			session_start();
 			$_SESSION['id_usuario'] = $res['id_usuario'];
 			$_SESSION['nombreUsuario'] = $nombreUsuario;
-			/*setcookie("nombreUsuario", $nombreUsuario, time()+3600);  /* expira en una hora */
+			setcookie("nombreUsuario", $nombreUsuario, time()+3600);  /* expira en una hora */
 			header("location:index.php");
 		}	
 	}
-	session_start();
+/**	session_start();
 	if(!isset($_SESSION['nombreUsuario'])){
 		header("location:sign-in.php");
-	}
+	}**/
 ?>
