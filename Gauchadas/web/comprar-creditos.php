@@ -71,12 +71,13 @@ comprobarSession("index.php");
     </nav>
 
     <!-- Page Header -->
-    <header class="intro-header" style="background-image: url('img/contact-bg.jpg')">
+    <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: contain;
+    background-position-y: 0; height: 333px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                     <div class="page-heading">
-                        <h1>Comprar Creditos</h1>
+                        <h1 style="text-shadow: black;color: #fff;text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Comprar Creditos</h1>
                         <hr class="small">
                         <span class="subheading">Comprá creditos para poder publicar una gauchada</span>
                     </div>

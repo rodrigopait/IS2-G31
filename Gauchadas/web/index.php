@@ -56,7 +56,7 @@ session_start();
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                    <div class="site-heading" style="background-image: url(img/logo-gauchadas.png);
+                    <div class="site-heading" style="background-image: url(img/logo-gauchada.jpg);
                     background-repeat: repeat-x; background-position: center; width: 90%; margin-left: 7%;
                     padding-bottom: 16%;">
                         <h1>Gauchadas</h1>
@@ -75,10 +75,10 @@ session_start();
                 <?php $consul_gauchada = mysql_query("SELECT * FROM registrado INNER JOIN gauchada ON registrado.id_usuario = gauchada.id_registrado INNER JOIN foto ON gauchada.id_foto = foto.id_foto");?>
                 <div class="post-preview">
                     <?php $tupla = mysql_fetch_array($consul_gauchada);?>
-                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=0">
+                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>">
                         <h2 class="post-title">
                             <?php echo $tupla['titulo'];?> 
-                            <img href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=0" 
+                            <img href="post.php?variable=<?php echo $tupla['id_gauchada'];?>" 
                             src="<?php echo $tupla['foto']?>" width="120" height="100" style="position: absolute;
                             right: 40px;">
                         </h2>
@@ -91,10 +91,10 @@ session_start();
                 <hr>
                 <div class="post-preview">
                     <?php $tupla = mysql_fetch_array($consul_gauchada);?>
-                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=0">
+                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>">
                         <h2 class="post-title">
                             <?php echo $tupla['titulo'];?>
-                            <img href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=0" 
+                            <img href="post.php?variable=<?php echo $tupla['id_gauchada'];?>" 
                             src="<?php echo $tupla['foto']?>" width="120" height="100" style="position: absolute;
                             right: 40px;">
                         </h2 >
@@ -106,10 +106,10 @@ session_start();
                 <hr>
                <div class="post-preview">
                     <?php $tupla = mysql_fetch_array($consul_gauchada);?>
-                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=0">
+                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>">
                         <h2 class="post-title">   
                             <?php echo $tupla['titulo'];?>
-                            <img href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=0" 
+                            <img href="post.php?variable=<?php echo $tupla['id_gauchada'];?>" 
                             src="<?php echo $tupla['foto']?>" width="120" height="100" style="position: absolute;
                             right: 40px;">
                         </h2>

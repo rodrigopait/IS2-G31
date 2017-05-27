@@ -7,14 +7,12 @@ function comprobarSession(){
 		header("location:sign-in.php");
 	}
 }
-function getGauchadas()
-{
+function getGauchadas(){
 	$consul_gauchada = mysql_query("SELECT * FROM gauchada");
 	return mysql_fetch_array($consul_gauchada);
 }
 
-function cantGauchadas()
-{
+function cantGauchadas(){
 	$cant = mysql_query("SELECT count(*) FROM gauchada");
 	return $cant;
 }

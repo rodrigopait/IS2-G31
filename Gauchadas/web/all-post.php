@@ -71,10 +71,10 @@ session_start();?>
                 $consul_gauchada = mysql_query($string);
                 while ($tupla = mysql_fetch_array($consul_gauchada)){ ?>
                 <div class="post-preview">
-                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=0">
+                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>">
                         <h2 class="post-title">
                             <?php echo $tupla['titulo'];?>
-                            <img href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=0" 
+                            <img href="post.php?variable=<?php echo $tupla['id_gauchada'];?>" 
                             src="<?php echo $tupla['foto']?>" width="120" height="100" style="position: absolute;
                             right: 40px;">
                         </h2>
@@ -87,10 +87,10 @@ session_start();?>
                 <hr>
                 <?php $tupla = mysql_fetch_array($consul_gauchada);?>
                 <div class="post-preview">
-                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=0">
+                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>">
                         <h2 class="post-title">
                             <?php echo $tupla['titulo'];?>
-                            <img href="post.php?variable=<?php echo $tupla['id_gauchada'];?>&&postulado=0" 
+                            <img href="post.php?variable=<?php echo $tupla['id_gauchada'];?>" 
                             src="<?php echo $tupla['foto']?>" width="120" height="100" style="position: absolute;
                             right: 40px;">
                         </h2>

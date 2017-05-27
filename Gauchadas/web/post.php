@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include("conexion.php");
+include("consultasSQL.php");
 session_start();?>
 <head>
 
@@ -80,8 +81,9 @@ session_start();?>
                     <div class="clearfix">
                         <a style="text-align: left;"> Fecha de cierre: <?php echo $tabla['fecha_fin']?></a>
                         <?php if (isset($_SESSION['nombreUsuario'])){ ?>
-                        <?php $boolean = ($_GET['postulado']); if($boolean == 0){?>
-                        <a class="btn btn-secondary float-right" href="post.php?variable=<?php echo $tabla['id_gauchada'];?>&&postulado=1">Postularse  <i class="fa fa-plus" aria-hidden="true"></i></a>
+                        <?php if(0 == consultaPostulado($_SESSION['id_usuario'],$tabla['id_gauchada'])){?>
+                        <a class="btn btn-secondary float-right" href="postularse-check.php?variable=<?php echo $tabla['id_gauchada'];?>">
+                        Postularse  <i class="fa fa-plus" aria-hidden="true"></i></a>
                         <?php } else { ?>
                         <a class="btn btn-secondary float-right" style="background-color: #F27321;">Postulado  <i class="fa fa-check" aria-hidden="true"></i></span></a>
                         <?php }}?> 
