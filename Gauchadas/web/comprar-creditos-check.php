@@ -12,11 +12,21 @@ if(isset($_POST['cantCreditos'])){
 	$valorCredito = valorPorCredito();
 	$total = $valorCredito['valor'] * $cantCreditos;
 	$idCredito = $valorCredito['id_credito'];
-	$agregarDetalle  = agregarDetalleCompra($total,$cantCreditos,$idCredito,$idUsuario);
-	$mensaje = "La compra fue registrada correctamente!";
-			echo "<script>";
-			echo "alert('$mensaje');";
-			echo "window.location = 'index.php'";
-			echo "</script>";
+	$vencimiento = $_POST['vencimiento'];
+	$agregarDetalle  = agregarDetalleCompra($total,$vencimiento,$cantCreditos,$idCredito,$idUsuario);
+	if (!$agregarDetalle){
+		$mensaje = "La compra no se pudo realizar! Intente de nuevo";
+		echo "<script>";
+		echo "alert('$mensaje');";
+		echo "window.location = 'comprar-creditos.php'";
+		echo "</script>";
+	}
+	else {
+		$mensaje = "La compra fue registrada correctamente!";
+		echo "<script>";
+		echo "alert('$mensaje');";
+		echo "window.location = 'index.php'";
+		echo "</script>";
+	}
 }
 ?>

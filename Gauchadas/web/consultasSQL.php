@@ -1,7 +1,7 @@
 <?php
 
 function obtenerUsuario($nombreUsuario, $password){
-	$consulta = mysql_query("SELECT * FROM usuario WHERE nombre_usu = '$nombreUsuario' AND password = '$password'" );
+	$consulta = mysql_query("SELECT * FROM registrado WHERE nombre_usu = '$nombreUsuario' AND password = '$password'" );
 	return mysql_fetch_array($consulta);
 }
 
@@ -16,7 +16,8 @@ function valorPorCredito(){
 	$consulta = mysql_query("SELECT * FROM credito ORDER BY id_credito desc");
 	return mysql_fetch_array($consulta);
 }
-function agregarDetalleCompra($total,$cantCreditos,$idCredito,$idUsuario){
-	$consulta = mysql_query("INSERT INTO compra (id_compra, fecha, total, cant_creditos, id_credito, id_registrado) VALUES (NULL, NULL, '$total', '$cantCreditos', '$idCredito' , '$idUsuario')");
+function agregarDetalleCompra($total,$fecha,$cantCreditos,$idCredito,$idUsuario){
+	$consulta = mysql_query("INSERT INTO compra (id_compra, fecha, total, cant_creditos, id_credito, id_registrado) VALUES (NULL, '$fecha', '$total', '$cantCreditos', '$idCredito' , '$idUsuario')");
+	return $consulta;
 }
 ?>

@@ -6,7 +6,11 @@
 		$password = $_POST['pw'];
 		$res = obtenerUsuario($nombreUsuario,$password);
 		if(!$res['id_usuario']){
-			header("location:sign-in.php");
+			$mensaje = "El nombre de usuario o contraseña es incorrecto! Por favor pruebe con uno diferente";
+			echo "<script>";
+			echo "alert('$mensaje');";
+			echo "window.location = 'sign-in.php'";
+			echo "</script>";
 		}
 		else{
 			session_start();
@@ -14,9 +18,5 @@
 			$_SESSION['nombreUsuario'] = $nombreUsuario;
 			header("location:index.php");
 		}	
-	}
-	session_start();
-	if(!isset($_SESSION['nombreUsuario'])){
-		header("location:sign-in.php");
 	}
 ?>
