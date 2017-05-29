@@ -85,26 +85,8 @@ session_start();?>
                     </p>
                 </div>
                 <hr>
-                <?php $tupla = mysql_fetch_array($consul_gauchada);?>
-                <div class="post-preview">
-                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>">
-                        <h2 class="post-title">
-                            <?php echo $tupla['titulo'];?>
-                            <img href="post.php?variable=<?php echo $tupla['id_gauchada'];?>" 
-                            src="<?php echo $tupla['foto']?>" width="120" height="100" style="position: absolute;
-                            right: 40px;">
-                        </h2>
-                    </a>
-                    <p class="post-meta">Publicado en 
-                        <?php echo $tupla['ciudad'];?> el <?php echo $tupla['fecha_ini']; ?>
-                    </p>
-                </div>
-                <hr><?php } ?>
-                <!-- Pager -->
-<!--                <div class="clearfix">
-                    <a class="btn btn-secondary float-right" href="#">ver mas &rarr;</a>
-                </div>
- -->            </div>
+                <?php } ?>
+            </div>
         </div>
     </div>
 
