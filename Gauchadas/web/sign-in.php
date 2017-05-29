@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php 
+include("conexion.php");
+session_start();
+?>
 <head>
 
     <meta charset="utf-8">
@@ -48,7 +51,8 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="sign-up.php">Registrarse</a>
+                        <a class="nav-link page-scroll" href="sign-up.php">
+                        <i class="fa fa-user-plus" aria-hidden="true"></i> Registrarse</a>
                     </li>
                 </ul>
             </div>
@@ -80,7 +84,7 @@
                 <form method="POST" action="sign-in-check.php">
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
-                            <label>Nombre de usuario</label>
+                            <label><i class="fa fa-user" aria-hidden="true"></i> Nombre de usuario</label>
                             <input type="text" class="form-control" placeholder="Nombre de usuario" 
                             name="nombreUsuario" value="" pattern="[a-z]{3,15}" required
                             title="Por favor ingrese su nombre en miniscula de al menos tres (3) y maximo quince (15) caracteres">
@@ -88,7 +92,7 @@
                     </div>
                     <div class="control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label>Contraseña</label>
+                            <label><i class="fa fa-key" aria-hidden="true"></i> Contraseña</label>
                             <input type="password" class="form-control" required placeholder="Contraseña" name="pw" value="" pattern=".{6,}" title="Por favor ingrese su contraseña de al menos seis (6) caracteres.">
                         </div>
                     </div>

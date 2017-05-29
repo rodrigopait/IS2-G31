@@ -8,19 +8,28 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="index.php">Home</a>
+                        <a class="nav-link page-scroll" href="index.php">
+                        <i class="fa fa-home" aria-hidden="true"></i> Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="">Perfil</a>
+                        <a class="nav-link page-scroll" href="">
+                        <i class="fa fa-user" aria-hidden="true"></i> Perfil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="public.php">Publicar Gauchada</a>
+                        <a class="nav-link page-scroll" href="search.php">
+                        <i class="fa fa-search" aria-hidden="true"></i> Busqueda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="comprar-creditos.php">Comprar Creditos</a>
+                        <a class="nav-link page-scroll" href="public.php">
+                        <i class="fa fa-pencil" aria-hidden="true"></i> Publicar Gauchada</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="logout.php">Logout</a>
+                        <a class="nav-link page-scroll" href="comprar-creditos.php">
+                        <i class="fa fa-money" aria-hidden="true"></i> Comprar Creditos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="logout.php">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
                 </ul>
             </div>
         </div>

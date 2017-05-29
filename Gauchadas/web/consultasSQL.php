@@ -34,4 +34,18 @@ function postularse($id_registrado,$id_gauchada){
 	return mysql_query("INSERT INTO postula (id_registrado, id_gauchada) VALUES ('$id_registrado','$id_gauchada')");
 }
 
+function publicarGauchada($titulo,$descripcion,$ciudad,$fecha_ini,$fecha_fin,$id_foto,$id_registrado){
+	return mysql_query("INSERT INTO gauchada (id_gauchada,titulo,descripcion,ciudad,fecha_ini,fecha_fin,id_foto,id_registrado) 
+		VALUES (NULL,'$titulo','$descripcion','$ciudad','$fecha_ini','$fecha_fin','$id_foto','$id_registrado')");
+}
+
+function agregarImagen($foto){
+	return mysql_query("INSERT INTO foto (id_foto,foto) VALUES (NULL,$foto)");
+}
+
+function consultaIdImagen($foto){
+	$consulta = mysql_query("SELECT id_foto FROM foto WHERE foto = '$foto'");
+	return mysql_fetch_array($consulta);
+}
+
 ?>

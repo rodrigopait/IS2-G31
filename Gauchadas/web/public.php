@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php include ("conexion.php");
+session_start();?>
 
 <head>
 
@@ -59,31 +61,46 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                <form name="registrerUser" method="POST" action="sign-up-check.php">
+                <form method="POST" action="public-check.php">
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
-                            <label>Titulo</label>
-                            <input type="text" class="form-control" placeholder="Titulo" required
-                            title="Por favor ingrese el titulo" name="title" value="">
+                            <label><i class="fa fa-font" aria-hidden="true"></i> Título</label>
+                            <input type="text" class="form-control" placeholder="Título" required
+                            title="Por favor ingrese un título" name="title" value="">
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
-                            <label>Descripción</label>
-                            <textarea rows="5" class="form-control" placeholder="Descripción" id="description" required data-validation-required-message="Por favor ingrese su descripción"></textarea>
+                            <label><i class="fa fa-pencil" aria-hidden="true"></i> Descripción</label>
+                            <textarea type="text" rows="5" class="form-control" placeholder="Descripción" required title="Por favor ingrese su descripción" name="desc" value=""></textarea>
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
-                            <label>Ciudad</label>
+                            <label><i class="fa fa-globe" aria-hidden="true"></i> Ciudad</label>
                             <input type="text" class="form-control" placeholder="Ciudad" required
                             title="Por favor ingrese su ciudad" name="city" value="">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls">
+                            <label><i class="fa fa-calendar" aria-hidden="true"></i> Fecha de fin</label>
+                            <input type="date" class="form-control" placeholder="Fecha de fin" required
+                            title="Por favor ingrese la fechad de fin de la gauchada" name="fecha_fin" value="">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls">
+                            <label><i class="fa fa-picture-o" aria-hidden="true"></i> Foto</label>
+                            <div enctype="multipart/form-data">
+                                <input name="image" type="file">
+                            </div>
                         </div>
                     </div>
                     <br>
                     <div id="success"></div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-secondary">Regístrate</button>
+                        <button type="submit" class="btn btn-secondary">Publicar</button>
                         <button type="reset" class="btn btn-secondary">Restablecer</button>
                     </div>
                 </form>

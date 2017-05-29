@@ -8,10 +8,12 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="sign-up.php">Registrarse</a>
+                        <a class="nav-link page-scroll" href="sign-up.php">
+                        <i class="fa fa-user-plus" aria-hidden="true"></i> Registrarse</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="sign-in.php">Iniciar sesion</a>
+                        <a class="nav-link page-scroll" href="sign-in.php">
+                        <i class="fa fa-sign-in" aria-hidden="true"></i> Iniciar sesion</a>
                     </li>
                 </ul>
             </div>

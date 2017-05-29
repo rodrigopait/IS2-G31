@@ -48,7 +48,8 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="sign-in.php">Iniciar Sesión</a>
+                        <a class="nav-link page-scroll" href="sign-in.php">
+                        <i class="fa fa-sign-in" aria-hidden="true"></i> Iniciar Sesión</a>
                     </li>
                 </ul>
             </div>
@@ -80,7 +81,7 @@
                 <form name="registrerUser" method="POST" action="sign-up-check.php">
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
-                            <label>Nombre de usuario</label>
+                            <label><i class="fa fa-user" aria-hidden="true"></i> Nombre de usuario</label>
                             <input type="text" class="form-control" placeholder="Nombre de usuario" 
                             name="name" value="" pattern="[a-z]{3,15}" 
                             title="Por favor ingrese su nombre en miniscula de al menos tres (3) y maximo quince (15) caracteres">
@@ -88,14 +89,14 @@
                     </div>
                     <div class="control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label>Contraseña</label>
+                            <label><i class="fa fa-key" aria-hidden="true"></i> Contraseña</label>
                             <input type="password" class="form-control" placeholder="Contraseña" name="pw" value=""
                             pattern=".{6,}" title="Por favor ingrese su contraseña de al menos seis (6) caracteres.">
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
-                            <label>Correo electrónico</label>
+                            <label><i class="fa fa-envelope-o" aria-hidden="true"></i> Correo electrónico</label>
                             <input type="email" class="form-control" placeholder="Correo electrónico" 
                             name="email" value="" title="Por favor ingrese algo como ejemplo@gauchadas.com"
                             required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">
@@ -103,14 +104,14 @@
                     </div>
                     <div class="control-group">
                         <div class="form-group col-xs-12 floating-label-form-group controls">
-                            <label>Telefono</label>
+                            <label><i class="fa fa-phone" aria-hidden="true"></i> Telefono</label>
                             <input type="tel" class="form-control" placeholder="Telefono" optional
                             pattern="[0-9]+" tittle="Por favor ingrese su numero de telefono" name="phone" value="">
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
-                            <label>Ciudad</label>
+                            <label><i class="fa fa-globe" aria-hidden="true"></i> Ciudad</label>
                             <input type="text" class="form-control" placeholder="Ciudad" required
                             title="Por favor ingrese su ciudad" name="city" value="">
                         </div>
