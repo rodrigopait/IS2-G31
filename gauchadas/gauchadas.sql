@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 25-05-2017 a las 19:20:56
+-- Tiempo de generación: 29-05-2017 a las 23:41:28
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -35,19 +35,19 @@ CREATE TABLE `calificacion` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `cate-gau`
+-- Estructura de tabla para la tabla `categau`
 --
 
-CREATE TABLE `cate-gau` (
+CREATE TABLE `categau` (
   `id_categoria` int(11) NOT NULL,
   `id_gauchada` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
 --
--- Volcado de datos para la tabla `cate-gau`
+-- Volcado de datos para la tabla `categau`
 --
 
-INSERT INTO `cate-gau` (`id_categoria`, `id_gauchada`) VALUES
+INSERT INTO `categau` (`id_categoria`, `id_gauchada`) VALUES
 (1, 1),
 (1, 3),
 (2, 2),
@@ -61,14 +61,14 @@ INSERT INTO `cate-gau` (`id_categoria`, `id_gauchada`) VALUES
 
 CREATE TABLE `categoria` (
   `id_cat` int(11) NOT NULL,
-  `descripcion` text CHARACTER SET utf8 NOT NULL
+  `tipocategoria` text CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `categoria`
 --
 
-INSERT INTO `categoria` (`id_cat`, `descripcion`) VALUES
+INSERT INTO `categoria` (`id_cat`, `tipocategoria`) VALUES
 (1, 'viajes'),
 (2, 'animales y mascotas'),
 (3, 'antiguedades'),
@@ -99,7 +99,10 @@ CREATE TABLE `compra` (
 --
 
 INSERT INTO `compra` (`id_compra`, `fecha`, `total`, `cant_creditos`, `id_credito`, `id_registrado`) VALUES
-(1, '0000-00-00', 0, 0, 0, 0);
+(1, '0000-00-00', 0, 0, 0, 0),
+(2, '0000-00-00', 10, 1, 2, 9),
+(3, '0000-00-00', 10, 1, 2, 9),
+(4, '2017-05-27', 10, 1, 2, 9);
 
 -- --------------------------------------------------------
 
@@ -111,6 +114,14 @@ CREATE TABLE `credito` (
   `id_credito` int(11) NOT NULL,
   `valor` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `credito`
+--
+
+INSERT INTO `credito` (`id_credito`, `valor`) VALUES
+(1, 5),
+(2, 10);
 
 -- --------------------------------------------------------
 
@@ -129,7 +140,9 @@ CREATE TABLE `foto` (
 
 INSERT INTO `foto` (`id_foto`, `foto`) VALUES
 (1, 'img/post-sample-image.jpg'),
-(2, 'img/logo-gauchada.jpg');
+(2, 'img/logo-gauchada.jpg'),
+(3, 'img/cachorro.jpg'),
+(4, 'img/Bariloche.jpg');
 
 -- --------------------------------------------------------
 
@@ -154,8 +167,8 @@ CREATE TABLE `gauchada` (
 
 INSERT INTO `gauchada` (`id_gauchada`, `titulo`, `descripcion`, `ciudad`, `fecha_ini`, `fecha_fin`, `id_foto`, `id_registrado`) VALUES
 (1, 'Busco acompañante de viaje\r\n\r\n', 'Soy camionero y busco una persona que me acompañe en mi viaje hasta Rawson porque sufro problemas de sueño.\r\n\r\nSaldriamos el primer fin de semana de octubre y retornariamos el fin de semana siguiente.\r\n\r\n* Condicion fundamental: debe cebar buenos mates', 'La Plata', '2017-05-08', '2017-10-05', 1, 5),
-(2, 'Se busca dueño para cachorritos', 'Mi perra tuvo cachorros y no los puedo mantener, se busca familia responsable.', 'La Plata', '2017-05-10', '2017-05-19', 2, 1),
-(3, 'Necesito viajar hasta Bariloche', 'busco gente que viaje para el sur y le sobre un lugar en el vehiculo.', 'Rosario', '2017-05-12', '2017-05-31', 2, 3),
+(2, 'Se busca dueño para cachorritos', 'Mi perra tuvo cachorros y no los puedo mantener, se busca familia responsable.', 'La Plata', '2017-05-10', '2017-05-19', 3, 1),
+(3, 'Necesito viajar hasta Bariloche', 'busco gente que viaje para el sur y le sobre un lugar en el vehiculo.', 'Rosario', '2017-05-12', '2017-05-31', 4, 3),
 (4, 'Se necesita cocinera', 'nuestra cocinera se enfermo y necesitamos ayuda para mantener alimentados a los chicos del comedor.', 'Villa Gessel', '2017-05-29', '2017-05-31', 2, 4);
 
 -- --------------------------------------------------------
@@ -174,10 +187,10 @@ CREATE TABLE `postula` (
 --
 
 INSERT INTO `postula` (`id_registrado`, `id_gauchada`) VALUES
-(1, 1),
 (3, 2),
 (3, 3),
-(4, 4);
+(5, 3),
+(9, 1);
 
 -- --------------------------------------------------------
 
@@ -226,8 +239,8 @@ INSERT INTO `registrado` (`id_usuario`, `nombre_usu`, `password`, `mail`, `ciuda
 (4, 'federicosanchez', '', 'fedesanchez@gmail.com', 'rosario', 0, 654846156, 3),
 (5, 'rodrigopait', '', 'rodripait@hotmail.com', 'mar de ajo', 0, 4876848, 3),
 (6, 'camila', '', 'cami@hotmail.com', 'mar de ajo', 0, NULL, 2),
-(7, 'pai', 'pai', 'pai@gauchadas.com', 'la plata', 0, 123, 2),
-(9, 'gauchada', 'gauchada', 'gauchada@gaucahda.com', 'la plata', 0, 0, 2);
+(7, 'pai', 'paipai', 'pai@gauchadas.com', 'la plata', 0, 123, 2),
+(9, 'gauchada', 'gauchada', 'gauchada@gaucahda.com', 'la plata', 22, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -289,9 +302,9 @@ ALTER TABLE `calificacion`
 ALTER TABLE `calificacion` ADD FULLTEXT KEY `comentario` (`comentario`);
 
 --
--- Indices de la tabla `cate-gau`
+-- Indices de la tabla `categau`
 --
-ALTER TABLE `cate-gau`
+ALTER TABLE `categau`
   ADD PRIMARY KEY (`id_categoria`,`id_gauchada`);
 
 --
@@ -369,17 +382,17 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `id_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_compra` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `credito`
 --
 ALTER TABLE `credito`
-  MODIFY `id_credito` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_credito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `foto`
 --
 ALTER TABLE `foto`
-  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `gauchada`
 --

@@ -2,15 +2,15 @@
 <html lang="en">
 <?php include("conexion.php");
 session_start();
-if (isset($_POST['categoria'])){ 
+if (!empty($_POST['categoria'])){ 
     $categoria = $_POST['categoria']; 
     setcookie('cateoria',$categoria,time()+4800);
 }
-if (isset($_POST['titulo'])){
+if (!empty($_POST['titulo'])){
     $titulo = $_POST['titulo'];
     setcookie('titulo',$titulo,time()+4800);
 }
-if (isset($_POST['ciudad'])){
+if (!empty($_POST['ciudad'])){
     $ciudad = $_POST['ciudad'];
     setcookie('ciudad',$ciudad,time()+4800);
 }
@@ -74,49 +74,49 @@ if (isset($_POST['ciudad'])){
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                <form method="POST" action="search.php">
-                    <div class="input-group">
+                <form method="post" action="search.php">
+                    <div class="input-group" style="margin-bottom: 1%;">
                         <span class="input-group-addon">Categoria</span>
                         <input type="text" class="form-control" name="categoria" value="">
                     </div>
-                    <div class="input-group">
+                    <div class="input-group" style="margin-bottom: 1%;">
                         <span class="input-group-addon">Ciudad</span>
                         <input type="text" class="form-control" name="ciudad" value="">
                     </div>
-                    <div class="input-group">
+                    <div class="input-group" style="margin-bottom: 1%;">
                         <span class="input-group-addon">Titulo</span>
                         <input type="text" class="form-control" name="titulo" value="">
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-secondary">Filtrar</button>
+                        <button type="submit" class="btn btn-secondary" style="margin-left: 40%;margin-top: 1%;">
+                        <i class="fa fa-search-plus" aria-hidden="true"></i> Filtrar</button>
                     </div>
                 </form>
-                <?php 
-                if( isset($_POST['categoria']) && isset($_POST['ciudad']) && isset($_POST['titulo'])) {
-                $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE categoria = '$categoria' AND ciudad = '$ciudad' AND titulo like %'$titulo'%"); 
+                <?php
+                if( (!empty($_POST['categoria'])) AND (!empty($_POST['ciudad'])) AND (!empty($_POST['titulo']))) {
+                $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto INNER JOIN categau ON gauchada.id_gauchada = categau.id_gauchada INNER JOIN categoria ON categau.id_categoria = categoria.id_cat WHERE tipocategoria = '$categoria' AND ciudad = '$ciudad' AND titulo LIKE '%$titulo%'"); 
                 }
                 else {
-                    if( isset($_POST['categoria']) && isset($_POST['ciudad']) && !isset($_POST['titulo'])){
-                $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE categoria = '$categoria' AND ciudad = '$ciudad'");}
+                    if( !empty($_POST['categoria']) && !empty($_POST['ciudad']) && empty($_POST['titulo'])){
+                $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto INNER JOIN categau ON gauchada.id_gauchada = categau.id_gauchada INNER JOIN categoria ON categau.id_categoria = categoria.id_cat WHERE tipocategoria = '$categoria' AND ciudad = '$ciudad'");}
                     else {
-                        if( isset($_POST['categoria']) && !isset($_POST['ciudad']) && !isset($_POST['titulo'])){
-                     $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE categoria = '$categoria'");}
+                        if( !empty($_POST['categoria']) && empty($_POST['ciudad']) && empty($_POST['titulo'])){
+                     $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto INNER JOIN categau ON gauchada.id_gauchada = categau.id_gauchada INNER JOIN categoria ON categau.id_categoria = categoria.id_cat WHERE tipocategoria = '$categoria'");}
                     else {
-                        if( !isset($_COOKIE['categoria']) && !isset($_COOKIE['ciudad']) && !isset($_COOKIE['titulo'])){
-                     $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto ");}
+                        if( empty($_POST['categoria']) && empty($_POST['ciudad']) && !empty($_POST['titulo'])){
+                     $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE titulo LIKE '%$titulo%'");}
                     else {
-                        if( !isset($_POST['categoria']) && isset($_POST['ciudad']) && !isset($_POST['titulo'])){
+                        if( empty($_POST['categoria']) && !empty($_POST['ciudad']) && empty($_POST['titulo'])){
                      $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE ciudad = '$ciudad' ");}
                     else {
-                        if( isset($_POST['categoria']) && !isset($_POST['ciudad']) && isset($_POST['titulo'])){
-                     $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE categoria= '$categoria' AND titulo= '$titulo'");}
+                        if( !empty($_POST['categoria']) && empty($_POST['ciudad']) && !empty($_POST['titulo'])){
+                     $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto INNER JOIN categau ON gauchada.id_gauchada = categau.id_gauchada INNER JOIN categoria ON categau.id_categoria = categoria.id_cat WHERE tipocategoria = '$categoria' AND titulo LIKE '%$titulo%'");}
                      else {
-                        if( !isset($_POST['categoria']) && isset($_POST['ciudad']) && isset($_POST['titulo'])){
-                     $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE ciudad = %'$ciudad'% AND titulo= '$titulo'");}
+                        if( empty($_POST['categoria']) && !empty($_POST['ciudad']) && !empty($_POST['titulo'])){
+                     $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE ciudad = '$ciudad' AND titulo LIKE '%$titulo%'");}
                      else {
-                        if( !isset($_POST['categoria']) && !isset($_POST['ciudad']) && isset($_POST['titulo'])){
-                     $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE titulo= '$titulo'");}
-                    }}}}}}}
+                        $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto ");
+                }}}}}}}
                 while ($tupla = mysql_fetch_array($consul_gauchada)){ ?>
                 <div class="post-preview">
                     <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>">
@@ -133,30 +133,10 @@ if (isset($_POST['ciudad'])){
                     </p>
                 </div>
                 <hr>
-                <?php $tupla = mysql_fetch_array($consul_gauchada);?>
-                <div class="post-preview">
-                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>">
-                        <h2 class="post-title">
-                            <?php echo $tupla['titulo'];?>
-                            <img href="post.php?variable=<?php echo $tupla['id_gauchada'];?>" 
-                            src="<?php echo $tupla['foto']?>" width="120" height="100" style="position: absolute;
-                            right: 40px;">
-                        </h2>
-                    </a>
-                    <p class="post-meta">Publicado en 
-                        <?php echo $tupla['ciudad'];?> el <?php echo $tupla['fecha_ini']; ?>
-                    </p>
-                </div>
-                <hr><?php } ?>
-                <!-- Pager -->
-<!--                <div class="clearfix">
-                    <a class="btn btn-secondary float-right" href="#">ver mas &rarr;</a>
-                </div>
- -->            </div>
+               <?php } ?> 
+           </div>
         </div>
     </div>
-
-    <hr>
 
     <!-- Footer -->
     <?php include("footer.php");?>
