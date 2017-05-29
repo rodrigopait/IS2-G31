@@ -5,7 +5,7 @@
 
 	// $uploadedfileload="true";
 	$temp = $_FILES['image']['tmp_name'];
-	echo $_FILES['image']['name'];
+	echo $hola = $_FILES['image']["name"];
 	// if (!($_FILES['uploadedfile']['type'] =="image/pjpeg" OR $_FILES['uploadedfile']['type'] =="image/gif")){
 	// 	$msg=" Tu archivo tiene que ser JPG o GIF. Otros archivos no son permitidos<BR>";
 	// 	$uploadedfileload="false";

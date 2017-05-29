@@ -2,17 +2,31 @@
 <html lang="en">
 <?php include("conexion.php");
 session_start();
-if (!empty($_POST['categoria'])){ 
-    $categoria = $_POST['categoria']; 
-    setcookie('cateoria',$categoria,time()+4800);
+if (!empty($_POST['categoria'])){
+    setcookie('categoria',$_POST['categoria'],time()+4800);
+    $categoria = $_COOKIE['categoria'];
 }
 if (!empty($_POST['titulo'])){
-    $titulo = $_POST['titulo'];
-    setcookie('titulo',$titulo,time()+4800);
+    setcookie('titulo',$_POST['titulo'],time()+4800);
+    $titulo = $_COOKIE['titulo'];
 }
 if (!empty($_POST['ciudad'])){
-    $ciudad = $_POST['ciudad'];
-    setcookie('ciudad',$ciudad,time()+4800);
+    setcookie('ciudad',$_POST['ciudad'],time()+4800);
+    $ciudad = $_COOKIE['ciudad'];
+}
+if (!empty($_COOKIE['categoria'])){
+    $categoria = $_COOKIE['categoria'];
+}
+if (!empty($_COOKIE['titulo'])){
+    $titulo = $_COOKIE['titulo'];
+}
+if (!empty($_COOKIE['ciudad'])){
+    $ciudad = $_COOKIE['ciudad'];
+}
+if (!empty($_POST['eliminar'])){
+    setcookie('categoria',"",time()-4800);
+    setcookie('ciudad',"",time()-4800);
+    setcookie('titulo',"",time()-4800);
 }
 ?>
 <head>
@@ -88,31 +102,40 @@ if (!empty($_POST['ciudad'])){
                         <input type="text" class="form-control" name="titulo" value="">
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-secondary" style="margin-left: 40%;margin-top: 1%;">
-                        <i class="fa fa-search-plus" aria-hidden="true"></i> Filtrar</button>
+                        <button type="submit" class="btn btn-secondary" style="margin-left: 22%">
+                        <i class="fa fa-search-plus" aria-hidden="true"></i> Agregar Filtro</button>
+                        <button type="submit" class="btn btn-secondary" name="eliminar" value="true">
+                        <i class="fa fa-search-minus" aria-hidden="true"></i> Eliminar Filtro</button>
                     </div>
                 </form>
                 <?php
-                if( (!empty($_POST['categoria'])) AND (!empty($_POST['ciudad'])) AND (!empty($_POST['titulo']))) {
+                if( (!empty($_POST['categoria'])) AND (!empty($_POST['ciudad'])) AND (!empty($_POST['titulo'])) AND
+                    (!empty($_COOKIE['categoria'])) AND (!empty($_COOKIE['ciudad'])) AND (!empty($_COOKIE['titulo']))){
                 $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto INNER JOIN categau ON gauchada.id_gauchada = categau.id_gauchada INNER JOIN categoria ON categau.id_categoria = categoria.id_cat WHERE tipocategoria = '$categoria' AND ciudad = '$ciudad' AND titulo LIKE '%$titulo%'"); 
                 }
                 else {
-                    if( !empty($_POST['categoria']) && !empty($_POST['ciudad']) && empty($_POST['titulo'])){
+                    if( (!empty($_POST['categoria']) && !empty($_POST['ciudad']) && empty($_POST['titulo'])) || 
+                        (!empty($_COOKIE['categoria']) && !empty($_COOKIE['ciudad']) && empty($_COOKIE['titulo']))){
                 $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto INNER JOIN categau ON gauchada.id_gauchada = categau.id_gauchada INNER JOIN categoria ON categau.id_categoria = categoria.id_cat WHERE tipocategoria = '$categoria' AND ciudad = '$ciudad'");}
                     else {
-                        if( !empty($_POST['categoria']) && empty($_POST['ciudad']) && empty($_POST['titulo'])){
+                        if( (!empty($_POST['categoria']) && empty($_POST['ciudad']) && empty($_POST['titulo'])) ||
+                            (!empty($_COOKIE['categoria']) && empty($_COOKIE['ciudad']) && empty($_COOKIE['titulo']))){
                      $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto INNER JOIN categau ON gauchada.id_gauchada = categau.id_gauchada INNER JOIN categoria ON categau.id_categoria = categoria.id_cat WHERE tipocategoria = '$categoria'");}
                     else {
-                        if( empty($_POST['categoria']) && empty($_POST['ciudad']) && !empty($_POST['titulo'])){
+                        if( (empty($_POST['categoria']) && empty($_POST['ciudad']) && !empty($_POST['titulo'])) ||
+                            (empty($_COOKIE['categoria']) && empty($_COOKIE['ciudad']) && !empty($_COOKIE['titulo']))){
                      $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE titulo LIKE '%$titulo%'");}
                     else {
-                        if( empty($_POST['categoria']) && !empty($_POST['ciudad']) && empty($_POST['titulo'])){
+                        if( (empty($_POST['categoria']) && !empty($_POST['ciudad']) && empty($_POST['titulo'])) ||
+                            (empty($_COOKIE['categoria']) && !empty($_COOKIE['ciudad']) && empty($_COOKIE['titulo']))){
                      $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE ciudad = '$ciudad' ");}
                     else {
-                        if( !empty($_POST['categoria']) && empty($_POST['ciudad']) && !empty($_POST['titulo'])){
+                        if( (!empty($_POST['categoria']) && empty($_POST['ciudad']) && !empty($_POST['titulo'])) ||
+                        (!empty($_COOKIE['categoria']) && empty($_COOKIE['ciudad']) && !empty($_COOKIE['titulo']))){
                      $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto INNER JOIN categau ON gauchada.id_gauchada = categau.id_gauchada INNER JOIN categoria ON categau.id_categoria = categoria.id_cat WHERE tipocategoria = '$categoria' AND titulo LIKE '%$titulo%'");}
                      else {
-                        if( empty($_POST['categoria']) && !empty($_POST['ciudad']) && !empty($_POST['titulo'])){
+                        if( (empty($_POST['categoria']) && !empty($_POST['ciudad']) && !empty($_POST['titulo'])) ||
+                        (empty($_COOKIE['categoria']) && !empty($_COOKIE['ciudad']) && !empty($_COOKIE['titulo']))){
                      $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE ciudad = '$ciudad' AND titulo LIKE '%$titulo%'");}
                      else {
                         $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto ");
