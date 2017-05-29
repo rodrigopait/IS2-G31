@@ -61,7 +61,7 @@ session_start();?>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                <form method="POST" action="public-check.php">
+                <form method="POST" action="public-check.php" enctype="multipart/form-data">
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
                             <label><i class="fa fa-font" aria-hidden="true"></i> Título</label>
@@ -92,7 +92,7 @@ session_start();?>
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
                             <label><i class="fa fa-picture-o" aria-hidden="true"></i> Foto</label>
-                            <input name="image[]" type="file">
+                            <input name="image" type="file">
                         </div>
                     </div>
                     <br>
