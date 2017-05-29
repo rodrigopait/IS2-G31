@@ -92,9 +92,7 @@ session_start();?>
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
                             <label><i class="fa fa-picture-o" aria-hidden="true"></i> Foto</label>
-                            <div enctype="multipart/form-data">
-                                <input name="image" type="file">
-                            </div>
+                            <input name="image[]" type="file">
                         </div>
                     </div>
                     <br>

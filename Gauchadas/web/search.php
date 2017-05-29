@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include("conexion.php");
-session_start();?>
+session_start();
+if (isset($_POST['categoria'])){ 
+    $categoria = $_POST['categoria']; 
+    setcookie('cateoria',$categoria,time()+4800);
+}
+if (isset($_POST['titulo'])){
+    $titulo = $_POST['titulo'];
+    setcookie('titulo',$titulo,time()+4800);
+}
+if (isset($_POST['ciudad'])){
+    $ciudad = $_POST['ciudad'];
+    setcookie('ciudad',$ciudad,time()+4800);
+}
+?>
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8">
@@ -61,7 +74,7 @@ session_start();?>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                <div class="row" method="post" action="search-check.php">
+                <form method="POST" action="search.php">
                     <div class="input-group">
                         <span class="input-group-addon">Categoria</span>
                         <input type="text" class="form-control" name="categoria" value="">
@@ -75,11 +88,35 @@ session_start();?>
                         <input type="text" class="form-control" name="titulo" value="">
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-secondary">Publicar</button>
+                        <button type="submit" class="btn btn-secondary">Filtrar</button>
                     </div>
-                </div>
-                <?php $string = "SELECT * FROM registrado INNER JOIN gauchada ON registrado.id_usuario = gauchada.id_registrado INNER JOIN foto ON gauchada.id_foto = foto.id_foto";
-                $consul_gauchada = mysql_query($string);
+                </form>
+                <?php 
+                if( isset($_POST['categoria']) && isset($_POST['ciudad']) && isset($_POST['titulo'])) {
+                $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE categoria = '$categoria' AND ciudad = '$ciudad' AND titulo like %'$titulo'%"); 
+                }
+                else {
+                    if( isset($_POST['categoria']) && isset($_POST['ciudad']) && !isset($_POST['titulo'])){
+                $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE categoria = '$categoria' AND ciudad = '$ciudad'");}
+                    else {
+                        if( isset($_POST['categoria']) && !isset($_POST['ciudad']) && !isset($_POST['titulo'])){
+                     $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE categoria = '$categoria'");}
+                    else {
+                        if( !isset($_COOKIE['categoria']) && !isset($_COOKIE['ciudad']) && !isset($_COOKIE['titulo'])){
+                     $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto ");}
+                    else {
+                        if( !isset($_POST['categoria']) && isset($_POST['ciudad']) && !isset($_POST['titulo'])){
+                     $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE ciudad = '$ciudad' ");}
+                    else {
+                        if( isset($_POST['categoria']) && !isset($_POST['ciudad']) && isset($_POST['titulo'])){
+                     $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE categoria= '$categoria' AND titulo= '$titulo'");}
+                     else {
+                        if( !isset($_POST['categoria']) && isset($_POST['ciudad']) && isset($_POST['titulo'])){
+                     $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE ciudad = %'$ciudad'% AND titulo= '$titulo'");}
+                     else {
+                        if( !isset($_POST['categoria']) && !isset($_POST['ciudad']) && isset($_POST['titulo'])){
+                     $consul_gauchada = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE titulo= '$titulo'");}
+                    }}}}}}}
                 while ($tupla = mysql_fetch_array($consul_gauchada)){ ?>
                 <div class="post-preview">
                     <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>">
