@@ -9,6 +9,7 @@
 	$ciudad = $_POST['city'];
 	$fecha_fin = $_POST['fecha_fin'];
 	$fecha_ini = date("Y-m-d");
+	$id_categoria = $_POST['categoria'];
 	$id_registrado = $_SESSION['id_usuario'];
 	if ($_FILES['image']['name']){
 		$type=$_FILES['image']['type'];
@@ -34,8 +35,9 @@
 		$id_foto ="2";
 	}
 	publicarGauchada($titulo,$descripcion,$ciudad,$fecha_ini,$fecha_fin,$id_foto[0],$id_registrado);
-	header('Location : index.php');
-
+	$id_gauchada = consultarIdGauchada($titulo,$id_registrado);
+	asociarGaucahdaConCategoria($id_categoria,$id_gauchada[0]);
+	header('Location: index.php');
 /**	$nombre_file = "img/".mktime().'.jpg';
 	$consulta = mysql_query("INSERT INTO foto SET foto='$nombre_file'");
 	$origen = $_FILES['image']['tmp_name'];

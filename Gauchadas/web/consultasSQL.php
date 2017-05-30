@@ -48,4 +48,13 @@ function consultaIdImagen($foto){
 	return mysql_fetch_array($consulta);
 }
 
+function consultarIdGauchada($titulo,$id_registrado){
+	$consulta = mysql_query("SELECT * FROM gauchada WHERE titulo = '$titulo' AND id_registrado = '$id_registrado' ");
+	return mysql_fetch_array($consulta);
+}
+
+function asociarGaucahdaConCategoria($id_categoria,$id_gauchada){
+	mysql_query("INSERT INTO categau (id_categoria,id_gauchada) VALUES ('$id_categoria','$id_gauchada')");
+}
+
 ?>

@@ -91,6 +91,17 @@ comprobarSession();
                             title="Por favor ingrese la fechad de fin de la gauchada" name="fecha_fin" value="">
                         </div>
                     </div>
+<!--                     Probar DATALIST mas adelante-->                   
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls">
+                            <select name="categoria">
+                                <?php $consulta = mysql_query("SELECT * FROM categoria");
+                                while ($tabla = mysql_fetch_array($consulta)){?>
+                                <option value="<?php echo $tabla['id_cat']?>"><?php echo $tabla['tipocategoria']?></option>
+                                <?php }?>
+                            </select>
+                        </div>
+                    </div>
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
                             <label><i class="fa fa-picture-o" aria-hidden="true"></i> Foto</label>
