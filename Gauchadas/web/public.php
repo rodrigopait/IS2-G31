@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include ("conexion.php");
-session_start();?>
+include("funciones.php");
+comprobarSession();
+?>
 
 <head>
 
