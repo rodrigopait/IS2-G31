@@ -16,7 +16,7 @@
 		echo "</script>";
 	}
 	else {
-		$insertar = "INSERT INTO registrado (id_usuario, nombre_usu, password, mail, ciudad, creditos, telefono, id_compra, id_rep) VALUES (NULL, '$name','$pw', '$email', '$city', 0, '$phone', 1, 2)";
+		$insertar = "INSERT INTO registrado (id_usuario, nombre_usu, password, mail, ciudad, creditos, telefono, id_rep,tipo_adm) VALUES (NULL, '$name','$pw', '$email', '$city', 0, '$phone', 2,0)";
 		if (!mysql_query($insertar)){
 			die ('Error: ' . mysql_error());
 			echo "Error al crear el usuario" . "<br />";
