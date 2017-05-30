@@ -51,7 +51,7 @@ session_start();?>
     <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: contain;
     background-position-y: 0; height: 333px;">
         <?php $id = ($_GET['variable']);
-        $consulta = mysql_query("SELECT * FROM gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE id_gauchada = '$id'");
+        $consulta = mysql_query("SELECT * FROM gauchada NATURAL JOIN foto NATURAL JOIN categau INNER JOIN categoria ON id_categoria = id_cat WHERE id_gauchada = '$id'");
         $tabla = mysql_fetch_array($consulta);?>
         <div class="container">
             <div class="row">
@@ -70,8 +70,8 @@ session_start();?>
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1" style="text-align: justify;line-height: 2;">
-                    <p class="caption text-muted" style="text-align: left;"> Fecha de creación:
-                        <?php echo $tabla['fecha_ini']?></p>
+                    <div class="caption text-muted" style="text-align: left;"> Fecha de creación:
+                        <?php echo $tabla['fecha_ini'];?> <i style="margin-left: 40%">Categoria : <?php echo $tabla['tipocategoria']?></i></div>
                         <?php echo $tabla['descripcion']?>
                     <br />
                     <a href="post.php?variable=<?php echo $tabla['id_gauchada'];?>&&postulado=0">
