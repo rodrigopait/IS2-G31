@@ -34,7 +34,7 @@
 		$id_foto ="2";
 	}
 	publicarGauchada($titulo,$descripcion,$ciudad,$fecha_ini,$fecha_fin,$id_foto[0],$id_registrado);
-
+	header('Location : index.php');
 
 /**	$nombre_file = "img/".mktime().'.jpg';
 	$consulta = mysql_query("INSERT INTO foto SET foto='$nombre_file'");

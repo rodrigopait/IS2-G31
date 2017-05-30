@@ -4,15 +4,15 @@
 session_start();
 if (!empty($_POST['categoria'])){
     setcookie('categoria',$_POST['categoria'],time()+4800);
-    $categoria = $_COOKIE['categoria'];
+    $categoria = $_POST['categoria'];
 }
 if (!empty($_POST['titulo'])){
     setcookie('titulo',$_POST['titulo'],time()+4800);
-    $titulo = $_COOKIE['titulo'];
+    $titulo = $_POST['titulo'];
 }
 if (!empty($_POST['ciudad'])){
     setcookie('ciudad',$_POST['ciudad'],time()+4800);
-    $ciudad = $_COOKIE['ciudad'];
+    $ciudad = $_POST['ciudad'];
 }
 if (!empty($_COOKIE['categoria'])){
     $categoria = $_COOKIE['categoria'];
