@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 29-05-2017 a las 23:41:28
+-- Tiempo de generación: 30-05-2017 a las 21:08:23
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -226,21 +226,23 @@ CREATE TABLE `registrado` (
   `ciudad` text CHARACTER SET utf8 NOT NULL,
   `creditos` int(11) NOT NULL,
   `telefono` int(13) DEFAULT NULL,
-  `id_rep` int(11) NOT NULL
+  `id_rep` int(11) NOT NULL,
+  `tipo_adm` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `registrado`
 --
 
-INSERT INTO `registrado` (`id_usuario`, `nombre_usu`, `password`, `mail`, `ciudad`, `creditos`, `telefono`, `id_rep`) VALUES
-(1, 'facundomedero', '', 'facumedero@hotmail.com', 'laplata', 0, 6546464, 2),
-(3, 'francotagliero', '', 'francotagliero@hotmail.com', 'la plata', 0, 35464, 2),
-(4, 'federicosanchez', '', 'fedesanchez@gmail.com', 'rosario', 0, 654846156, 3),
-(5, 'rodrigopait', '', 'rodripait@hotmail.com', 'mar de ajo', 0, 4876848, 3),
-(6, 'camila', '', 'cami@hotmail.com', 'mar de ajo', 0, NULL, 2),
-(7, 'pai', 'paipai', 'pai@gauchadas.com', 'la plata', 0, 123, 2),
-(9, 'gauchada', 'gauchada', 'gauchada@gaucahda.com', 'la plata', 22, 0, 2);
+INSERT INTO `registrado` (`id_usuario`, `nombre_usu`, `password`, `mail`, `ciudad`, `creditos`, `telefono`, `id_rep`, `tipo_adm`) VALUES
+(1, 'facundomedero', '', 'facumedero@hotmail.com', 'laplata', 0, 6546464, 2, 0),
+(3, 'francotagliero', '', 'francotagliero@hotmail.com', 'la plata', 0, 35464, 2, 0),
+(4, 'federicosanchez', '', 'fedesanchez@gmail.com', 'rosario', 0, 654846156, 3, 0),
+(5, 'rodrigopait', '', 'rodripait@hotmail.com', 'mar de ajo', 0, 4876848, 3, 0),
+(6, 'camila', '', 'cami@hotmail.com', 'mar de ajo', 0, NULL, 2, 0),
+(7, 'pai', 'paipai', 'pai@gauchadas.com', 'la plata', 0, 123, 2, 0),
+(9, 'gauchada', 'gauchada', 'gauchada@gaucahda.com', 'la plata', 22, 0, 2, 0),
+(10, 'rodrigo', 'Rodrigo', 'rodri@hotmail.com', 'La Plata', 0, 1234, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -407,7 +409,7 @@ ALTER TABLE `rango`
 -- AUTO_INCREMENT de la tabla `registrado`
 --
 ALTER TABLE `registrado`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `reputacion`
 --
