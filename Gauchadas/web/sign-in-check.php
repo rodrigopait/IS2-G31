@@ -13,9 +13,11 @@
 			echo "</script>";
 		}
 		else{
+			$consulta_usuario = consultaUsuario($res['id_usuario']);
 			session_start();
 			$_SESSION['id_usuario'] = $res['id_usuario'];
 			$_SESSION['nombreUsuario'] = $nombreUsuario;
+			$_SESSION['tipo_adm'] = $consulta_usuario['tipo_adm'];
 			header("location:index.php");
 		}	
 	}

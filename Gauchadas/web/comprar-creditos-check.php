@@ -3,7 +3,7 @@ include ("conexion.php");
 include ("consultasSQL.php");
 session_start();
 if(isset($_POST['cantCreditos'])){
-	$res = cantCreditos($_SESSION['nombreUsuario']);
+	$res = cantCreditos($_SESSION['id_usuario']);
 	$idUsuario = $_SESSION['id_usuario'];
 	$cantCreditos = $_POST['cantCreditos'];
 	$cantCreditos = $cantCreditos + $res['creditos'];

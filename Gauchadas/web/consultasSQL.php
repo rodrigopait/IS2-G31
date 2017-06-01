@@ -5,8 +5,8 @@ function obtenerUsuario($nombreUsuario, $password){
 	return mysql_fetch_array($consulta);
 }
 
-function cantCreditos($nombreUsuario){
-	$consulta = mysql_query("SELECT creditos FROM registrado WHERE nombre_usu ='$nombreUsuario'");
+function cantCreditos($id_usuario){
+	$consulta = mysql_query("SELECT creditos FROM registrado WHERE id_usuario ='$id_usuario'");
 	return mysql_fetch_array($consulta);
 }
 
@@ -40,7 +40,7 @@ function publicarGauchada($titulo,$descripcion,$ciudad,$fecha_ini,$fecha_fin,$id
 }
 
 function agregarImagen($foto){
-	return mysql_query("INSERT INTO foto (id_foto,foto) VALUES (NULL,$foto)");
+	return mysql_query("INSERT INTO foto SET foto='$nuevo_path'");
 }
 
 function consultaIdImagen($foto){
@@ -63,8 +63,21 @@ function getGauchadas(){
 }
 
 function cantGauchadas(){
-	$cant = mysql_query("SELECT count(*) FROM gauchada");
-	return $cant;
+	return mysql_query("SELECT count(*) FROM gauchada");
 }
+
+function consultaUsuario($id_usuario){
+	$consulta = mysql_query("SELECT * FROM registrado WHERE id_usuario = '$id_usuario'");
+	return mysql_fetch_array($consulta);
+}
+
+function consultaCalificaciones($id_usuario){
+	return mysql_query("SELECT id_aceptado,id_calificacion FROM gauchada NATURAL JOIN registrado WHERE id_usuario = '$id_usuario'");
+}
+
+function modificarCreditos($id_usuario,$creditos){
+	mysql_query("UPDATE registrado SET creditos = '$creditos' WHERE id_usuario = '$id_usuario'");
+}
+
 
 ?>

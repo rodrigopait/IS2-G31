@@ -1,91 +1,61 @@
 <?php
-
 	include ("conexion.php");
 	include ("consultasSQL.php");
 	session_start();
-	//capturamos los datos del fichero subido    
-	$titulo = $_POST['title'];
-	$descripcion = $_POST['desc'];
-	$ciudad = $_POST['city'];
-	$fecha_fin = $_POST['fecha_fin'];
-	$fecha_ini = date("Y-m-d");
-	$id_categoria = $_POST['categoria'];
-	$id_registrado = $_SESSION['id_usuario'];
-	if ($_FILES['image']['name']){
-		$type=$_FILES['image']['type'];
-	$tmp_name = $_FILES['image']["tmp_name"];
-	$name = $_FILES['image']["name"];
-	//Creamos una nueva ruta (nuevo path)
-	//Así guardaremos nuestra imagen en la carpeta "images"
-	$nuevo_path="img/".$name;
-	//Movemos el archivo desde su ubicación temporal hacia la nueva ruta
-	# $tmp_name: la ruta temporal del fichero
-	# $nuevo_path: la nueva ruta que creamos
-	move_uploaded_file($tmp_name,$nuevo_path);
-	//Extraer la extensión del archivo. P.e: jpg
-	# Con explode() segmentamos la cadena de acuerdo al separador que definamos. En este caso punto (.)
-	$array=explode('.',$nuevo_path);
-	# Capturamos el último elemento del array anterior que vendría a ser la extensión
-	$ext= end($array);
-	$res = mysql_query("INSERT INTO foto SET foto='$nuevo_path'");
-	//Imprimimos un texto de subida exitosa.
-	$id_foto = consultaIdImagen($nuevo_path);
+	$consultaCreditos = cantCreditos($_SESSION['id_usuario']);
+	$consultaCalificaciones = consultaCalificaciones($_SESSION['id_usuario']);
+	$adeuda_calificaciones = true;
+	while ($calificaciones = mysql_fetch_array($consultaCalificaciones)) {
+		if ((!empty($calificaciones['id_aceptado'])) && (empty($calificaciones['id_calificacion']))){
+			$adeuda_calificaciones = false;
+		}
+	}
+	if (($consultaCreditos['creditos'] >= 1) && ($adeuda_calificaciones)){
+		$titulo = $_POST['title'];
+		$descripcion = $_POST['desc'];
+		$ciudad = $_POST['city'];
+		$fecha_fin = $_POST['fecha_fin'];
+		$fecha_ini = date("Y-m-d");
+		$id_categoria = $_POST['categoria'];
+		$id_registrado = $_SESSION['id_usuario'];
+		if ($fecha_fin < date("Y-m-d")){
+			$mensaje = "La fecha de fin (Fecha de vencimiento) debe ser mayor o igual al dia de hoy!!";
+			echo "<script>";
+			echo "alert('$mensaje');";
+			echo "window.location = 'public.php'";
+			echo "</script>";
+		}
+		if ($_FILES['image']['name']){
+			$type=$_FILES['image']['type'];
+			$tmp_name = $_FILES['image']["tmp_name"];
+			$name = $_FILES['image']["name"];
+			$nuevo_path="img/".$name;
+			move_uploaded_file($tmp_name,$nuevo_path);
+			$array=explode('.',$nuevo_path);
+			$ext= end($array);
+			$res = agregarImagen($nuevo_path);
+			$id_foto = consultaIdImagen($nuevo_path);
+		}
+		else{
+			$id_foto ="2";
+		}
+		$creditos = $consultaCreditos['creditos'];
+		$creditos --;
+		modificarCreditos($id_registrado,$creditos);
+		publicarGauchada($titulo,$descripcion,$ciudad,$fecha_ini,$fecha_fin,$id_foto[0],$id_registrado);
+		$id_gauchada = consultarIdGauchada($titulo,$id_registrado);
+		asociarGaucahdaConCategoria($id_categoria,$id_gauchada[0]);
+		$mensaje = "La gacuahda ha sido publicada con exito!!  Le quedan: ".$creditos." creditos.";
+		echo "<script>";
+		echo "alert('$mensaje');";
+		echo "window.location = 'index.php'";
+		echo "</script>";
 	}
 	else{
-		$id_foto ="2";
+		$mensaje = "Usted adeuda Gauchadas por calificar, por favor califiquelas antes de publicar alguna gaucahda.";
+		echo "<script>";
+		echo "alert('$mensaje');";
+		echo "window.location = 'public.php'";
+		echo "</script>";
 	}
-	publicarGauchada($titulo,$descripcion,$ciudad,$fecha_ini,$fecha_fin,$id_foto[0],$id_registrado);
-	$id_gauchada = consultarIdGauchada($titulo,$id_registrado);
-	asociarGaucahdaConCategoria($id_categoria,$id_gauchada[0]);
-	header('Location: index.php');
-/**	$nombre_file = "img/".mktime().'.jpg';
-	$consulta = mysql_query("INSERT INTO foto SET foto='$nombre_file'");
-	$origen = $_FILES['image']['tmp_name'];
-	$destino = "img/$nombre_file";
-	move_uploaded_file($origen, $destino);
-	echo "titulo: ".$titulo = $_POST['title']."<br/>";
-	echo "descripcion: ".$descripcion = $_POST['desc']."<br/>";
-	echo "ciudad: ".$ciudad = $_POST['city']."<br/>";
-	echo "fecha_ini: ".$fecha_ini = date("Y-m-d")."<br/>";
-	echo "fecha_fin: ".$fecha_fin = $_POST['fecha_fin']."<br/>";
-	echo "foto: ".$foto = $id_foto[0]."<br/>";
-	echo "id_registrado: ".$id_registrado = $_SESSION['id_usuario']."<br/>";
-
-/**
-	// $uploadedfileload="true";
-	$temp = $_FILES['image']['tmp_name'];
-	echo $_FILES['image']['name'];
-	// if (!($_FILES['uploadedfile']['type'] =="image/pjpeg" OR $_FILES['uploadedfile']['type'] =="image/gif")){
-	// 	$msg=" Tu archivo tiene que ser JPG o GIF. Otros archivos no son permitidos<BR>";
-	// 	$uploadedfileload="false";
-	// }
-	$dir = "img/";
-	$file_name=$_FILES['image']['name'];
-	move_uploaded_file ($temp,"$dir/$file_name");
-	$name="img/$file_name";
-	// if($uploadedfileload=="true"){
-	// 	if(move_uploaded_file ($_FILES['uploadedfile']['tmp_name'], $name)){
-	// 		echo "Ha sido subido satisfactoriamente";
-			// agregarImagen($name);
-			// $id_foto = consultaIdImagen($name);
-	// 	}
-	// 	else{
-	// 		echo "Error al subir el archivo";
-	// 	}
-	// }else{
-	// 	echo $msg;
-	// }
-
-	echo "titulo: ".$titulo = $_POST['title']."<br/>";
-	echo "descripcion: ".$descripcion = $_POST['desc']."<br/>";
-	echo "ciudad: ".$ciudad = $_POST['city']."<br/>";
-	echo "fecha_ini: ".$fecha_ini = date("Y-m-d")."<br/>";
-	echo "fecha_fin: ".$fecha_fin = $_POST['fecha_fin']."<br/>";
-	echo "foto: ".$foto = $id_foto[0]."<br/>";
-	echo "id_registrado: ".$id_registrado = $_SESSION['id_usuario']."<br/>";
-
-	publicarGauchada($titulo,$descripcion,$ciudad,$fecha_ini,$fecha_fin,$foto,$id_registrado);
-
-	// header('Location: index.php');
-**/
 ?> 
