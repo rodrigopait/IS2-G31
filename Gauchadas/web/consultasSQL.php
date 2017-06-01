@@ -57,4 +57,14 @@ function asociarGaucahdaConCategoria($id_categoria,$id_gauchada){
 	mysql_query("INSERT INTO categau (id_categoria,id_gauchada) VALUES ('$id_categoria','$id_gauchada')");
 }
 
+function getGauchadas(){
+	$consul_gauchada = mysql_query("SELECT * FROM gauchada");
+	return mysql_fetch_array($consul_gauchada);
+}
+
+function cantGauchadas(){
+	$cant = mysql_query("SELECT count(*) FROM gauchada");
+	return $cant;
+}
+
 ?>
