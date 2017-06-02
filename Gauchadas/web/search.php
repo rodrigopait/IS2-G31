@@ -3,6 +3,10 @@
 <?php include("conexion.php");
 include("consultasSQL.php");
 session_start();
+if (isset($_COOKIE['eliminarFiltro'])){
+    $eliminarFiltro = true;
+    setcookie('eliminarFiltro',"",time()-4800);
+}else $eliminarFiltro = false;
 if (!empty($_POST['categoria'])){
     setcookie('categoria',$_POST['categoria'],time()+4800);
     $categoria = $_POST['categoria'];
@@ -25,19 +29,22 @@ if (!empty($_COOKIE['ciudad'])){
     $ciudad = $_COOKIE['ciudad'];
 }
 if (!empty($_POST['eliminarCategoria'])){
-    setcookie('categoria',"",time()-48000);
+    setcookie('categoria',"",time()-4800);
     $categoria= "";
-    header('Location: search.php');
+    setcookie('eliminarFiltro',"true",time()+4800);
+    Header('Location: search.php');
 }
 if (!empty($_POST['eliminarCiudad'])){
-    setcookie('ciudad',"",time()-48000);
+    setcookie('ciudad',"",time()-4800);
     $ciudad= "";
-    header('Location: search.php');
+    setcookie('eliminarFiltro',"true",time()+4800);
+    Header('Location: search.php');
 }
 if (!empty($_POST['eliminarTitulo'])){
-    setcookie('titulo',"",time()-48000);
+    setcookie('titulo',"",time()-4800);
     $titulo= "";
-    header('Location: search.php');
+    setcookie('eliminarFiltro',"true",time()+4800);
+    Header('Location: search.php');
 }
 ?>
 <head>
@@ -100,6 +107,17 @@ if (!empty($_POST['eliminarTitulo'])){
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <form method="post" action="search.php">
+                <?php if (!empty($_COOKIE['eliminarFiltro'])){?>
+                    <div class="alert alert-warning alert-dismissable">
+                      <button type="button" class="close" data-dismiss="alert">&times;</button>
+                      <strong>¡Cuidado!</strong> Ah eliminado un filtro.
+                    </div>
+                <?php }else if ((!empty($_POST['agregarFiltro'])) && (((!empty($categoria)))||(!empty($ciudad))||(!empty($titulo)))){?>
+                    <div class="alert alert-success alert-dismissable">
+                      <button type="button" class="close" data-dismiss="alert">&times;</button>
+                      <strong>¡Bien Hecho!</strong> Ah agregado un nuevo filtro.
+                    </div>
+                <?php }?>
                     <div class="input-group" style="margin-bottom: 1%;">
                         <span class="input-group-addon">Categoria</span>
                         <input list="browsers" class="form-control" name="categoria" 
@@ -134,7 +152,7 @@ if (!empty($_POST['eliminarTitulo'])){
                         <?php }?>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-secondary" style="margin-left: 36%">
+                        <button type="submit" class="btn btn-secondary" style="margin-left: 36%" name="agregarFiltro" value="true">
                         <i class="fa fa-search-plus" aria-hidden="true"></i> Agregar Filtro</button>
                     </div>
                 </form>
