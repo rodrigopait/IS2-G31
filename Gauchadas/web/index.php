@@ -44,7 +44,7 @@ session_start();
     <!-- Navigation -->
     <?php
     if(isset($_SESSION['nombreUsuario'])){
-        if ($_SESSION['tipo_adm']==1){
+        if ($_SESSION['tipo_adm'] == 1){
             include ("navbarAdm.php");
         }
         else include("navbar.php");    
