@@ -79,5 +79,8 @@ function modificarCreditos($id_usuario,$creditos){
 	mysql_query("UPDATE registrado SET creditos = '$creditos' WHERE id_usuario = '$id_usuario'");
 }
 
+function categorias(){
+	return mysql_query("SELECT * FROM categoria");
+}
 
 ?>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include("conexion.php");
+include("consultasSQL.php");
 session_start();
 if (!empty($_POST['categoria'])){
     setcookie('categoria',$_POST['categoria'],time()+4800);
@@ -23,10 +24,20 @@ if (!empty($_COOKIE['titulo'])){
 if (!empty($_COOKIE['ciudad'])){
     $ciudad = $_COOKIE['ciudad'];
 }
-if (!empty($_POST['eliminar'])){
-    setcookie('categoria',"",time()-4800);
-    setcookie('ciudad',"",time()-4800);
-    setcookie('titulo',"",time()-4800);
+if (!empty($_POST['eliminarCategoria'])){
+    setcookie('categoria',"",time()-48000);
+    $categoria= "";
+    header('Location: search.php');
+}
+if (!empty($_POST['eliminarCiudad'])){
+    setcookie('ciudad',"",time()-48000);
+    $ciudad= "";
+    header('Location: search.php');
+}
+if (!empty($_POST['eliminarTitulo'])){
+    setcookie('titulo',"",time()-48000);
+    $titulo= "";
+    header('Location: search.php');
 }
 ?>
 <head>
@@ -91,21 +102,40 @@ if (!empty($_POST['eliminar'])){
                 <form method="post" action="search.php">
                     <div class="input-group" style="margin-bottom: 1%;">
                         <span class="input-group-addon">Categoria</span>
-                        <input type="text" class="form-control" name="categoria" value="">
+                        <input list="browsers" class="form-control" name="categoria" 
+                        <?php if(!empty($categoria)){?> placeholder="<?php echo $categoria;}?>">
+                        <datalist id="browsers">
+                          <?php $consulta = categorias();
+                             while ($tabla = mysql_fetch_array($consulta)){?>
+                            <option value="<?php echo $tabla['tipocategoria']?>">
+                            <?php }?> 
+                        </datalist>
+                        <?php if(!empty($categoria)){?>
+                            <button type="submit" class="btn btn-secondary" name="eliminarCategoria" value="true">
+                            <i class="fa fa-search-minus" aria-hidden="true"></i> Eliminar Filtro</button>
+                        <?php }?>
                     </div>
                     <div class="input-group" style="margin-bottom: 1%;">
                         <span class="input-group-addon">Ciudad</span>
-                        <input type="text" class="form-control" name="ciudad" value="">
+                        <input type="text" class="form-control" name="ciudad" value=""
+                        <?php if(!empty($ciudad)){?> placeholder="<?php echo $ciudad;}?>">
+                        <?php if(!empty($ciudad)){?>
+                            <button type="submit" class="btn btn-secondary" name="eliminarCiudad" value="true">
+                            <i class="fa fa-search-minus" aria-hidden="true"></i> Eliminar Filtro</button>
+                        <?php }?>
                     </div>
                     <div class="input-group" style="margin-bottom: 1%;">
                         <span class="input-group-addon">Titulo</span>
-                        <input type="text" class="form-control" name="titulo" value="">
+                        <input type="text" class="form-control" name="titulo" value=""
+                        <?php if(!empty($titulo)){?> placeholder="<?php echo $titulo;}?>">
+                        <?php if(!empty($titulo)){?>
+                            <button type="submit" class="btn btn-secondary" name="eliminarTitulo" value="true">
+                            <i class="fa fa-search-minus" aria-hidden="true"></i> Eliminar Filtro</button>
+                        <?php }?>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-secondary" style="margin-left: 22%">
+                        <button type="submit" class="btn btn-secondary" style="margin-left: 36%">
                         <i class="fa fa-search-plus" aria-hidden="true"></i> Agregar Filtro</button>
-                        <button type="submit" class="btn btn-secondary" name="eliminar" value="true">
-                        <i class="fa fa-search-minus" aria-hidden="true"></i> Eliminar Filtro</button>
                     </div>
                 </form>
                 <?php
