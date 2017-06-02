@@ -39,7 +39,10 @@ session_start();?>
 <body>
     <?php
     if(isset($_SESSION['nombreUsuario'])){
-        include("navbar.php");    
+        if ($_SESSION['tipo_adm'] == 1){
+            include ("navbarAdm.php");
+        }
+        else include("navbar.php");    
     }
     else{
         include("navbarObservador.php");
