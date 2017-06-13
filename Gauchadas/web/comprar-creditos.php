@@ -15,7 +15,7 @@ comprobarSession("index.php");
     <title>Gauchadas - Comprar Creditos</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
 
     <!-- Additional fonts for this theme -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">

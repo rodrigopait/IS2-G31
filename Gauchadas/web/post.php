@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include("conexion.php");
-include("consultasSQL.php");
+include("funciones.php");
 session_start();?>
 <head>
 
@@ -12,7 +12,7 @@ session_start();?>
     <title>Gauchadas</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
 
     <!-- Additional fonts for this theme -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -80,13 +80,12 @@ session_start();?>
                     </a>
                     <div class="clearfix">
                         <a style="text-align: left;"> Fecha de cierre: <?php echo $tabla['fecha_fin']?></a>
-                        <?php if (isset($_SESSION['nombreUsuario'])){ ?>
-                        <?php if(0 == consultaPostulado($_SESSION['id_usuario'],$tabla['id_gauchada'])){?>
-                        <a class="btn btn-secondary float-right" href="postularse-check.php?variable=<?php echo $tabla['id_gauchada'];?>">
-                        Postularse  <i class="fa fa-plus" aria-hidden="true"></i></a>
-                        <?php } else { ?>
-                        <a class="btn btn-secondary float-right" style="background-color: #F27321;">Postulado  <i class="fa fa-check" aria-hidden="true"></i></span></a>
-                        <?php }}?> 
+                        <?php if ($tabla['id_registrado'] == $_SESSION['id_usuario']){
+                                mostrarUsuarioCreador($tabla['id_gauchada']);
+                        } else {
+                            consultaUsuarioPostulado($_SESSION['nombreUsuario'],$_SESSION['id_usuario'],
+                            $tabla['id_gauchada']);
+                        }?> 
                    </div>
                 </div>
             </div>

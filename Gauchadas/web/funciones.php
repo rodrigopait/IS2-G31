@@ -12,8 +12,91 @@ function comprobarSession(){
 function mostrarMensajeErrorCreditos($id_usuario){
 	$consultaCreditos = cantCreditos($id_usuario);
 	if ($consultaCreditos['creditos'] < 1){
-		echo "<h4 style='color:#f20202';>No posee creditos suficientes para publicar una Gauchada</h4>";
+		echo "<div class='alert alert-danger' style='text-align:center'>
+            <button type='button' class='close' data-dismiss='alert'></button>
+            <strong>No posee creditos suficientes para publicar una Gauchada.</strong>
+            </div>";
 	}
+}
+
+function mostrarBarraDeProgreso($id_rep){
+	switch ($id_rep) {
+		case '1':
+			echo "
+				<div class='progress-bar progress-bar-negative'>
+                    17%
+                </div>"; 
+			break;
+		case '2':
+			echo "
+				<div class='progress-bar progress-bar-neutral'>
+                    34%
+                </div>"; 
+			break;
+		case '3':
+			echo "
+				<div class='progress-bar progress-bar-one'>
+                    50%
+                </div>";
+			break;
+		case '4':
+			echo "
+				<div class='progress-bar progress-bar-eleven'>
+                    66%
+                </div>";
+			break;
+		case '5':
+			echo "
+				<div class='progress-bar progress-bar-twentyone'>
+                    80%
+                </div>";
+			break;
+		case '6':
+			echo "
+				<div class='progress-bar progress-bar-positive'>
+                    100%
+                </div>";
+			break;
+	}
+}
+
+function consultaUsuarioPostulado ($nombreUsuario, $id_usuario, $id_gauchada) {
+	if (isset($nombreUsuario)){
+    	if(0 == consultaPostulado($id_usuario,$id_gauchada)){
+  			echo "<a class='btn btn-secondary float-right' href='postularse-check.php?variable=".$id_gauchada."'>Postularse  <i class='fa fa-plus' aria-hidden='true'></i></a>";
+        } else {
+	    	echo "<a class='btn btn-secondary float-right' style='background-color: #F27321;'>
+	        Postulado  <i class='fa fa-check' aria-hidden='true'></i></span></a>";
+        }
+    }
+}
+
+function mostrarUsuarioCreador ($id_gauchada){
+	echo "<a href='listUsers.php?id_gaucahda=".$id_gauchada."' style='margin-left: 33%''>
+         <i class='fa fa-external-link' aria-hidden='true'> Ver usuarios postulados</i></a>";
+}
+
+function mostrarMensajeDePostulado($id_gaucahda){
+	$tabla = consultarGauchada($id_gaucahda);
+    if (!empty($tabla['id_aceptado'])){
+        echo "<div class='alert alert-danger' style='text-align:center'>
+            <button type='button' class='close' data-dismiss='alert'></button>
+            <strong>Usted ya ah elegido a un postulante.</strong>
+            </div>";
+    }
+}
+
+function mostrarBotonesPostulado ($id_aceptado,$id_registrado,$id_usuario,$id_gauchada){
+	if (empty($id_aceptado)){
+        echo "<button class='btn btn-secondary' style='margin-left: 32%' href='acceptPostulado.php?id_usuario=".$id_usuario."&&id_gauchada=".$id_gauchada."'>
+            <i class='fa fa-plus' aria-hidden='true'></i> Aceptar</button>";
+    }
+    else {
+    	if ($id_aceptado == $id_registrado){
+    		echo "<button class='btn btn-secondary' style='margin-left: 32%;background-color: #F27321;'>
+            <i class='fa fa-check' aria-hidden='true'></i> Aceptado</button>";
+    	}
+    }                
 }
 
 ?>

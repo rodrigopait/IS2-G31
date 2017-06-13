@@ -1,5 +1,4 @@
 <?php
-
 function obtenerUsuario($nombreUsuario, $password){
 	$consulta = mysql_query("SELECT * FROM registrado WHERE nombre_usu = '$nombreUsuario' AND password = '$password'" );
 	return mysql_fetch_array($consulta);
@@ -81,6 +80,23 @@ function modificarCreditos($id_usuario,$creditos){
 
 function categorias(){
 	return mysql_query("SELECT * FROM categoria");
+}
+
+function consultarUsuariosConReputacion(){
+	return mysql_query("SELECT * FROM registrado NATURAL JOIN reputacion");
+}
+
+function consultarUsuariosPostulados ($id_gauchada){
+	return mysql_query("SELECT * FROM gauchada INNER JOIN postula ON gauchada.id_gauchada = postula.id_gauchada INNER JOIN registrado ON postula.id_registrado = registrado.id_usuario INNER JOIN reputacion ON registrado.id_rep = reputacion.id_rep WHERE postula.id_gauchada = '$id_gauchada' ");
+}
+
+function consultarGauchada ($id_gauchada){
+	$consulta = mysql_query("SELECT * FROM gauchada WHERE id_gauchada = '$id_gauchada' ");
+	return mysql_fetch_array($consulta);
+}
+
+function aceptarPostulado($id_usuario, $id_gauchada){
+	mysql_query("UPDATE gauchada SET id_aceptado = '$id_usuario' WHERE id_gauchada = '$id_gauchada' ");
 }
 
 ?>

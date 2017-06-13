@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include("conexion.php");
+<?php include("funciones.php");
 session_start();?>
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
@@ -37,16 +37,7 @@ session_start();?>
 </head>
 
 <body>
-    <?php
-    if(isset($_SESSION['nombreUsuario'])){
-        if ($_SESSION['tipo_adm'] == 1){
-            include ("navbarAdm.php");
-        }
-        else include("navbar.php");    
-    }
-    else{
-        include("navbarObservador.php");
-    }?>
+    <?php include("navbar.php");?>
     
     <!-- Page Header -->
     <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: contain;
@@ -57,8 +48,8 @@ session_start();?>
                     <div class="site-heading" style="background-image: url(img/logo-gauchadas.png);
                     background-repeat: repeat-x; background-position: center; width: 90%; margin-left: 7%;
                     padding-bottom: 16%;">
-                        <h1>Gauchadas</h1>
-                        <span class="subheading" style="font-weight: bold; padding-top: 1%">
+                        <h1 style="text-shadow: black;color: #fff;text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Gauchadas</h1>
+                        <span class="subheading" style="font-weight: bold; text-shadow: black;color: #fff;text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; padding-top: 1%">
                             Un Blog Donde Encuentras Gauchadas</span>
                     </div>
                 </div>
@@ -70,21 +61,25 @@ session_start();?>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                <?php $string = "SELECT * FROM registrado INNER JOIN gauchada ON registrado.id_usuario = gauchada.id_registrado INNER JOIN foto ON gauchada.id_foto = foto.id_foto";
-                $consul_gauchada = mysql_query($string);
-                while ($tupla = mysql_fetch_array($consul_gauchada)){ ?>
-                <div class="post-preview">
-                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>">
-                        <h2 class="post-title">
-                            <?php echo $tupla['titulo'];?>
-                            <img href="post.php?variable=<?php echo $tupla['id_gauchada'];?>" 
-                            src="<?php echo $tupla['foto']?>" width="120" height="100" style="position: absolute;
-                            right: 40px;">
-                        </h2>
-                        <h3 class="post-subtitle"></h3>
-                    </a>
-                    <p class="post-meta">Publicado en 
-                        <?php echo $tupla['ciudad'];?> el <?php echo $tupla['fecha_ini']; ?>
+                <?php mostrarMensajeDePostulado($_GET['id_gaucahda']);
+                $consulta = consultarUsuariosPostulados($_GET['id_gaucahda']);
+                $tabla = mysql_fetch_array($consulta);
+                if (empty($tabla)){?>
+                <h3 style="text-align:center;color:#F27321">
+                No se encuantran postulados hasta el momento</h3>
+                <?php } $consul_gauchada = consultarUsuariosPostulados($_GET['id_gaucahda']);
+                while ($tupla = mysql_fetch_array($consul_gauchada)){?>
+                    <div class="post-preview">
+                    <h2 class="post-title"><?php echo  $tupla['nombre_usu'];?>
+                    <?php mostrarBotonesPostulado($tupla['id_aceptado'],$tupla['id_registrado'],$_SESSION['id_usuario'],$_GET['id_gaucahda']);?>
+                    </h2>
+                    <div class="progress">
+                      <?php mostrarBarraDeProgreso($tupla['id_rep']);?>
+                    </div>
+                    <a style="color: #777">Reputacion :  </a><?php echo $tupla['descripcion'] ;?>
+                    <h3 class="post-subtitle"></h3>
+                    <p class="post-meta">Vive en :  
+                        <a style="margin-right: 10%"> <?php echo $tupla['ciudad'];?></a>Email : <a> <?php echo $tupla['mail']; ?></a>
                     </p>
                 </div>
                 <hr>

@@ -5087,6 +5087,48 @@ a.badge:focus, a.badge:hover {
           animation: progress-bar-stripes 1s linear infinite;
 }
 
+.progress-bar-negative {
+  height: 1rem;
+  color: #fff;
+  background-color: #cc020f;
+  width: 17%;
+}
+
+.progress-bar-neutral {
+  height: 1rem;
+  color: #fff;
+  background-color: #999596;
+  width: 34%;
+}
+
+.progress-bar-one {
+  height: 1rem;
+  color: #fff;
+  background-color: #e27500;
+  width: 50%;
+}
+
+.progress-bar-eleven {
+  height: 1rem;
+  color: #fff;
+  background-color: #f7f72e;
+  width: 66%;
+}
+
+.progress-bar-twentyone {
+  height: 1rem;
+  color: #fff;
+  background-color: #90cc6c;
+  width: 80%;
+}
+
+.progress-bar-positive {
+  height: 1rem;
+  color: #fff;
+  background-color: #00aa0e;
+  width: 100%;
+}
+
 .media {
   display: -webkit-box;
   display: -webkit-flex;
