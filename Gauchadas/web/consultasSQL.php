@@ -99,4 +99,5 @@ function aceptarPostulado($id_usuario, $id_gauchada){
 	mysql_query("UPDATE gauchada SET id_aceptado = '$id_usuario' WHERE id_gauchada = '$id_gauchada' ");
 }
 
+
 ?>

@@ -61,18 +61,17 @@ session_start();?>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                <?php mostrarMensajeDePostulado($_GET['id_gaucahda']);
-                $consulta = consultarUsuariosPostulados($_GET['id_gaucahda']);
+                <?php mostrarMensajeDePostulado($_GET['id_gauchada']);
+                $consulta = consultarUsuariosPostulados($_GET['id_gauchada']);
                 $tabla = mysql_fetch_array($consulta);
                 if (empty($tabla)){?>
                 <h3 style="text-align:center;color:#F27321">
                 No se encuantran postulados hasta el momento</h3>
-                <?php } $consul_gauchada = consultarUsuariosPostulados($_GET['id_gaucahda']);
+                <?php } $consul_gauchada = consultarUsuariosPostulados($_GET['id_gauchada']);
                 while ($tupla = mysql_fetch_array($consul_gauchada)){?>
                     <div class="post-preview">
-                    <h2 class="post-title"><?php echo  $tupla['nombre_usu'];?>
-                    <?php mostrarBotonesPostulado($tupla['id_aceptado'],$tupla['id_registrado'],$_SESSION['id_usuario'],$_GET['id_gaucahda']);?>
-                    </h2>
+                    <h2 class="post-title" style="display: flow-root;"><?php echo  $tupla['nombre_usu'];?>
+                    <?php mostrarBotonesPostulado($tupla['id_aceptado'],$tupla['id_registrado'],$_GET['id_gauchada']);?></h2>
                     <div class="progress">
                       <?php mostrarBarraDeProgreso($tupla['id_rep']);?>
                     </div>

@@ -86,10 +86,10 @@ function mostrarMensajeDePostulado($id_gaucahda){
     }
 }
 
-function mostrarBotonesPostulado ($id_aceptado,$id_registrado,$id_usuario,$id_gauchada){
+function mostrarBotonesPostulado ($id_aceptado,$id_registrado,$id_gauchada){
 	if (empty($id_aceptado)){
-        echo "<button class='btn btn-secondary' style='margin-left: 32%' href='acceptPostulado.php?id_usuario=".$id_usuario."&&id_gauchada=".$id_gauchada."'>
-            <i class='fa fa-plus' aria-hidden='true'></i> Aceptar</button>";
+        echo "<a class='btn btn-secondary float-right' style='' href='acceptPostulado.php?id_usuario=".$id_registrado."&&id_gauchada=".$id_gauchada."'>
+            <i class='fa fa-plus' aria-hidden='true'></i> Aceptar</a>";
     }
     else {
     	if ($id_aceptado == $id_registrado){
