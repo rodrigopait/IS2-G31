@@ -78,6 +78,11 @@ function modificarCreditos($id_usuario,$creditos){
 	mysql_query("UPDATE registrado SET creditos = '$creditos' WHERE id_usuario = '$id_usuario'");
 }
 
+function modificarGauchada($id_categoria, $titulo, $desc, $ciudad, $fecha_fin, $id_gauchada, $id_foto){
+	mysql_query("UPDATE gauchada SET titulo = '$titulo', descripcion = '$desc', ciudad = '$ciudad', fecha_fin='$fecha_fin', id_foto = 'id_foto' WHERE id_gauchada = '$id_gauchada' ");
+
+}
+
 function categorias(){
 	return mysql_query("SELECT * FROM categoria");
 }
