@@ -99,5 +99,22 @@ function aceptarPostulado($id_usuario, $id_gauchada){
 	mysql_query("UPDATE gauchada SET id_aceptado = '$id_usuario' WHERE id_gauchada = '$id_gauchada' ");
 }
 
+function consultaAdeudorCalificacion ($id_registrado){
+	$consulta = mysql_query("SELECT * FROM gauchada WHERE id_registrado = '$id_registrado' ");
+	return mysql_fetch_array($consulta);
+}
+
+function consultaUsuarioParaPerfil($id_usuario){
+	$consulta = mysql_query("SELECT * FROM registrado NATURAL JOIN foto NATURAL JOIN reputacion WHERE id_usuario = '$id_usuario'");
+	return mysql_fetch_array($consulta);
+}
+
+function consultaGauchadaAdeudada ($id_usuario){
+	return mysql_query("SELECT * FROM gauchada NATURAL JOIN foto INNER JOIN registrado ON gauchada.id_registrado = registrado.id_usuario WHERE id_registrado = '$id_usuario' AND id_aceptado IS NOT NULL AND id_calificacion IS NULL");
+}
+
+function consultaGauchadaNoAdeudada ($id_usuario){
+	return mysql_query("SELECT * FROM gauchada NATURAL JOIN foto INNER JOIN registrado ON gauchada.id_registrado = registrado.id_usuario WHERE id_registrado = '$id_usuario' AND id_calificacion IS NOT NULL");
+}
 
 ?>

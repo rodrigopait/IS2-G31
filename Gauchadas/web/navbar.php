@@ -12,7 +12,7 @@
                         <i class="fa fa-home" aria-hidden="true"></i> Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="">
+                        <a class="nav-link page-scroll" href="perfil.php?id_usuario=<?php echo $_SESSION['id_usuario']?>">
                         <i class="fa fa-user" aria-hidden="true"></i> Perfil</a>
                     </li>
                     <li class="nav-item">

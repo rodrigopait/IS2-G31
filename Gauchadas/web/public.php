@@ -63,7 +63,7 @@ comprobarSession();
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                <?php mostrarMensajeErrorCreditos($_SESSION['id_usuario']);?>
+                <?php mostrarMensajeErrorPublicarGauchada($_SESSION['id_usuario']);?>
                 <form method="POST" action="public-check.php" enctype="multipart/form-data">
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
@@ -112,7 +112,8 @@ comprobarSession();
                     <br>
                     <div id="success"></div>
                     <?php $creditos = cantCreditos($_SESSION['id_usuario']);
-                    if($creditos['creditos']>=1){?>
+                    $calificaciones = consultaAdeudorCalificacion($_SESSION['id_usuario']);
+                    if(($creditos['creditos']>=1)&&((!empty($consultaCalificacion['id_aceptado'])) && (empty($consultaCalificacion['id_calificacion'])))){?>
                     <div class="form-group">
                         <button type="submit" class="btn btn-secondary">Publicar</button>
                         <button type="reset" class="btn btn-secondary">Restablecer</button>

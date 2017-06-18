@@ -9,13 +9,22 @@ function comprobarSession(){
 	}
 }
 
-function mostrarMensajeErrorCreditos($id_usuario){
+function mostrarMensajeErrorPublicarGauchada($id_usuario){
 	$consultaCreditos = cantCreditos($id_usuario);
+	$consultaCalificacion = consultaAdeudorCalificacion($id_usuario);
 	if ($consultaCreditos['creditos'] < 1){
 		echo "<div class='alert alert-danger' style='text-align:center'>
             <button type='button' class='close' data-dismiss='alert'></button>
             <strong>No posee creditos suficientes para publicar una Gauchada.</strong>
             </div>";
+	}
+	else {
+		if ( (!empty($consultaCalificacion['id_aceptado'])) && (empty($consultaCalificacion['id_calificacion'])) ){
+			echo "<div class='alert alert-danger' style='text-align:center'>
+            <button type='button' class='close' data-dismiss='alert'></button>
+            <strong>Usted adeuda calificaciones de gauchadas.</strong>
+            </div>";
+		}
 	}
 }
 
@@ -72,7 +81,7 @@ function consultaUsuarioPostulado ($nombreUsuario, $id_usuario, $id_gauchada) {
 }
 
 function mostrarUsuarioCreador ($id_gauchada){
-	echo "<a href='listUsers.php?id_gaucahda=".$id_gauchada."' style='margin-left: 33%''>
+	echo "<a href='listUsers.php?id_gauchada=".$id_gauchada."' style='margin-left: 33%''>
          <i class='fa fa-external-link' aria-hidden='true'> Ver usuarios postulados</i></a>";
 }
 
@@ -88,15 +97,32 @@ function mostrarMensajeDePostulado($id_gaucahda){
 
 function mostrarBotonesPostulado ($id_aceptado,$id_registrado,$id_gauchada){
 	if (empty($id_aceptado)){
-        echo "<a class='btn btn-secondary float-right' style='' href='acceptPostulado.php?id_usuario=".$id_registrado."&&id_gauchada=".$id_gauchada."'>
+        echo "<a class='btn btn-secondary float-right' href='acceptPostulado.php?id_usuario=".$id_registrado."&&id_gauchada=".$id_gauchada."'>
             <i class='fa fa-plus' aria-hidden='true'></i> Aceptar</a>";
     }
     else {
     	if ($id_aceptado == $id_registrado){
-    		echo "<button class='btn btn-secondary' style='margin-left: 32%;background-color: #F27321;'>
+    		echo "<button class='btn btn-secondary float-right' style='background-color: #F27321;'>
             <i class='fa fa-check' aria-hidden='true'></i> Aceptado</button>";
     	}
     }                
+}
+
+function mostrarGauchada ($consulta){
+	while ($tabla = mysql_fetch_array($consulta)){
+		echo "
+    	<div class='post-preview'>
+            <a href='post.php?variable= ".$tabla['id_gauchada']."'>
+                <h2 class='post-title'> ".$tabla['titulo']."
+                    <img href='post.php?variable= ".$tabla['id_gauchada']."'
+                    src='".$tabla['foto']."' width='120' height='100' style='position: absolute;right: 40px;'>
+                </h2>
+                <h3 class='post-subtitle'></h3>
+            </a>
+            <p class='post-meta'>Publicado en ".$tabla['ciudad']." el ".$tabla['fecha_ini']."</p>
+        </div>
+ 		<hr>";
+    }
 }
 
 ?>
