@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include("conexion.php");
+include("funciones.php");
 session_start();?>
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
@@ -72,23 +73,7 @@ session_start();?>
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <?php $string = "SELECT * FROM registrado INNER JOIN gauchada ON registrado.id_usuario = gauchada.id_registrado INNER JOIN foto ON gauchada.id_foto = foto.id_foto";
                 $consul_gauchada = mysql_query($string);
-                while ($tupla = mysql_fetch_array($consul_gauchada)){ ?>
-                <div class="post-preview">
-                    <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>">
-                        <h2 class="post-title">
-                            <?php echo $tupla['titulo'];?>
-                            <img href="post.php?variable=<?php echo $tupla['id_gauchada'];?>" 
-                            src="<?php echo $tupla['foto']?>" width="120" height="100" style="position: absolute;
-                            right: 40px;">
-                        </h2>
-                        <h3 class="post-subtitle"></h3>
-                    </a>
-                    <p class="post-meta">Publicado en 
-                        <?php echo $tupla['ciudad'];?> el <?php echo $tupla['fecha_ini']; ?>
-                    </p>
-                </div>
-                <hr>
-                <?php } ?>
+                mostrarGauchada($consul_gauchada);?>
             </div>
         </div>
     </div>

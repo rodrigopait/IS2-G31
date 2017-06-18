@@ -80,10 +80,10 @@ session_start();?>
                     </a>
                     <div class="clearfix">
                         <a style="text-align: left;"> Fecha de cierre: <?php echo $tabla['fecha_fin']?></a>
-                        <?php if ($tabla['id_registrado'] == $_SESSION['id_usuario']){
-                                mostrarUsuarioCreador($tabla['id_gauchada']);
-                                mostrarModificarGauchada($tabla['id_gauchada']);
-                        }
+                        <?php if ($tabla['id_registrado'] == $_SESSION['id_usuario']){ ?>
+                            <?php mostrarUsuarioCreador($tabla['id_gauchada']);
+                                mostrarModificarGauchada($tabla['id_gauchada']);?>
+                        <?php }
                         else{
                             consultaUsuarioPostulado($_SESSION['nombreUsuario'],$_SESSION['id_usuario'],
                             $tabla['id_gauchada']);
@@ -94,7 +94,7 @@ session_start();?>
         </div>
     </article>
 
-    <hr>{
+    <hr>
 
     <!-- Footer -->
     <?php include("footer.php");?>

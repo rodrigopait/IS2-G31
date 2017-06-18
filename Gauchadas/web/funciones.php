@@ -94,10 +94,6 @@ function mostrarMensajeDePostulado($id_gaucahda){
             </div>";
     }
 }
-function mostrarModificarGauchada ($id_gauchada){
-    echo "<a href='modificar_gauchada.php?id_gauchada=".$id_gauchada."' style='margin-left: 71%''>
-         <i class='fa fa-pencil' aria-hidden='true'> Modificar gauchada</i></a>";
-}
 
 function mostrarBotonesPostulado ($id_aceptado,$id_registrado,$id_gauchada){
 	if (empty($id_aceptado)){
@@ -128,5 +124,11 @@ function mostrarGauchada ($consulta){
  		<hr>";
     }
 }
+
+function mostrarModificarGauchada ($id_gauchada){
+    echo "<a href='modificar_gauchada.php?id_gauchada=".$id_gauchada."' style='margin-left: 71%''>
+         <i class='fa fa-pencil' aria-hidden='true'> Modificar gauchada</i></a>";
+}
+
 
 ?>

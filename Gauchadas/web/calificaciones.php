@@ -73,7 +73,56 @@ session_start();?>
                         if (empty(mysql_fetch_array($consultaVacio))){ ?>
                             <h3 class="caption text-muted">No se encuantran publicaciones</h3>
                         <?php }
-                        mostrarGauchada($consulta);?>
+                        while ($tupla = mysql_fetch_array($consulta)){ ?>
+                            <div class="post-preview">
+                                <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>">
+                                    <h2 class="post-title">
+                                        <?php echo $tupla['titulo'];?>
+                                        <img href="post.php?variable=<?php echo $tupla['id_gauchada'];?>" 
+                                        src="<?php echo $tupla['foto']?>" width="120" height="100" style="position: absolute;
+                                        right: 40px;">
+                                    </h2>
+                                    <h3 class="post-subtitle"></h3>
+                                </a>
+                                <p class="post-meta">Publicado en 
+                                    <?php echo $tupla['ciudad'];?> el <?php echo $tupla['fecha_ini'];?></p>
+                            </div>
+                            <div class="post-preview">
+                                <h2 class="post-title" style="display:flow-root;">
+                                <?php echo $tupla['nombre_usu'];?></h2>
+                                <div class="progress">
+                                    <?php mostrarBarraDeProgreso($tupla['id_rep']);?>
+                                </div>
+                                <a style="color:#777">Reputacion :  </a><?php echo $tupla['descripcion'];?>
+                                <p class="post-meta">Vive en :  
+                                    <a style="margin-right: 10%"> <?php echo $tupla['ciudad'];?></a>Email : <a> <?php echo $tupla['mail']; ?></a>
+                                </p>
+                            </div>
+                            <form method="POST" action="calificaciones-check.php?id_gauchada=<?php echo $tupla['id_gauchada'];?>">
+                                <div class="control-group">
+                                    <div class="form-group floating-label-form-group controls">
+                                        <label><i class="fa fa-commenting-o" aria-hidden="true"></i> Reseña</label>
+                                        <textarea rows="3" name="text" class="form-control" placeholder="Reseña" required title="Por favor ingrese su reseña."></textarea>
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                </div>
+                                <br>
+                                <div>
+                                    <select name="puntuacion" style="width: 100%">
+                                        <?php $consul = consultaCalificaion();
+                                        while ($tabla = mysql_fetch_array($consul)){?>
+                                            <option value="<?php echo $tabla['id_puntuacion'];?>">
+                                            <?php echo $tabla['descripcion']?></option>
+                                        <?php }?>
+                                    </select>
+                                </div>
+                                <br>
+                                <div class="form-group" style="margin-left: 41%">
+                                    <button type="submit" class="btn btn-secondary">Calificar</button>
+                                </div>
+                            </form>
+                            <hr>
+                        <?php } ?>
                     </div>
                     <div class="caption text-muted">
                         <h2>Calificaciones Sin Adeudar:</h2>
@@ -84,7 +133,41 @@ session_start();?>
                         if (empty(mysql_fetch_array($consultaVacio))){ ?>
                             <h3 class="caption text-muted">No se encuantran publicaciones</h3>
                         <?php }
-                        mostrarGauchada($consulta);?>
+                        while ($tupla = mysql_fetch_array($consulta)){ ?>
+                            <div class="post-preview">
+                                <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>">
+                                    <h2 class="post-title">
+                                        <?php echo $tupla['titulo'];?>
+                                        <img href="post.php?variable=<?php echo $tupla['id_gauchada'];?>" 
+                                        src="<?php echo $tupla['foto']?>" width="120" height="100" style="position: absolute;
+                                        right: 40px;">
+                                    </h2>
+                                    <h3 class="post-subtitle"></h3>
+                                </a>
+                                <p class="post-meta">Publicado en 
+                                    <?php echo $tupla['ciudad'];?> el <?php echo $tupla['fecha_ini'];?></p>
+                            </div>
+                            <div class="post-preview">
+                                <h2 class="post-title" style="display:flow-root;">
+                                <?php echo $tupla['nombre_usu'];?></h2>
+                                <div class="progress">
+                                    <?php mostrarBarraDeProgreso($tupla['id_rep']);?>
+                                </div>
+                                <a style="color:#777">Reputacion :  </a><?php echo $tupla['descripcion'];?>
+                                <p class="post-meta">Vive en :  
+                                    <a style="margin-right: 10%"> <?php echo $tupla['ciudad'];?></a>Email : <a> <?php echo $tupla['mail']; ?></a>
+                                </p>
+                            </div>
+                            <div class="control-group">
+                                <div class="form-group floating-label-form-group controls">
+                                    <i class="text-muted"><u>Reseña:</u></i>
+                                    <textarea class="form-control"><?php echo $tupla['comentario'] ?></textarea>
+                                    <i class="text-muted"><u>Puntuación:</u></i>
+                                    <i><?php echo $tupla[14]?></i>
+                                </div>
+                            </div>
+                            <hr>
+                        <?php } ?>
                     </div>
             </div>
         </div>

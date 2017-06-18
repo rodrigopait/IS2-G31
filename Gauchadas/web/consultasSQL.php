@@ -78,11 +78,6 @@ function modificarCreditos($id_usuario,$creditos){
 	mysql_query("UPDATE registrado SET creditos = '$creditos' WHERE id_usuario = '$id_usuario'");
 }
 
-function modificarGauchada($id_categoria, $titulo, $desc, $ciudad, $fecha_fin, $id_gauchada, $id_foto){
-	mysql_query("UPDATE gauchada SET titulo = '$titulo', descripcion = '$desc', ciudad = '$ciudad', fecha_fin='$fecha_fin', id_foto = 'id_foto' WHERE id_gauchada = '$id_gauchada' ");
-
-}
-
 function categorias(){
 	return mysql_query("SELECT * FROM categoria");
 }
@@ -115,11 +110,32 @@ function consultaUsuarioParaPerfil($id_usuario){
 }
 
 function consultaGauchadaAdeudada ($id_usuario){
-	return mysql_query("SELECT * FROM gauchada NATURAL JOIN foto INNER JOIN registrado ON gauchada.id_registrado = registrado.id_usuario WHERE id_registrado = '$id_usuario' AND id_aceptado IS NOT NULL AND id_calificacion IS NULL");
+	return mysql_query("SELECT * FROM gauchada NATURAL JOIN foto INNER JOIN registrado ON gauchada.id_aceptado = registrado.id_usuario INNER JOIN reputacion ON registrado.id_rep = reputacion.id_rep WHERE gauchada.id_registrado = '$id_usuario' AND id_aceptado IS NOT NULL AND id_calificacion IS NULL");
 }
 
 function consultaGauchadaNoAdeudada ($id_usuario){
-	return mysql_query("SELECT * FROM gauchada NATURAL JOIN foto INNER JOIN registrado ON gauchada.id_registrado = registrado.id_usuario WHERE id_registrado = '$id_usuario' AND id_calificacion IS NOT NULL");
+	return mysql_query("SELECT * FROM gauchada NATURAL JOIN foto NATURAL JOIN calificacion INNER JOIN puntuacion ON calificacion.id_puntuacion = puntuacion.id_puntuacion INNER JOIN registrado ON gauchada.id_aceptado = registrado.id_usuario INNER JOIN reputacion ON registrado.id_rep = reputacion.id_rep WHERE gauchada.id_registrado = '$id_usuario' AND id_calificacion IS NOT NULL");
+}
+
+function consultaCalificaion(){
+	return mysql_query("SELECT * FROM puntuacion");
+}
+
+function modificarGauchada($id_categoria, $titulo, $desc, $ciudad, $fecha_fin, $id_gauchada, $id_foto){
+	mysql_query("UPDATE gauchada SET titulo = '$titulo', descripcion = '$desc', ciudad = '$ciudad', fecha_fin='$fecha_fin', id_foto = 'id_foto' WHERE id_gauchada = '$id_gauchada' ");
+}
+
+function agregarCalificacion ($text,$id_puntuacion){
+	mysql_query("INSERT INTO calificacion (id_calificacion,comentario,id_puntuacion) VALUES (NULL,'$text','$id_puntuacion')");
+}
+
+function consultaIdCalificacion ($text,$id_puntuacion){
+	$consulta = mysql_query("SELECT id_calificacion FROM calificacion WHERE comentario = '$text' AND id_puntuacion = '$id_puntuacion' ");
+	return mysql_fetch_array($consulta);
+}
+
+function modificarGauchadaCalificacion ($id_gauchada, $id_calificacion){
+	mysql_query("UPDATE gauchada SET id_calificacion = '$id_calificacion' WHERE id_gauchada = '$id_gauchada' ");
 }
 
 ?>
