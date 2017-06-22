@@ -138,4 +138,9 @@ function modificarGauchadaCalificacion ($id_gauchada, $id_calificacion){
 	mysql_query("UPDATE gauchada SET id_calificacion = '$id_calificacion' WHERE id_gauchada = '$id_gauchada' ");
 }
 
+function consultaGauchada ($id_gauchada){
+	$consulta = mysql_query("SELECT * FROM gauchada WHERE id_gauchada = '$id_gauchada' ");
+	return mysql_fetch_array($consulta);
+}
+
 ?>
