@@ -24,7 +24,7 @@ function agregarDetalleCompra($total,$fecha,$cantCreditos,$idCredito,$idUsuario)
 }
 
 function consultaPostulado($id_registrado,$id_gauchada){
-	$consulta = mysql_query("SELECT * FROM postula WHERE id_gauchada = '$id_gauchada' AND id_registrado = '$id_registrado'");
+	$consulta = mysql_query("SELECT * FROM postula INNER JOIN gauchada WHERE postula.id_gauchada = '$id_gauchada' AND postula.id_registrado = '$id_registrado'");
 	return mysql_fetch_array($consulta);
 	
 }

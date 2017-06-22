@@ -71,11 +71,14 @@ function mostrarBarraDeProgreso($id_rep){
 
 function consultaUsuarioPostulado ($nombreUsuario, $id_usuario, $id_gauchada) {
 	if (isset($nombreUsuario)){
-    	if(0 == consultaPostulado($id_usuario,$id_gauchada)){
-  			echo "<a class='btn btn-secondary float-right' href='postularse-check.php?variable=".$id_gauchada."'>Postularse  <i class='fa fa-plus' aria-hidden='true'></i></a>";
-        } else {
-	    	echo "<a class='btn btn-secondary float-right' style='background-color: #F27321;'>
-	        Postulado  <i class='fa fa-check' aria-hidden='true'></i></span></a>";
+        $tabla = consultaPostulado($id_usuario,$id_gauchada);
+        if (date("Y-m-d") <= $tabla['fecha_fin']) {
+        	if( 0 == $tabla){
+      			echo "<a class='btn btn-secondary float-right' href='postularse-check.php?variable=".$id_gauchada."'>Postularse  <i class='fa fa-plus' aria-hidden='true'></i></a>";
+            } else {
+    	    	echo "<a class='btn btn-secondary float-right' style='background-color: #F27321;'>
+    	        Postulado  <i class='fa fa-check' aria-hidden='true'></i></span></a>";
+            }
         }
     }
 }
