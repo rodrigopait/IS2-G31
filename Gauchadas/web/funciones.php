@@ -71,13 +71,19 @@ function mostrarBarraDeProgreso($id_rep){
 
 function consultaUsuarioPostulado ($nombreUsuario, $id_usuario, $id_gauchada) {
 	if (isset($nombreUsuario)){
+    	if(0 == consultaPostulado($id_usuario,$id_gauchada)){
+  			echo "<a class='btn btn-secondary float-right' href='postularse-check.php?variable=".$id_gauchada."'>Postularse  <i class='fa fa-plus' aria-hidden='true'></i></a>";
+        } else {
+	    	echo "<a class='btn btn-secondary float-right' style='background-color: #F27321;'>
+	        Postulado  <i class='fa fa-check' aria-hidden='true'></i></span></a>";
+        }
         $tabla = consultaGauchada($id_gauchada);
         if( (0 == consultaPostulado($id_usuario,$id_gauchada)) && (date("Y-m-d") <= $tabla['fecha_fin'])){
-      		echo "<a class='btn btn-secondary float-right' href='postularse-check.php?variable=".$id_gauchada."'>Postularse  <i class='fa fa-plus' aria-hidden='true'></i></a>";
+            echo "<a class='btn btn-secondary float-right' href='postularse-check.php?variable=".$id_gauchada."'>Postularse  <i class='fa fa-plus' aria-hidden='true'></i></a>";
         } else { 
                 echo "<a class='btn btn-secondary float-right' style='background-color: #F27321;'>
                 Postulado  <i class='fa fa-check' aria-hidden='true'></i></span></a>";
-        }
+            }
     }
 }
 
@@ -126,10 +132,35 @@ function mostrarGauchada ($consulta){
     }
 }
 
+function mostrarMisGauchada($consulta, $id_registrado){
+    while ($tabla = mysql_fetch_array($consulta)){
+        if ($tabla['id_registrado'] == $id_registrado ){
+            echo "
+        <div class='post-preview'>
+            <a href='post.php?variable= ".$tabla['id_gauchada']."'>
+                <h2 class='post-title'> ".$tabla['titulo']."
+                    <img href='post.php?variable= ".$tabla['id_gauchada']."'
+                    src='".$tabla['foto']."' width='120' height='100' style='position: absolute;right: 40px;'>
+                </h2>
+                <h3 class='post-subtitle'></h3>
+            </a>
+            <p class='post-meta'>Publicado en ".$tabla['ciudad']." el ".$tabla['fecha_ini']."</p>
+            </div>";
+            mostrarModificarGauchada($tabla['id_gauchada']);
+            mostrarEliminarGauchada($tabla['id_gauchada']);
+            echo "<hr>";
+        }
+    }
+}
+
 function mostrarModificarGauchada ($id_gauchada){
     echo "<a href='modificar_gauchada.php?id_gauchada=".$id_gauchada."' style='margin-left: 71%''>
          <i class='fa fa-pencil' aria-hidden='true'> Modificar gauchada</i></a>";
 }
 
+function mostrarEliminarGauchada ($id_gauchada){
+    echo "<a href='eliminar_gauchada.php?id_gauchada=".$id_gauchada."' style='margin-left: 71%''>
+         <i class='fa fa-remove' aria-hidden='true' > Eliminar gauchada</i></a>";
+}
 
 ?>

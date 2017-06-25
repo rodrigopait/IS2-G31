@@ -3,13 +3,12 @@
 include ("conexion.php");
 include ("consultasSQL.php");
 session_start();
-
-$id_gauchada = $_GET['id_gauchada'];
-$titulo = $_POST['title'];
-$desc = $_POST['desc'];
-$ciudad = $_POST['city'];
-$fecha_fin = $_POST['fecha_fin'];
-$id_categoria = $_POST['categoria'];
+$idusu = $_GET['usuario'];
+$nombre = $_POST['nombreusuario'];
+$password = $_POST['password'];
+$email = $_POST['email'];
+$ciudad = $_POST['ciudad'];
+$telefono = $_POST['telefono'];
 if ($_FILES['image']['name']){
 	$type=$_FILES['image']['type'];
 	$tmp_name = $_FILES['image']["tmp_name"];
@@ -22,16 +21,13 @@ if ($_FILES['image']['name']){
 	$id_foto = consultaIdImagen($nuevo_path);
 	}
 else{
-	$id_foto['id_foto'] = '2';
+	$id_foto['id_foto'] = '7';
 }
-
-echo $id_categoria; 	
-modificarGauchada($titulo, $desc, $ciudad, $fecha_fin, $id_gauchada, $id_foto['id_foto']);
-modificarCategoria($id_categoria, $id_gauchada);
+modificarUsuario($idusu, $nombre, $password, $email, $ciudad, $telefono, $id_foto['id_foto'] );
 $mensaje = "Se ha modificado la gauchada correctamente.";
 		echo "<script>";
 		echo "alert('$mensaje');";
-		echo "window.location = 'post.php?variable=$id_gauchada.php'";
+		echo "window.location = 'perfil.php?id_usuario=$idusu.php'";
 		echo "</script>";
 
 

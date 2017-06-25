@@ -24,7 +24,7 @@ function agregarDetalleCompra($total,$fecha,$cantCreditos,$idCredito,$idUsuario)
 }
 
 function consultaPostulado($id_registrado,$id_gauchada){
-	$consulta = mysql_query("SELECT * FROM postula INNER JOIN gauchada WHERE postula.id_gauchada = '$id_gauchada' AND postula.id_registrado = '$id_registrado'");
+	$consulta = mysql_query("SELECT * FROM postula WHERE id_gauchada = '$id_gauchada' AND id_registrado = '$id_registrado'");
 	return mysql_fetch_array($consulta);
 	
 }
@@ -39,7 +39,7 @@ function publicarGauchada($titulo,$descripcion,$ciudad,$fecha_ini,$fecha_fin,$id
 }
 
 function agregarImagen($foto){
-	return mysql_query("INSERT INTO foto SET foto='$nuevo_path'");
+	return mysql_query("INSERT INTO foto SET foto='$foto'");
 }
 
 function consultaIdImagen($foto){
@@ -59,6 +59,11 @@ function asociarGaucahdaConCategoria($id_categoria,$id_gauchada){
 function getGauchadas(){
 	$consul_gauchada = mysql_query("SELECT * FROM gauchada");
 	return mysql_fetch_array($consul_gauchada);
+}
+
+function getUsuario($id_usuario){
+	$consult_usuario = mysql_query("SELECT * FROM registrado WHERE id_usuario = $id_usuario ");
+	return mysql_fetch_array($consult_usuario);
 }
 
 function cantGauchadas(){
@@ -121,12 +126,25 @@ function consultaCalificaion(){
 	return mysql_query("SELECT * FROM puntuacion");
 }
 
-function modificarGauchada($id_categoria, $titulo, $desc, $ciudad, $fecha_fin, $id_gauchada, $id_foto){
-	mysql_query("UPDATE gauchada SET titulo = '$titulo', descripcion = '$desc', ciudad = '$ciudad', fecha_fin='$fecha_fin', id_foto = 'id_foto' WHERE id_gauchada = '$id_gauchada' ");
+function modificarGauchada($titulo, $desc, $ciudad, $fecha_fin, $id_gauchada, $id_foto){
+	mysql_query("UPDATE gauchada SET titulo = '$titulo', descripcion = '$desc', ciudad = '$ciudad', fecha_fin='$fecha_fin', id_foto = '$id_foto' WHERE id_gauchada = '$id_gauchada' ");
+}
+
+function modificarCategoria($id_categoria, $id_gauchada){
+	mysql_query("UPDATE categau SET id_categoria = '$id_categoria' WHERE id_gauchada = '$id_gauchada' ");
+}
+
+function modificarUsuario($idusu, $nombre, $password, $email, $ciudad, $telefono,$id_foto ){
+	mysql_query("UPDATE registrado SET nombre_usu = '$nombre', password = '$password', mail = '$email', ciudad = '$ciudad', telefono = '$telefono', id_foto = '$id_foto' WHERE id_usuario = '$idusu' ");
 }
 
 function agregarCalificacion ($text,$id_puntuacion){
 	mysql_query("INSERT INTO calificacion (id_calificacion,comentario,id_puntuacion) VALUES (NULL,'$text','$id_puntuacion')");
+}
+
+function consultaGauchada ($id_gauchada){
+	$consulta = mysql_query("SELECT * FROM gauchada WHERE id_gauchada = '$id_gauchada' ");
+	return mysql_fetch_array($consulta);
 }
 
 function consultaIdCalificacion ($text,$id_puntuacion){
@@ -138,9 +156,8 @@ function modificarGauchadaCalificacion ($id_gauchada, $id_calificacion){
 	mysql_query("UPDATE gauchada SET id_calificacion = '$id_calificacion' WHERE id_gauchada = '$id_gauchada' ");
 }
 
-function consultaGauchada ($id_gauchada){
-	$consulta = mysql_query("SELECT * FROM gauchada WHERE id_gauchada = '$id_gauchada' ");
-	return mysql_fetch_array($consulta);
+function eliminarGauchada($id_gauchada){
+	mysql_query("DELETE FROM gauchada WHERE id_gauchada = $id_gauchada");
 }
 
 ?>

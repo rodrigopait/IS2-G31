@@ -64,53 +64,48 @@ comprobarSession();
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <?php 
-                $id_gauchada = ($_GET['id_gauchada']);
-                $tabla=consultarGauchada($id_gauchada); 
+                $id_usuario = ($_GET['variable']);
+                $usuario = getUsuario($id_usuario);
                 ?>
-                <form method="POST" action="modificar-check.php?id_gauchada=<?php echo $id_gauchada?>" enctype="multipart/form-data">
+                <form method="POST" action="modificarusuario-check.php?usuario=<?php echo $id_usuario?>" enctype="multipart/form-data">
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
-                            <label><i class="fa fa-font" aria-hidden="true"></i> Título</label>
+                            <label><i class="fa fa-font" aria-hidden="true"></i> Nombre</label>
                             <input type="text" class="form-control" required
-                            title="Por favor ingrese un título" name="title" value="<?php echo $tabla['titulo'] ?>">
+                            title="Por favor ingrese un nombre" name="nombreusuario" value="<?php echo $usuario['nombre_usu'] ?>">
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
-                            <label><i class="fa fa-pencil" aria-hidden="true"></i> Descripción</label>
-                            <textarea type="text" rows="5" class="form-control" value="<?php echo $tabla['descripcion'] ?>" required  title="Por favor ingrese su descripción" name="desc" 
-                            value=""><?php echo $tabla['descripcion'] ?></textarea>
+                            <label><i class="fa fa-key" aria-hidden="true"></i> Contraseña</label>
+                            <input type="password" class="form-control" required title="Por favor ingrese una contraseña" name="password" value="<?php echo $usuario['password']?>">
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
-                            <label><i class="fa fa-globe" aria-hidden="true"></i> Ciudad</label>
+                            <label><i class="fa fa-envelope-o" aria-hidden="true"></i> Correo electrónico</label>
+                            <input type="email" class="form-control" value="<?php echo $usuario['mail'] ?>" 
+                            name="email" value="" title="Por favor ingrese algo como ejemplo@gauchadas.com"
+                            required pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls">
+                            <label><i class="fa fa-calendar" aria-hidden="true"></i> Ciudad</label>
                             <input type="text" class="form-control" required
-                            title="Por favor ingrese su ciudad" name="city" value="<?php echo $tabla['ciudad'] ?>">
+                            title="Por favor ingrese su ciudad" name="ciudad" value="<?php echo $usuario['ciudad'] ?>">
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
-                            <label><i class="fa fa-calendar" aria-hidden="true"></i> Fecha de fin</label>
-                            <input type="date" class="form-control" required
-                            title="Por favor ingrese la fechad de fin de la gauchada" name="fecha_fin" value="<?php echo $tabla['fecha_fin'] ?>">
-                        </div>
-                    </div>
-<!--                     Probar DATALIST mas adelante-->                   
-                    <div class="control-group">
-                        <div class="form-group floating-label-form-group controls">
-                            <select name="categoria">
-                                <?php $consulta = mysql_query("SELECT * FROM categoria");
-                                while ($tabla = mysql_fetch_array($consulta)){?>
-                                <option value="<?php echo $tabla['id_cat'] ?>"><?php echo $tabla['tipocategoria']?></option>
-                                <?php }?>
-                            </select>
+                            <label><i class="fa fa-calendar" aria-hidden="true"></i> Telefono</label>
+                            <input type="number" class="form-control" name="telefono" value="<?php echo $usuario['telefono'] ?>">
                         </div>
                     </div>
                     <div class="control-group">
                         <div class="form-group floating-label-form-group controls">
                             <label><i class="fa fa-picture-o" aria-hidden="true"></i> Foto</label>
-                            <input name="image" value="<?php echo $tabla['id_foto']; ?>" type="file">
+                            <input name="image" value="<?php echo $usuario['id_foto']; ?>" type="file">
                         </div>
                     </div>
                     <br>
