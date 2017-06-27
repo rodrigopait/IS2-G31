@@ -118,7 +118,14 @@ comprobarSession();
                         <button type="submit" class="btn btn-secondary">Publicar</button>
                         <button type="reset" class="btn btn-secondary">Restablecer</button>
                     </div>
-                    <?php }?>
+                    <?php }
+                    else { if ($creditos['creditos']>=1) { ?>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-secondary">Publicar</button>
+                            <button type="reset" class="btn btn-secondary">Restablecer</button>
+                        </div>
+                    <?php }
+                    } ?>
                 </form>
             </div>
         </div>

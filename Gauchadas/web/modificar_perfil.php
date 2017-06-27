@@ -47,12 +47,9 @@ comprobarSession();
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                    <div class="site-heading" style="background-image: url(img/logo-gauchadas.png);
-                    background-repeat: repeat-x; background-position: center; width: 90%; margin-left: 7%;
-                    padding-bottom: 16%;">
-                        <h1>Modificar Gauchada</h1>
-                        <span class="subheading" style="font-weight: bold; padding-top: 1%">
-                            Un Blog Donde Encuentras Gauchadas</span>
+                    <div class="post-heading" style="text-align: center;">
+                        <h1 style="text-shadow: black;color: #fff;text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Modificar Perfil</h1>
+                        <h2 class="subheading"></h2>
                     </div>
                 </div>
             </div>
