@@ -186,6 +186,7 @@ function modificarUsuario($idusu, $nombre, $password, $email, $ciudad, $telefono
 
 function consultaGauchada ($id_gauchada){
 	$consulta = mysql_query("SELECT * FROM gauchada WHERE id_gauchada = '$id_gauchada' ");
+	return mysql_fetch_array($consulta);
 }
 function eliminarGauchada($id_gauchada){
 	mysql_query("DELETE FROM gauchada WHERE id_gauchada = $id_gauchada");

@@ -148,11 +148,6 @@ function mostrarMensajeErrorPregunta($id_usuario, $id_gauchada, $fecha, $hoy){
     }
 }
 
-function mostrarModificarGauchada ($id_gauchada){
-    echo "<a href='modificar_gauchada.php?id_gauchada=".$id_gauchada."' style='margin-left: 71%''>
-         <i class='fa fa-pencil' aria-hidden='true'> Modificar gauchada</i></a>";
-}
-
 function mostrarEliminarGauchada ($id_gauchada){
     echo "<a href='eliminar_gauchada.php?id_gauchada=".$id_gauchada."' style='margin-left: 71%''>
         <i class='fa fa-remove' aria-hidden='true' > Eliminar gauchada</i></a>";
