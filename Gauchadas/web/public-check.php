@@ -45,14 +45,14 @@
 		publicarGauchada($titulo,$descripcion,$ciudad,$fecha_ini,$fecha_fin,$id_foto[0],$id_registrado);
 		$id_gauchada = consultarIdGauchada($titulo,$id_registrado);
 		asociarGaucahdaConCategoria($id_categoria,$id_gauchada[0]);
-		$mensaje = "La gacuahda ha sido publicada con exito!!  Le quedan: ".$creditos." creditos.";
+		$mensaje = "La gauchada ha sido publicada con exito!!  Le quedan: ".$creditos." creditos.";
 		echo "<script>";
 		echo "alert('$mensaje');";
 		echo "window.location = 'index.php'";
 		echo "</script>";
 	}
 	else{
-		$mensaje = "Usted adeuda Gauchadas por calificar, por favor califiquelas antes de publicar alguna gaucahda.";
+		$mensaje = "Usted adeuda Gauchadas por calificar, por favor califiquelas antes de publicar alguna gauchada.";
 		echo "<script>";
 		echo "alert('$mensaje');";
 		echo "window.location = 'public.php'";

@@ -49,20 +49,22 @@ session_start();?>
 
     <!-- Page Header -->
     <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: contain;
-    background-position-y: 0; height: 333px;">
-        <?php $id = ($_GET['variable']);
-        $consulta = mysql_query("SELECT * FROM gauchada NATURAL JOIN foto NATURAL JOIN categau INNER JOIN categoria ON id_categoria = id_cat WHERE id_gauchada = '$id'");
-        $tabla = mysql_fetch_array($consulta);?>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                    <div class="post-heading" style="text-align: center;">
-                        <h1 style="text-shadow: black;color: #fff;text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"> <?php echo $tabla['titulo'];?> </h1>
-                        <h2 class="subheading"></h2>
+    background-position-y: 0; height: 333px;">       
+            <?php $id = ($_GET['variable']);
+            $consulta = mysql_query("SELECT * FROM gauchada NATURAL JOIN foto NATURAL JOIN categau INNER JOIN categoria ON id_categoria = id_cat LEFT JOIN pregunta ON id_preg = id_pregunta WHERE id_gauchada = '$id'");
+            $tabla = mysql_fetch_array($consulta);
+            ?>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                        <div class="post-heading" style="text-align: center;">
+                            <h1 style="text-shadow: black;color: #fff;text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"> <?php echo $tabla['titulo'];?> </h1>
+                            <h2 class="subheading"></h2>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </header>
 
     <!-- Post Content -->
@@ -80,7 +82,7 @@ session_start();?>
                     </a>
                     <div class="clearfix">
                         <a style="text-align: left;"> Fecha de cierre: <?php echo $tabla['fecha_fin']?></a>
-                        <?php if ($tabla['id_registrado'] == $_SESSION['id_usuario']){ ?>
+                        <?php if ($tabla[7] == $_SESSION['id_usuario']){ ?>
                             <?php mostrarUsuarioCreador($tabla['id_gauchada']);
                                 mostrarModificarGauchada($tabla['id_gauchada']);?>
                         <?php }
@@ -88,13 +90,62 @@ session_start();?>
                             consultaUsuarioPostulado($_SESSION['nombreUsuario'],$_SESSION['id_usuario'],
                             $tabla['id_gauchada']);
                         }?> 
-                   </div>
-                </div>
+                    </div>
+                    <?php if($tabla['id_pregunta'] == NULL){ ?>
+                                 <div id="succes"></div>
+                                 <?php $fecha = consultaFechaDeCierre($tabla['id_gauchada']);
+                                 $hoy = date("Y-m-d");
+                                 ?>
+                                    <form method="POST" action="post-check.php?id_gauchada=<?php echo $tabla['id_gauchada'] ?>" enctype="multipart/form-data">
+                                        <div class="control-group">
+                                            <div class="form-group floating-label-form-group controls">
+                                                <label><i class="fa fa-question-circle" aria-hidden="true"></i> Pregunta</label>
+                                                <textarea type="text" rows="2" class="form-control" placeholder="Escribe tu pregunta aquí..." required title="Por favor ingrese una pregunta" name="question" value=""></textarea>
+                                            </div>
+                                        </div>
+                                        <?php mostrarMensajeErrorPregunta($_SESSION['id_usuario'], $tabla['id_gauchada'], $fecha['fecha_fin'], $hoy);
+                                        if(($fecha['fecha_fin'] >= $hoy ) && ((!empty($calificaciones['id_aceptado'])) && (!empty($consultaCalificacion['id_calificacion'])))){?>
+                                            <div class="form-group">
+                                               <button type="submit" class="btn btn-secondary">Realizar pregunta</button>
+                                            </div>
+                                        <?php }
+                                        else{  ?>
+                                            <?php if($fecha['fecha_fin'] >= $hoy ) {?>
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-secondary">Realizar pregunta</button>
+                                                </div>
+                                            <?php } ?>
+                                        <?php } ?>
+                                         
+                                    </form>
+                    <?php }                            
+                    else{ ?> 
+                        <?php $nombreUsuario = consultaUsuario($tabla[17]);
+                         echo "<p class='post-meta'><b>Pregunta:</b> ".$tabla['pregunta']."</p><p class='post-meta'><b> Usuario que pregunta: </b> ".$nombreUsuario['nombre_usu']. "</p>"                        ;?>
+                        <?php if($tabla['id_respuesta'] == NULL){?>
+                            <form method="POST" action="post-check.php?id_gauchada=<?php echo $tabla['id_gauchada'] ?>" enctype="multipart/form-data">
+                                <div class="control-group">
+                                    <div class="form-group floating-label-form-group controls">
+                                        <label><i class="fa fa-question-circle" aria-hidden="true"></i> Respuesta</label>
+                                        <textarea type="text" rows="2" class="form-control" placeholder="Escribe una respuesta a esta pregunta" required title="Por favor ingrese una respuesta" name="answer" value=""></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-secondary">Contestar pregunta</button>
+                                    </div>
+                                </div>
+                            </form>
+                        <?php }?>    
+                    <?php }?>
+
+                    <?php if($tabla['id_respuesta'] != NULL){?> 
+                         <?php $consultaRespuesta = consultaRespuesta($tabla['id_respuesta']);
+                         echo "<p class='post-meta'><b>Respuesta:</b> ".$consultaRespuesta['respuesta']."</p>";
+                    }?>
+               </div>
             </div>
-        </div>
+        </div>  
     </article>
 
-    <hr>
 
     <!-- Footer -->
     <?php include("footer.php");?>
