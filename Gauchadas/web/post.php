@@ -51,7 +51,7 @@ session_start();?>
     <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: contain;
     background-position-y: 0; height: 333px;">       
             <?php $id = ($_GET['variable']);
-            $consulta = mysql_query("SELECT * FROM gauchada NATURAL JOIN foto NATURAL JOIN categau INNER JOIN categoria ON id_categoria = id_cat LEFT JOIN pregunta ON id_preg = id_pregunta WHERE id_gauchada = '$id'");
+            $consulta = mysql_query("SELECT * FROM gauchada NATURAL JOIN foto NATURAL JOIN categau INNER JOIN categoria ON id_categoria = id_cat LEFT JOIN pregunta ON pregunta.id_pregunta = gauchada.id_pregunta WHERE id_gauchada = '$id'");
             $tabla = mysql_fetch_array($consulta);
             ?>
             <div class="container">
@@ -82,13 +82,15 @@ session_start();?>
                     </a>
                     <div class="clearfix">
                         <a style="text-align: left;"> Fecha de cierre: <?php echo $tabla['fecha_fin']?></a>
-                        <?php if ($tabla[7] == $_SESSION['id_usuario']){ ?>
-                            <?php mostrarUsuarioCreador($tabla['id_gauchada']);
-                                mostrarModificarGauchada($tabla['id_gauchada']);?>
-                        <?php }
-                        else{
-                            consultaUsuarioPostulado($_SESSION['nombreUsuario'],$_SESSION['id_usuario'],
-                            $tabla['id_gauchada']);
+                        <?php if(isset($_SESSION['nombreUsuario'])){
+                            if ($tabla[7] == $_SESSION['id_usuario']){ ?>
+                                <?php mostrarUsuarioCreador($tabla['id_gauchada']);
+                                    mostrarModificarGauchada($tabla['id_gauchada']);?>
+                            <?php }
+                            else{
+                                consultaUsuarioPostulado($_SESSION['nombreUsuario'],$_SESSION['id_usuario'],
+                                $tabla['id_gauchada']);
+                            }
                         }?> 
                     </div>
                     <?php if($tabla['id_pregunta'] == NULL){ ?>
