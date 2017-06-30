@@ -72,10 +72,17 @@ session_start();?>
                 <td style="width: 15%;vertical-align: top;">
                     <img class="img-responsive" style="margin-bottom: 10%; max-width: 165px; max-height: 165px;" 
                         src="<?php echo $tabla['foto'];?>">
+<<<<<<< HEAD
                     <a href="misgauchadas.php">Mis Gauchadas</a>
                     <a href="calificaciones.php">Mis Calificaciones</a>
                     <a href="">Mis postulaciones</a>
                     <a href="modificar_perfil.php?variable=<?php echo $tabla['id_usuario']?>">Modificar Perfil</a>
+=======
+<!--                     <a href="">Mis Gauchadas</a>
+ -->                    <a href="calificaciones.php">Mis Calificaciones</a>
+<!--                     <a href="">Mis postulaciones</a>
+                    <a href="">Modificar Perfil</a> -->
+>>>>>>> origin/Gauchada
                 </td>
                 <td>
                 <div class="col-md-8 col-md-10" style="margin-left: 3%">

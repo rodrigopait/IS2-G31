@@ -2,8 +2,6 @@
 include ("conexion.php");
 include ("consultasSQL.php");
 session_start();
-if(isset($_SESSION['nombreUsuario'])){
-    if(isset($_POST['question'])){
         $idUsuario = $_SESSION['id_usuario'];
         $que = $_POST['question'];
         agregarPregunta($idUsuario, $que);
@@ -12,20 +10,6 @@ if(isset($_SESSION['nombreUsuario'])){
         $mensaje = "La pregunta fue publicada exitosamente!";
         echo "<script>";
         echo "alert('$mensaje')";
-        echo "window.location = 'post.php?variable=<?php echo $id'";
+        echo "window.location = 'post.php?variable=<?php echo $_GET['id_gauchada']?>'";
         echo "</script>";
-    
-        if(isset($_POST['answer'])){
-            $ans = $_POST['answer'];
-            agregarRespuesta($ans);
-            $idRespuesta = consultaIdRespuesta($ans);
-            modificarGauchadaRespuesta($idRespuesta['id_respuesta'], $idUsuario, $que);
-            $mensaje = "La respuesta fue publicada exitosamente!";
-            echo "<script>";
-            echo "alert('$mensaje')";
-            header("post.php");
-            echo "</script>";
-        }
-    }
-}   
 ?>
