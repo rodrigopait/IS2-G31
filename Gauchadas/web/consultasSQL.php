@@ -168,4 +168,49 @@ function eliminarGauchada($id_gauchada){
 	mysql_query("DELETE FROM gauchada WHERE id_gauchada = $id_gauchada");
 }
 
+function consultaPregunta($id_respuesta, $id_usuario){
+	$consulta = mysql_query("SELECT * FROM pregunta WHERE id_respuesta = '$id_respuesta' AND id_registrado = '$id_usuario");
+return mysql_fetch_array($consulta);
+}
+
+function consultaPreguntasYrespuestas(){
+	return mysql_query("SELECT * FROM pregunta INNER JOIN gauchada ON pregunta.id_pregunta = gauchada.id_pregunta ");
+
+}
+
+function consultaRespuesta($id_respuesta){
+	$consulta = mysql_query("SELECT * from respuesta WHERE id_respuesta = '$id_respuesta' ");
+	return mysql_fetch_array($consulta);
+}
+
+function consultaIdRespuesta($ans){
+	$consulta = mysql_query("SELECT * FROM respuesta WHERE respuesta = '$ans' ");
+	return mysql_fetch_array($consulta);
+}
+
+function modificarGauchadaRespuesta($idRespuesta, $idUsuario,$id_pregunta){
+	mysql_query("UPDATE pregunta SET id_respuesta = '$idRespuesta' WHERE id_registrado = '$idUsuario' AND id_pregunta = '$id_pregunta' ");
+}
+
+function consultaFechaDeCierre($id_gauchada){
+ 	$consulta = mysql_query("SELECT fecha_fin FROM gauchada WHERE id_gauchada ='$id_gauchada'");
+	return mysql_fetch_array($consulta);
+}
+
+function agregarRespuesta($ans){
+	mysql_query( "INSERT INTO respuesta (id_respuesta, respuesta) VALUES (NULL,'$ans')");
+}
+
+function consultaIdPregunta ($id_usuario, $question){
+	$consulta = mysql_query("SELECT * FROM pregunta WHERE id_registrado = '$id_usuario' AND pregunta = '$question'");
+	return mysql_fetch_array($consulta);
+}
+
+function modificarGauchadaPregunta ($id_gauchada, $id_pregun){
+	mysql_query("UPDATE gauchada SET id_pregunta = '$id_pregun' WHERE id_gauchada = '$id_gauchada' ");
+}
+
+function agregarPregunta($id_usuario, $question){
+	mysql_query( "INSERT INTO pregunta (id_pregunta,pregunta,id_registrado, id_respuesta) VALUES (NULL,'$question','$id_usuario',NULL)");
+}
 ?>

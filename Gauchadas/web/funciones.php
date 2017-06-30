@@ -74,17 +74,16 @@ function consultaUsuarioPostulado ($nombreUsuario, $id_usuario, $id_gauchada) {
     	if(0 == consultaPostulado($id_usuario,$id_gauchada)){
   			echo "<a class='btn btn-secondary float-right' href='postularse-check.php?variable=".$id_gauchada."'>Postularse  <i class='fa fa-plus' aria-hidden='true'></i></a>";
         } else {
-	    	echo "<a class='btn btn-secondary float-right' style='background-color: #F27321;'>
-	        Postulado  <i class='fa fa-check' aria-hidden='true'></i></span></a>";
-        }
-        $tabla = consultaGauchada($id_gauchada);
-        if( (0 == consultaPostulado($id_usuario,$id_gauchada)) && (date("Y-m-d") <= $tabla['fecha_fin'])){
-            echo "<a class='btn btn-secondary float-right' href='postularse-check.php?variable=".$id_gauchada."'>Postularse  <i class='fa fa-plus' aria-hidden='true'></i></a>";
-        } else { 
-                echo "<a class='btn btn-secondary float-right' style='background-color: #F27321;'>
-                Postulado  <i class='fa fa-check' aria-hidden='true'></i></span></a>";
+                $tabla = consultaGauchada($id_gauchada);
+                if( (0 == consultaPostulado($id_usuario,$id_gauchada)) && (date("Y-m-d") <= $tabla['fecha_fin'])){
+                    echo "<a class='btn btn-secondary float-right' href='postularse-check.php?variable=".$id_gauchada."'>Postularse  <i class='fa fa-plus' aria-hidden='true'></i></a>";
+                }
+                 else { 
+                        echo "<a class='btn btn-secondary float-right' style='background-color: #F27321;'>
+                        Postulado  <i class='fa fa-check' aria-hidden='true'></i></span></a>";
+                    }
             }
-    }
+        }
 }
 
 function mostrarUsuarioCreador ($id_gauchada){
@@ -161,6 +160,41 @@ function mostrarModificarGauchada ($id_gauchada){
 function mostrarEliminarGauchada ($id_gauchada){
     echo "<a href='eliminar_gauchada.php?id_gauchada=".$id_gauchada."' style='margin-left: 71%''>
          <i class='fa fa-remove' aria-hidden='true' > Eliminar gauchada</i></a>";
+}
+
+function mostrarRespuestas($consulta, $tabla_respuesta){
+     while ($tabla = mysql_fetch_array($consulta)){
+        if($tabla['id_respuesta'] == $tabla_respuesta['id_respuesta']){ 
+            echo "<p class='post-meta'><b>Respuesta:</b> ".$tabla_respuesta['respuesta']."</p>";
+        
+        }
+    }
+}
+
+function mostrarPreguntas($consulta, $nombreUsuario, $id_pregunta){
+     while ($tabla = mysql_fetch_array($consulta)){
+       if ($tabla['id_pregunta'] == $id_pregunta){
+            echo "<p class='post-meta'><b>Pregunta:</b> ".$tabla['pregunta']."</p><p class='post-meta'><b> Usuario que pregunta: </b> ".$nombreUsuario['nombre_usu']. "</p>";
+            
+        }
+    }
+}
+function mostrarMensajeErrorPregunta($id_usuario, $id_gauchada, $fecha, $hoy){
+    $consultaCalificacion = consultaAdeudorCalificacion($id_usuario);
+    if ($fecha < $hoy){
+        echo "<div class='alert alert-danger' style='text-align:center'>
+            <button type='button' class='close' data-dismiss='alert'></button>
+            <strong>La gauchada ya caducó, no puedes publicar preguntas</strong>
+            </div>";
+    }
+    else {
+        if ( (!empty($consultaCalificacion['id_aceptado'])) && (empty($consultaCalificacion['id_calificacion'])) ){
+            echo "<div class='alert alert-danger' style='text-align:center'>
+            <button type='button' class='close' data-dismiss='alert'></button>
+            <strong>Usted adeuda calificaciones de gauchadas, no puedes publicar preguntas.</strong>
+            </div>";
+        }
+    }
 }
 
 ?>
