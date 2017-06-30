@@ -126,16 +126,24 @@ function consultaCalificaion(){
 	return mysql_query("SELECT * FROM puntuacion");
 }
 
-function modificarGauchada($titulo, $desc, $ciudad, $fecha_fin, $id_gauchada, $id_foto){
-	mysql_query("UPDATE gauchada SET titulo = '$titulo', descripcion = '$desc', ciudad = '$ciudad', fecha_fin='$fecha_fin', id_foto = '$id_foto' WHERE id_gauchada = '$id_gauchada' ");
+function modificarGauchada($titulo, $desc, $ciudad, $fecha_fin, $id_gauchada){
+	mysql_query("UPDATE gauchada SET titulo = '$titulo', descripcion = '$desc', ciudad = '$ciudad', fecha_fin='$fecha_fin' WHERE id_gauchada = '$id_gauchada' ");
+}
+
+function modificarFotoGauchada($id_gauchada, $id_foto){
+	mysql_query("UPDATE gauchada SET id_foto = '$id_foto' WHERE id_gauchada = '$id_gauchada' ");
 }
 
 function modificarCategoria($id_categoria, $id_gauchada){
 	mysql_query("UPDATE categau SET id_categoria = '$id_categoria' WHERE id_gauchada = '$id_gauchada' ");
 }
 
-function modificarUsuario($idusu, $nombre, $password, $email, $ciudad, $telefono,$id_foto ){
-	mysql_query("UPDATE registrado SET nombre_usu = '$nombre', password = '$password', mail = '$email', ciudad = '$ciudad', telefono = '$telefono', id_foto = '$id_foto' WHERE id_usuario = '$idusu' ");
+function modificarUsuario($idusu, $nombre, $password, $email, $ciudad, $telefono ){
+	mysql_query("UPDATE registrado SET nombre_usu = '$nombre', password = '$password', mail = '$email', ciudad = '$ciudad', telefono = '$telefono' WHERE id_usuario = '$idusu' ");
+}
+
+function modificarFotoUsuario($idusu, $id_foto){
+	mysql_query("UPDATE registrado SET id_foto = '$id_foto' WHERE id_usuario = '$idusu' ");
 }
 
 function agregarCalificacion ($text,$id_puntuacion){

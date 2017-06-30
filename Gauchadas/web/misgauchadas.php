@@ -60,9 +60,7 @@ session_start();?>
                     <div class="site-heading" style="background-image: url(img/logo-gauchadas.png);
                     background-repeat: repeat-x; background-position: center; width: 90%; margin-left: 7%;
                     padding-bottom: 16%;">
-                        <h1>Mis Gauchadas</h1>
-                        <span class="subheading" style="font-weight: bold; padding-top: 1%">
-                            Administrar mis gauchadas</span>
+                        <h1 style="text-shadow: black;color: #fff;text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Mis Gauchadas</h1>
                     </div>
                 </div>
             </div>

@@ -23,8 +23,11 @@ if ($_FILES['image']['name']){
 else{
 	$id_foto['id_foto'] = '7';
 }
-modificarUsuario($idusu, $nombre, $password, $email, $ciudad, $telefono, $id_foto['id_foto'] );
-$mensaje = "Se ha modificado la gauchada correctamente.";
+modificarUsuario($idusu, $nombre, $password, $email, $ciudad, $telefono );
+if ($_FILES['image']['name']){
+	modificarFotoUsuario($idusu, $id_foto['id_foto']);
+}
+$mensaje = "Se ha modificado el perfil correctamente.";
 		echo "<script>";
 		echo "alert('$mensaje');";
 		echo "window.location = 'perfil.php?id_usuario=$idusu.php'";

@@ -26,13 +26,14 @@ else{
 }
 
 echo $id_categoria; 	
-modificarGauchada($titulo, $desc, $ciudad, $fecha_fin, $id_gauchada, $id_foto['id_foto']);
+modificarGauchada($titulo, $desc, $ciudad, $fecha_fin, $id_gauchada );
 modificarCategoria($id_categoria, $id_gauchada);
+if ($_FILES['image']['name']){
+	modificarFotoGauchada($id_gauchada, $id_foto['id_foto']);
+}
 $mensaje = "Se ha modificado la gauchada correctamente.";
 		echo "<script>";
 		echo "alert('$mensaje');";
 		echo "window.location = 'post.php?variable=$id_gauchada.php'";
 		echo "</script>";
-
-
 ?>
