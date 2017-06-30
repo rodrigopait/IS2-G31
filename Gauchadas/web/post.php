@@ -93,7 +93,9 @@ session_start();?>
                             }
                         }?> 
                     </div>
-                    <?php if($tabla['id_pregunta'] == NULL){ ?>
+                    <?php if (isset($_SESSION['nombreUsuario'])){
+                        if ($tabla[7] != $_SESSION['id_usuario']){
+                    if($tabla['id_pregunta'] == NULL){ ?>
                                  <div id="succes"></div>
                                  <?php $fecha = consultaFechaDeCierre($tabla['id_gauchada']);
                                  $hoy = date("Y-m-d");
@@ -142,7 +144,7 @@ session_start();?>
                     <?php if($tabla['id_respuesta'] != NULL){?> 
                          <?php $consultaRespuesta = consultaRespuesta($tabla['id_respuesta']);
                          echo "<p class='post-meta'><b>Respuesta:</b> ".$consultaRespuesta['respuesta']."</p>";
-                    }?>
+                    }}}?>
                </div>
             </div>
         </div>  
