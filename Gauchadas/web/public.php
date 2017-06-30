@@ -112,22 +112,12 @@ comprobarSession();
                     <br>
                     <div id="success"></div>
                     <?php $creditos = cantCreditos($_SESSION['id_usuario']);
-                    $calificaciones = consultaAdeudorCalificacion($_SESSION['id_usuario']);
-                    if(($creditos['creditos']>=1) && ((!empty($consultaCalificacion['id_aceptado'])) && (empty($consultaCalificacion['id_calificacion'])))){?>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-secondary">Publicar</button>
-                            <button type="reset" class="btn btn-secondary">Restablecer</button>
-                        </div>
-                    <?php }
-                    else{ ?>
-                        <?php if(($creditos['creditos']>=1) && ((empty($consultaCalificacion['id_aceptado'])) && (empty($consultaCalificacion['id_calificacion'])))){ ?>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-secondary">Publicar</button>
-                                <button type="reset" class="btn btn-secondary">Restablecer</button>
-                            </div>
-                        <?php } ?>
-                    <?php } ?>
-
+                    $calificaciones = consultaAdeudorCalificacion($_SESSION['id_usuario']);?>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-secondary">Publicar</button>
+                        <button type="reset" class="btn btn-secondary">Restablecer</button>
+                    </div>
+                    <?php?>
                 </form>
             </div>
         </div>

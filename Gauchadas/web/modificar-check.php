@@ -22,9 +22,12 @@ if ($_FILES['image']['name']){
 	$id_foto = consultaIdImagen($nuevo_path);
 	}
 else{
-	$id_foto['id_foto'] = "2";
+	$id_foto['id_foto'] = '2';
 }
-modificarGauchada($id_categoria, $titulo, $desc, $ciudad, $fecha_fin, $id_gauchada, $id_foto['id_foto']);
+
+echo $id_categoria; 	
+modificarGauchada($titulo, $desc, $ciudad, $fecha_fin, $id_gauchada, $id_foto['id_foto']);
+modificarCategoria($id_categoria, $id_gauchada);
 $mensaje = "Se ha modificado la gauchada correctamente.";
 		echo "<script>";
 		echo "alert('$mensaje');";

@@ -102,7 +102,7 @@ comprobarSession();
                             <select name="categoria">
                                 <?php $consulta = mysql_query("SELECT * FROM categoria");
                                 while ($tabla = mysql_fetch_array($consulta)){?>
-                                <option value=""><?php echo $tabla['tipocategoria']?></option>
+                                <option value="<?php echo $tabla['id_cat'] ?>"><?php echo $tabla['tipocategoria']?></option>
                                 <?php }?>
                             </select>
                         </div>

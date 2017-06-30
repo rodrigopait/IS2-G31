@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include("conexion.php");
-include("funciones.php");
+include("consultasSQL.php");
 session_start();?>
 <head>
 
@@ -12,7 +12,7 @@ session_start();?>
     <title>Gauchadas</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Additional fonts for this theme -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -30,7 +30,7 @@ session_start();?>
     @media (max-width: 576px) {
         nav > .container {
             width: 100%;
-        }
+                 }
     }
     </style>
 
@@ -80,14 +80,23 @@ session_start();?>
                     </a>
                     <div class="clearfix">
                         <a style="text-align: left;"> Fecha de cierre: <?php echo $tabla['fecha_fin']?></a>
-                        <?php if ($tabla['id_registrado'] == $_SESSION['id_usuario']){ ?>
-                            <?php mostrarUsuarioCreador($tabla['id_gauchada']);
-                                mostrarModificarGauchada($tabla['id_gauchada']);?>
-                        <?php }
-                        else{
-                            consultaUsuarioPostulado($_SESSION['nombreUsuario'],$_SESSION['id_usuario'],
-                            $tabla['id_gauchada']);
-                        }?> 
+                        <?php 
+                        if (isset($_SESSION['nombreUsuario'])){
+                         if ($_SESSION['id_usuario'] == $tabla['id_registrado']){?>
+                         	 <a class="btn btn-secondary float-right" href="modificar_publicacion.php?variable=<?php echo $tupla['id_gauchada'];?>">Modificar Gauchada</a>
+                         <?php}
+                         else{
+                        	if(0 == consultaPostulado($_SESSION['id_usuario'],$tabla['id_gauchada'])){?>
+                        		<a class="btn btn-secondary float-right" href="postularse-check.php?variable=<?php echo $tabla['id_gauchada'];?>>Postularse  <i class="fa fa-plus" aria-hidden="true"></i></a>
+                        	<?php
+                        		} 
+                        		else{ 
+                        			?>
+                        			<a class="btn btn-secondary float-right" style="background-color: #F27321;">Postulado  <i class="fa fa-check" aria-hidden="true"></i></span></a>
+            		            <?php 
+            		            }
+            		        }
+            		            ?> 
                    </div>
                 </div>
             </div>
