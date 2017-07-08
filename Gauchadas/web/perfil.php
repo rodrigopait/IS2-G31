@@ -51,7 +51,8 @@ session_start();?>
     <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: contain;
     background-position-y: 0; height: 333px;">
         <?php $id_usuario = ($_GET['id_usuario']);
-        $tabla = consultaUsuarioParaPerfil($id_usuario); ?>
+        $tabla = consultaUsuarioParaPerfil($id_usuario);
+        $reputacion = calcularReputacion($id_usuario); ?>
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
@@ -100,7 +101,7 @@ session_start();?>
                             <dd class="col-sm-9 text-muted"> <?php echo $tabla['telefono']?></dd>
 
                             <dt class="col-sm-3"><h3><u>Reputacion:</u></h3></dt>
-                            <dd class="col-sm-9 text-muted"> <?php echo $tabla['descripcion']?></dd>
+                            <dd class="col-sm-9 text-muted"> <?php echo $reputacion['descripcion']; ?></dd>
                         </dl>
                    </div>
                 </div>

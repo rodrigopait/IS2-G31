@@ -62,7 +62,7 @@ function getGauchadas(){
 }
 
 function getUsuario($id_usuario){
-	$consult_usuario = mysql_query("SELECT * FROM registrado WHERE id_usuario = $id_usuario ");
+	$consult_usuario = mysql_query("SELECT * FROM registrado WHERE id_usuario = '$id_usuario' ");
 	return mysql_fetch_array($consult_usuario);
 }
 
@@ -87,12 +87,8 @@ function categorias(){
 	return mysql_query("SELECT * FROM categoria");
 }
 
-function consultarUsuariosConReputacion(){
-	return mysql_query("SELECT * FROM registrado NATURAL JOIN reputacion");
-}
-
 function consultarUsuariosPostulados ($id_gauchada){
-	return mysql_query("SELECT * FROM gauchada INNER JOIN postula ON gauchada.id_gauchada = postula.id_gauchada INNER JOIN registrado ON postula.id_registrado = registrado.id_usuario INNER JOIN reputacion ON registrado.id_rep = reputacion.id_rep WHERE postula.id_gauchada = '$id_gauchada' ");
+	return mysql_query("SELECT * FROM gauchada INNER JOIN postula ON gauchada.id_gauchada = postula.id_gauchada INNER JOIN registrado ON postula.id_registrado = registrado.id_usuario WHERE postula.id_gauchada = '$id_gauchada' ");
 }
 
 function consultarGauchada ($id_gauchada){
@@ -110,16 +106,16 @@ function consultaAdeudorCalificacion ($id_registrado){
 }
 
 function consultaUsuarioParaPerfil($id_usuario){
-	$consulta = mysql_query("SELECT * FROM registrado NATURAL JOIN foto NATURAL JOIN reputacion WHERE id_usuario = '$id_usuario'");
+	$consulta = mysql_query("SELECT * FROM registrado NATURAL JOIN foto WHERE id_usuario = '$id_usuario'");
 	return mysql_fetch_array($consulta);
 }
 
 function consultaGauchadaAdeudada ($id_usuario){
-	return mysql_query("SELECT * FROM gauchada NATURAL JOIN foto INNER JOIN registrado ON gauchada.id_aceptado = registrado.id_usuario INNER JOIN reputacion ON registrado.id_rep = reputacion.id_rep WHERE gauchada.id_registrado = '$id_usuario' AND id_aceptado IS NOT NULL AND id_calificacion IS NULL");
+	return mysql_query("SELECT * FROM gauchada NATURAL JOIN foto INNER JOIN registrado ON gauchada.id_aceptado = registrado.id_usuario WHERE gauchada.id_registrado = '$id_usuario' AND id_aceptado IS NOT NULL AND id_calificacion IS NULL");
 }
 
 function consultaGauchadaNoAdeudada ($id_usuario){
-	return mysql_query("SELECT * FROM gauchada NATURAL JOIN foto NATURAL JOIN calificacion INNER JOIN puntuacion ON calificacion.id_puntuacion = puntuacion.id_puntuacion INNER JOIN registrado ON gauchada.id_aceptado = registrado.id_usuario INNER JOIN reputacion ON registrado.id_rep = reputacion.id_rep WHERE gauchada.id_registrado = '$id_usuario' AND id_calificacion IS NOT NULL");
+	return mysql_query("SELECT * FROM gauchada NATURAL JOIN foto NATURAL JOIN calificacion INNER JOIN puntuacion ON calificacion.id_puntuacion = puntuacion.id_puntuacion INNER JOIN registrado ON gauchada.id_aceptado = registrado.id_usuario WHERE gauchada.id_registrado = '$id_usuario' AND id_calificacion IS NOT NULL");
 }
 
 function consultaCalificaion(){
@@ -170,7 +166,7 @@ function eliminarGauchada($id_gauchada){
 
 function consultaPregunta($id_respuesta, $id_usuario){
 	$consulta = mysql_query("SELECT * FROM pregunta WHERE id_respuesta = '$id_respuesta' AND id_registrado = '$id_usuario");
-return mysql_fetch_array($consulta);
+	return mysql_fetch_array($consulta);
 }
 
 function consultaPreguntasYrespuestas(){
@@ -213,4 +209,22 @@ function modificarGauchadaPregunta ($id_gauchada, $id_pregun){
 function agregarPregunta($id_usuario, $question){
 	mysql_query( "INSERT INTO pregunta (id_pregunta,pregunta,id_registrado, id_respuesta) VALUES (NULL,'$question','$id_usuario',NULL)");
 }
+
+function agregarReputacion ($rango_min,$rango_max,$titulo) {
+	mysql_query("INSERT INTO reputacion (id_rep, rango_min, rango_max, descripcion) VALUES (NULL, '$rango_min', '$rango_max', '$titulo')");
+}
+
+function consultaReputacion(){
+	return mysql_query("SELECT * FROM reputacion");
+}
+
+function calificarUsuario($id_registrado,$puntos,$creditos){
+	mysql_query("UPDATE registrado SET puntos = '$puntos', creditos = '$creditos' WHERE id_usuario = '$id_registrado' ");
+}
+
+function consultaUsuarioCalificado($id_calificacion) {
+	$consulta = mysql_query("SELECT * FROM gauchada WHERE id_calificacion = '$id_calificacion' ");
+	return mysql_fetch_array($consulta);
+}
+
 ?>

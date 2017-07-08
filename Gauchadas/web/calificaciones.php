@@ -70,6 +70,7 @@ session_start();?>
                     <div>
                         <?php $consulta = consultaGauchadaAdeudada($_SESSION['id_usuario']);
                         $consultaVacio = consultaGauchadaAdeudada($_SESSION['id_usuario']);
+                        $reputacionUsuario = calcularReputacion($_SESSION['id_usuario']);
                         if (empty(mysql_fetch_array($consultaVacio))){ ?>
                             <h3 class="caption text-muted">No se encuantran publicaciones</h3>
                         <?php }
@@ -91,9 +92,9 @@ session_start();?>
                                 <h2 class="post-title" style="display:flow-root;">
                                 <?php echo $tupla['nombre_usu'];?></h2>
                                 <div class="progress">
-                                    <?php mostrarBarraDeProgreso($tupla['id_rep']);?>
+                                    <?php mostrarBarraDeProgreso($reputacionUsuario['id_rep']);?>
                                 </div>
-                                <a style="color:#777">Reputacion :  </a><?php echo $tupla['descripcion'];?>
+                                <a style="color:#777">Reputacion :  </a><?php echo $reputacionUsuario['descripcion'];?>
                                 <p class="post-meta">Vive en :  
                                     <a style="margin-right: 10%"> <?php echo $tupla['ciudad'];?></a>Email : <a> <?php echo $tupla['mail']; ?></a>
                                 </p>
@@ -151,9 +152,9 @@ session_start();?>
                                 <h2 class="post-title" style="display:flow-root;">
                                 <?php echo $tupla['nombre_usu'];?></h2>
                                 <div class="progress">
-                                    <?php mostrarBarraDeProgreso($tupla['id_rep']);?>
+                                    <?php mostrarBarraDeProgreso($reputacionUsuario['id_rep']);?>
                                 </div>
-                                <a style="color:#777">Reputacion :  </a><?php echo $tupla['descripcion'];?>
+                                <a style="color:#777">Reputacion :  </a><?php echo $reputacionUsuario['descripcion'];?>
                                 <p class="post-meta">Vive en :  
                                     <a style="margin-right: 10%"> <?php echo $tupla['ciudad'];?></a>Email : <a> <?php echo $tupla['mail']; ?></a>
                                 </p>
@@ -163,7 +164,7 @@ session_start();?>
                                     <i class="text-muted"><u>Reseña:</u></i>
                                     <textarea class="form-control"><?php echo $tupla['comentario'] ?></textarea>
                                     <i class="text-muted"><u>Puntuación:</u></i>
-                                    <i><?php echo $tupla[14]?></i>
+                                    <i><?php echo $tupla[15]?></i>
                                 </div>
                             </div>
                             <hr>

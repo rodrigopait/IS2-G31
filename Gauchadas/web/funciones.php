@@ -197,4 +197,34 @@ function mostrarMensajeErrorPregunta($id_usuario, $id_gauchada, $fecha, $hoy){
     }
 }
 
+function calcularReputacion ($id_registrado){
+    $usuario = getUsuario($id_registrado);
+    $consulta = consultaReputacion();
+    while ($reputacion = mysql_fetch_array($consulta)) {
+        if (($reputacion['rango_min'] <= $usuario['puntos'])&&($reputacion['rango_max'] >= $usuario['puntos'])){
+            return $reputacion;
+        }
+    }
+}
+
+function agregarCalificacionUsuario($id_registrado,$puntuacion){
+    switch ($puntuacion) {
+        case 1:
+            $puntos = 1;
+            $creditos = 1;
+            break;
+        case 2:
+            $usuario = getUsuario($id_registrado);
+            $puntos = $usuario['puntos'] - 2;
+            $creditos = $usuario['creditos'];
+            break;
+        default:
+            $usuario = getUsuario($id_registrado);
+            $puntos = $usuario['puntos'];
+            $creditos = $usuario['creditos'];
+            break;
+    }
+    calificarUsuario($id_registrado,$puntos,$creditos);
+}
+
 ?>

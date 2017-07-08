@@ -111,13 +111,10 @@ comprobarSession();
                     </div>
                     <br>
                     <div id="success"></div>
-                    <?php $creditos = cantCreditos($_SESSION['id_usuario']);
-                    $calificaciones = consultaAdeudorCalificacion($_SESSION['id_usuario']);?>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-secondary">Publicar</button>
-                        <button type="reset" class="btn btn-secondary">Restablecer</button>
-                    </div>
-                    <?php?>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-secondary">Publicar</button>
+                            <button type="reset" class="btn btn-secondary">Restablecer</button>
+                        </div>
                 </form>
             </div>
         </div>
