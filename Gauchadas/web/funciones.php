@@ -227,4 +227,13 @@ function agregarCalificacionUsuario($id_registrado,$puntuacion){
     calificarUsuario($id_registrado,$puntos,$creditos);
 }
 
+function calcularTablaAModifcar($min,$max,$tupla_min,$tupla_max){
+    $subMinimo = $min - $tupla_min;
+    $subMaximo = $tupla_max - $max;
+    if ( $subMinimo <= $subMaximo) {
+        return $min;
+    }
+    else return $max;
+}
+
 ?>

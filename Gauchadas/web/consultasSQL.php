@@ -215,7 +215,7 @@ function agregarReputacion ($rango_min,$rango_max,$titulo) {
 }
 
 function consultaReputacion(){
-	return mysql_query("SELECT * FROM reputacion");
+	return mysql_query("SELECT * FROM reputacion ORDER BY `rango_min` ASC");
 }
 
 function calificarUsuario($id_registrado,$puntos,$creditos){
@@ -225,6 +225,10 @@ function calificarUsuario($id_registrado,$puntos,$creditos){
 function consultaUsuarioCalificado($id_calificacion) {
 	$consulta = mysql_query("SELECT * FROM gauchada WHERE id_calificacion = '$id_calificacion' ");
 	return mysql_fetch_array($consulta);
+}
+
+function insertarReputacion($rango_min, $rango_max,$titulo){
+	mysql_query("INSERT INTO reputacion (id_rep,rango_min,rango_max,descripcion) VALUES (NULL, '$rango_min','$rango_max', '$titulo')");
 }
 
 ?>

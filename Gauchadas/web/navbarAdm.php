@@ -8,12 +8,8 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link page-scroll" href="users.php">
-                        <i class="fa fa-users" aria-hidden="true"></i> Listar Usuarios </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link page-scroll" href="bestUsers.php">
-                        <i class="fa fa-star" aria-hidden="true"></i> Ranking de mejores usuarios</a>
+                        <a class="nav-link page-scroll" href="home_adm.php">
+                        <i class="fa fa-home" aria-hidden="true"></i> Home </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link page-scroll" href="logout.php">
