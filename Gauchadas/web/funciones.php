@@ -236,4 +236,17 @@ function calcularTablaAModifcar($min,$max,$tupla_min,$tupla_max){
     else return $max;
 }
 
+function mostrarRangoMinimo($rango_min){
+    if ($rango_min == (-9999999) ){
+        return "- ∞";
+    }
+    else return $rango_min;
+}
+
+function mostrarRangoMaximo($rango_max){
+    if ($rango_max == 9999999 ) return "∞";
+    else return $rango_max;
+}
+
+
 ?>

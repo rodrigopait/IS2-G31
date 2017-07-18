@@ -210,10 +210,6 @@ function agregarPregunta($id_usuario, $question){
 	mysql_query( "INSERT INTO pregunta (id_pregunta,pregunta,id_registrado, id_respuesta) VALUES (NULL,'$question','$id_usuario',NULL)");
 }
 
-function agregarReputacion ($rango_min,$rango_max,$titulo) {
-	mysql_query("INSERT INTO reputacion (id_rep, rango_min, rango_max, descripcion) VALUES (NULL, '$rango_min', '$rango_max', '$titulo')");
-}
-
 function consultaReputacion(){
 	return mysql_query("SELECT * FROM reputacion ORDER BY `rango_min` ASC");
 }
@@ -229,6 +225,19 @@ function consultaUsuarioCalificado($id_calificacion) {
 
 function insertarReputacion($rango_min, $rango_max,$titulo){
 	mysql_query("INSERT INTO reputacion (id_rep,rango_min,rango_max,descripcion) VALUES (NULL, '$rango_min','$rango_max', '$titulo')");
+}
+
+function consultaReputacionPorId ($id){
+	$consulta = mysql_query("SELECT * FROM reputacion WHERE id_rep = '$id' ");
+	return mysql_fetch_array($consulta);
+}
+
+function modificarReputacion ($rango_min,$rango_max,$titulo,$id){
+	mysql_query("UPDATE reputacion SET rango_min = '$rango_min', rango_max = '$rango_max', descripcion = '$titulo' WHERE id_rep = '$id' ");
+}
+
+function eliminarTupla($id){
+	mysql_query("DELETE FROM reputacion WHERE id_rep = '$id' ");
 }
 
 ?>

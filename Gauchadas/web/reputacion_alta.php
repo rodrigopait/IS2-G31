@@ -11,9 +11,6 @@ if (empty($consultaTitulo)){
 		$queryExiste = mysql_query("SELECT * FROM reputacion WHERE rango_min = '$rango_min' AND rango_max = '$rango_max'");
 		$existe = mysql_fetch_array($queryExiste);
 		if ( empty($existe) ){
-				// $queryTupla = mysql_query("SELECT * FROM reputacion WHERE ((rango_min <= '$rango_min') AND (rango_max >= '$rango_min')) ");
-				// $tupla = mysql_fetch_array($queryTupla);
-				// $id_original = $tupla['id_rep'];
 			if ($rango_min == $rango_max){
 				$queryIgualMin = mysql_query("SELECT * FROM reputacion WHERE rango_min = '$rango_min'");
 				$igualMin = mysql_fetch_array($queryIgualMin);
@@ -29,12 +26,10 @@ if (empty($consultaTitulo)){
 					$id = $request1['id_rep'];
 					$aux = $request1['rango_max'];
 					$auxMin = $rango_min - 1;
-					$auxMax = $rango_max + 1;
+					$auxRangoMax = $rango_max + 1;
+					$auxMax = $aux + 1;
 					mysql_query("UPDATE reputacion SET rango_max = '$auxMin' WHERE id_rep = '$id' ");
-					$query2 = mysql_query("SELECT * FROM reputacion WHERE rango_min = '$aux'");
-					$request2 = mysql_fetch_array($query2);
-					$id = $request2['id_rep'];
-					mysql_query("UPDATE reputacion SET rango_min = '$auxMax' ");
+					mysql_query("UPDATE reputacion SET rango_min = '$auxRangoMax' WHERE rango_min = '$auxMax' ");
 					insertarReputacion($rango_min, $rango_max,$titulo);
 				}
 			}
@@ -82,7 +77,7 @@ if (empty($consultaTitulo)){
 					insertarReputacion($rango_min, $rango_max,$titulo);
 				}
 			}
-			$mensaje = "Se ah realizado con exito el alta de la reputacion";
+			$mensaje = "Se ha realizado con exito el alta de la reputacion";
 		}
 		else{
 			$mensaje = "No se puede dar de alta la reputacion. El rango que ingreso ya se encuentra utilizado";

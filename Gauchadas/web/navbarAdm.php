@@ -12,6 +12,10 @@
                         <i class="fa fa-home" aria-hidden="true"></i> Home </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link page-scroll" href="reputacion.php">
+                        <i class="fa fa-thumbs-up " aria-hidden="true"></i> Reputación </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link page-scroll" href="logout.php">
                         <i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a>
                     </li>

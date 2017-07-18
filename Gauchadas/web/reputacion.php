@@ -61,7 +61,7 @@ session_start();?>
     <div class="container">
         <div class="row">
             <div class="col-lg-15 offset-lg-1 col-md-10" style="padding: 0%">
-                <form method='POST' action='alta_reputacion.php' style="display: flex;">
+                <form method='POST' action='reputacion_alta.php' style="display: flex;">
                     <input class="form-control" type="number" min="1" max="9999999" title="Ingrese un numero mayor o igual que 1(uno)" name="rango_min" value="" placeholder="Rango minimo" required style="margin-right: 0.5%;">
                     <input class="form-control" min="1" max="9999999" type="number" name="rango_max" value="" placeholder="Rango maximo" required style="margin-right: 0.5%;">
                     <input class="form-control" type="text" name="titulo" value="" placeholder="Titulo" required style="margin-right: 0.5%;">
@@ -76,12 +76,15 @@ session_start();?>
                                 <dd class="col-sm-6" style="padding: 0%"><h5><u>Titulo</u></h5></dd>
                                 <?php $reputacion = consultaReputacion();
                                 while ($tablaRep = mysql_fetch_array($reputacion)){?>
-                                    <dt class="col-sm-3 text-muted" style="margin-right: 3.5%"><?php echo $tablaRep['rango_min']; ?></dt>
-                                    <dd class="col-sm-2 text-muted"><?php echo $tablaRep['rango_max']; ?></dd>
+                                    <dt class="col-sm-3 text-muted" style="margin-right: 3.5%"><?php echo mostrarRangoMinimo($tablaRep['rango_min']); ?></dt>
+                                    <dd class="col-sm-2 text-muted"><?php echo mostrarRangoMaximo($tablaRep['rango_max']); ?></dd>
                                     <dd class="col-sm-3 text-muted"><?php echo $tablaRep['descripcion']; ?></dd>
-                                    <button class="btn btn-secondary" style="margin-right: 0.5%; margin-bottom: 0.5%;">Modificar</button>
-                                    <button class="btn btn-secondary" style="margin-bottom: 0.5%" >Eliminar</button>
-                                <?php }?>
+                                    <?php if (($tablaRep['id_rep'] == 1 ) OR ($tablaRep['id_rep'] == 2)){?>
+                                        <dd class="col-sm-2" ></dd>
+                                    <?php } else {?>
+                                        <button onclick="window.location.href='reputacion_modificar.php?id_rep=<?php echo $tablaRep['id_rep'];?>'" class="btn btn-secondary" style="margin-right: 0.5%; margin-bottom: 0.5%;">Modificar</button>
+                                        <button onclick="window.location.href='reputacion_baja.php?id_rep=<?php echo $tablaRep['id_rep'];?>'" class="btn btn-secondary" style="margin-bottom: 0.5%" >Eliminar</button>
+                                <?php }}?>
                             </dl>
                         </div>
                 </div>
