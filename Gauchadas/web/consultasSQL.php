@@ -258,4 +258,7 @@ function updateCategoria($categoria,$modificar){
 	mysql_query("UPDATE categoria SET tipocategoria = '$modificar' WHERE tipocategoria = '$categoria'");
 }
 
+function obtenerUsuarios(){
+	return mysql_query("SELECT id_usuario,nombre_usu, puntos FROM `registrado` WHERE tipo_adm = 0  ORDER BY puntos desc");
+}
 ?>

@@ -68,7 +68,7 @@ session_start();?>
                 <a class="adm" href="#" >Ver mis ganancias</a>            
             </i>
             <i>
-                <a class="adm" href="#">Ranking de mejores usuarios</a>
+                <a class="adm" href="ranking_usuarios.php">Ranking de mejores usuarios</a>
             </i>
     </div>
     <hr>

@@ -75,35 +75,17 @@ session_start();?>
     <hr>
     <!-- Post Content -->
     <div class="container">
-        <div class="row">
-            <div class="col-lg-15 offset-lg-1 col-md-10" style="padding: 0%">
-                <form method='POST' action='alta_categoria.php' style="display: flex;">
-                    <input class="form-control" type="text" name="Nueva" value="" placeholder="Categoría nueva" required style="margin-right: 0.5%;">
-                    <button class="btn btn-secondary" type="submit">Agregar Categoría</button>
-                </form>
-                <hr>
-                <form method='POST' action='modificar_categoria.php' style="display: flex;">
-                    <input class="form-control" type="text" name="categoria_vieja" value="" placeholder="Categoría a Modificar" required style="margin-right: 0.5%;">
-                <form method='POST' action='modificar_categoria.php' style="display: flex;">
-                    <input class="form-control" type="text" name="modifica" value="" placeholder="Nuevo nombre de la Categoría" required style="margin-right: 0.5%;">
-                    <button class="btn btn-secondary" type="submit">Modificar Categoría</button>
-                </form>
-                <hr>
-                <form method='POST' action='baja_categoria.php' style="display: flex;">
-                    <input class="form-control" type="text" name="elimina" value="" placeholder="Categoría a Eliminar" required style="margin-right: 0.5%;">
-                    <button class="btn btn-secondary" type="submit">Eliminar Categoría</button>
-                </form>
-                <hr>
-            </div>
-             <div class="clearfix">
-                            <dl class="row" style="margin-left: 7%">
-                                <dt class="col-sm-3" style="padding: "><h5><u>Categorías actuales</u></h5></dt>
-                                <?php $consulta = categorias();
-                                while ($tablaCat = mysql_fetch_array($consulta)){?>
-                                    <dt class="col-sm-10 text-muted" style="margin-right: 3.5%"><?php echo $tablaCat['tipocategoria']; ?></dt>
-                                <?php }?>
-                            </dl>
-                        </div>
+        <div class="clearfix">
+            <dl class="row" style="margin-left: 7%">
+                <dt class="col-sm-3" style="padding: "><h5><u>Usuario</u></h5></dt>
+                <dt class="col-sm-3" style="margin-left: 14.5%"><h5><u>reputación</u></h5></dt>
+                <?php $consulta = obtenerUsuarios();
+                while ($tablaUsers = mysql_fetch_array($consulta)){ ?>
+                    <?php $reputacion = calcularReputacion($tablaUsers['id_usuario']);?>
+                    <dt class="col-sm-5 text-muted" style="margin-right: 3.5%"><?php echo $tablaUsers['nombre_usu']; ?></dt>
+                    <dt class="col-sm-2 text-muted" style="margin-left: -6%"><?php echo $reputacion['descripcion']; ?></dt>
+                <?php }?>
+          </dl>
         </div>
     </div>
 
