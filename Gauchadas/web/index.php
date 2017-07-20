@@ -45,7 +45,7 @@ session_start();
     <?php
     if(isset($_SESSION['nombreUsuario'])){
         if ($_SESSION['tipo_adm'] == 1){
-            include ("navbarAdm.php");
+            header("location:indexadministrador.php");
         }
         else include("navbar.php");    
     }
@@ -54,7 +54,7 @@ session_start();
     }?>
 
     <!-- Page Header -->
-    <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: contain;
+    <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: cover;
     background-position-y: 0; height: 333px;">
         <div class="container">
             <div class="row">

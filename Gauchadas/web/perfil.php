@@ -48,7 +48,7 @@ session_start();?>
     }?>
 
     <!-- Page Header -->
-    <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: contain;
+    <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: cover;
     background-position-y: 0; height: 333px;">
         <?php $id_usuario = ($_GET['id_usuario']);
         $tabla = consultaUsuarioParaPerfil($id_usuario);

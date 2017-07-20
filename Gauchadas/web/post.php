@@ -48,7 +48,7 @@ session_start();?>
     }?>
 
     <!-- Page Header -->
-    <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: contain;
+    <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: cover;
     background-position-y: 0; height: 333px;">
         <?php $id = ($_GET['variable']);
         $consulta = mysql_query("SELECT * FROM gauchada NATURAL JOIN foto NATURAL JOIN categau INNER JOIN categoria ON id_categoria = id_cat LEFT JOIN pregunta ON pregunta.id_pregunta = gauchada.id_preggau WHERE id_gauchada = '$id'");

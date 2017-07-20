@@ -42,7 +42,7 @@ session_start();?>
     <?php include("navbarAdm.php"); ?>
 
     <!-- Page Header -->
-    <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: contain;
+    <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: cover;
     background-position-y: 0; height: 333px;">
         <div class="container">
             <div class="row">
@@ -50,13 +50,28 @@ session_start();?>
                     <div class="post-heading" style="background-image: url(img/logo-gauchadas.png);
                     background-repeat: repeat-x; background-position: center; width: 90%; margin-left: 7%;
                     padding-bottom: 20%;">
-                        <h1 style=" text-align: center; text-shadow: black;color: #fff;text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Reputacion</h1>
+                        <h1 style=" text-align: center; text-shadow: black;color: #fff;text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Administrador</h1>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-
+    
+    <div class="container">
+            <i>
+                <a class="adm" href="reputacion.php">Reputacion</a>
+            </i>
+            <i>
+                <a class="adm" href="#">Categoría</a>
+            </i>
+            <i>
+                <a class="adm" href="#" >Ver mis ganancias</a>            
+            </i>
+            <i>
+                <a class="adm" href="#">Ranking de mejores usuarios</a>
+            </i>
+    </div>
+    <hr>
     <!-- Post Content -->
     <div class="container">
         <div class="row">

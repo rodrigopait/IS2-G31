@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include("conexion.php");
-session_start();?>
+<?php 
+include("conexion.php");
+session_start();
+?>
+
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8">
@@ -20,7 +23,7 @@ session_start();?>
 
     <!-- Custom styles for this theme -->
     <link href="css/clean-blog.min.css" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <!-- Temporary navbar container fix until Bootstrap 4 is patched -->
     <style>
     .navbar-toggler {
@@ -37,57 +40,51 @@ session_start();?>
 </head>
 
 <body>
+
+    <!-- Navigation -->
     <?php
     if(isset($_SESSION['nombreUsuario'])){
-        include("navbar.php");    
+        if ($_SESSION['tipo_adm'] == 1){
+            include ("navbarAdm.php");
+        }
+        else include("navbar.php");    
     }
     else{
         include("navbarObservador.php");
     }?>
-    
+
     <!-- Page Header -->
     <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: cover;
     background-position-y: 0; height: 333px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                    <div class="site-heading" style="background-image: url(img/logo-gauchadas.png);
+                    <div class="post-heading" style="background-image: url(img/logo-gauchadas.png);
                     background-repeat: repeat-x; background-position: center; width: 90%; margin-left: 7%;
-                    padding-bottom: 16%;">
-                        <h1>Gauchadas</h1>
-                        <span class="subheading" style="font-weight: bold; padding-top: 1%">
-                            Un Blog Donde Encuentras Gauchadas</span>
+                    padding-bottom: 20%;">
+                        <h1 style=" text-align: center; text-shadow: black;color: #fff;text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Administrador</h1>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-
-    <!-- Main Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
-                <?php $string = "SELECT * FROM registrado NATURAL JOIN reputacion";
-                $consul_gauchada = mysql_query($string);
-                while ($tupla = mysql_fetch_array($consul_gauchada)){ ?>
-                <div class="post-preview">
-                    <a echo $tupla['id_gauchada'];?>
-                        <h2 class="post-title">
-                            Usuario: <?php echo  $tupla['nombre_usu'];?>
-                        </h2>
-                        Reputacion:  <?php echo $tupla['descripcion'] ;?>
-                        <h3 class="post-subtitle"></h3>
-                    </a>
-                    <p class="post-meta">Vive en: 
-                        <?php echo $tupla['ciudad'];?>     Email: <?php echo $tupla['mail']; ?>
-                    </p>
-                </div>
-                <hr>
-                <?php } ?>
-            </div>
-        </div>
+    
+    <div class="container" >
+            <i>
+                <a class="adm" href="reputacion.php">Reputacion</a>
+            </i>
+            <i>
+                <a class="adm" href="#">Categoría</a>
+            </i>
+            <i>
+                <a class="adm" href="#" >Ver mis ganancias</a>            
+            </i>
+            <i>
+                <a class="adm" href="#">Ranking de mejores usuarios</a>
+            </i>
     </div>
-
+    <hr style="margin-bottom: 390px">
+    <!-- Main Content -->
     <hr>
 
     <!-- Footer -->
