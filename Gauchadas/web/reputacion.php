@@ -62,7 +62,7 @@ session_start();?>
                 <a class="adm" href="reputacion.php">Reputacion</a>
             </i>
             <i>
-                <a class="adm" href="#">Categoría</a>
+                <a class="adm" href="categoria.php">Categoría</a>
             </i>
             <i>
                 <a class="adm" href="#" >Ver mis ganancias</a>            
