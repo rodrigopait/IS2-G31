@@ -118,9 +118,9 @@ function mostrarGauchada ($consulta){
 	while ($tabla = mysql_fetch_array($consulta)){
 		echo "
     	<div class='post-preview'>
-            <a href='post.php?variable= ".$tabla['id_gauchada']."'>
-                <h2 class='post-title'> ".$tabla['titulo']."
-                    <img href='post.php?variable= ".$tabla['id_gauchada']."'
+            <a href='post.php?variable=".$tabla['id_gauchada']."'>
+                <h2 class='post-title'>".$tabla['titulo']."
+                    <img href='post.php?variable=".$tabla['id_gauchada']."'
                     src='".$tabla['foto']."' width='120' height='100' style='position: absolute;right: 40px;'>
                 </h2>
                 <h3 class='post-subtitle'></h3>
@@ -138,7 +138,7 @@ function mostrarMisGauchada($consulta, $id_registrado){
         <div class='post-preview'>
             <a href='post.php?variable= ".$tabla['id_gauchada']."'>
                 <h2 class='post-title'> ".$tabla['titulo']."
-                    <img href='post.php?variable= ".$tabla['id_gauchada']."'
+                    <img href='post.php?variable=".$tabla['id_gauchada']."'
                     src='".$tabla['foto']."' width='120' height='100' style='position: absolute;right: 40px;'>
                 </h2>
                 <h3 class='post-subtitle'></h3>
@@ -162,20 +162,28 @@ function mostrarEliminarGauchada ($id_gauchada){
          <i class='fa fa-remove' aria-hidden='true' > Eliminar gauchada</i></a>";
 }
 
-function mostrarRespuestas($consulta, $tabla_respuesta){
-     while ($tabla = mysql_fetch_array($consulta)){
-        if($tabla['id_respuesta'] == $tabla_respuesta['id_respuesta']){ 
-            echo "<p class='post-meta'><b>Respuesta:</b> ".$tabla_respuesta['respuesta']."</p>";
-        
+function mostrarPreguntas($id_pregunta, $respuestas, $idGauchada){
+    $preguntasYrespuestas = consultaPreguntasYrespuestas($idGauchada);
+    while ($tabla = mysql_fetch_array($preguntasYrespuestas)){
+        $nombre = consultaUsuario($tabla['id_registrado']);
+        echo "<hr style='width:100%'><p class='post-meta'><b> Usuario: </b> ".$nombre['nombre_usu']."</p><p class='post-meta'><b>Pregunta:</b> ".$tabla['pregunta']."</p>";
+        if($tabla['id_respuesta'] != NULL) {
+                echo "<p class='post-meta'><b>Respuesta:</b> ".$tabla['respuesta']."</p>" ;
         }
-    }
-}
-
-function mostrarPreguntas($consulta, $nombreUsuario, $id_pregunta){
-     while ($tabla = mysql_fetch_array($consulta)){
-       if ($tabla['id_pregunta'] == $id_pregunta){
-            echo "<p class='post-meta'><b>Pregunta:</b> ".$tabla['pregunta']."</p><p class='post-meta'><b> Usuario que pregunta: </b> ".$nombreUsuario['nombre_usu']. "</p>";
-            
+        else{
+            if(isset($_SESSION['nombreUsuario'])){
+                    echo "<form method='POST' action='post-answer-check.php?id_gauchada=".$tabla['id_gauchada']."&&idPregunta=".$tabla['id_pregunta']."' enctype='multipart/form-data'>
+                        <div class='control-group'>
+                            <div class='form-group floating-label-form-group controls'>
+                                <label><i class='fa fa-question-circle' aria-hidden='true'></i> Respuesta</label>
+                                <textarea type='text' rows='2' class='form-control' placeholder='Escribe una respuesta a esta pregunta' required title='Por favor ingrese una respuesta' name='answer' value=''></textarea>  
+                            </div>
+                            <div class='form-group'>
+                                <button type='submit' class='btn btn-secondary'>Contestar pregunta</button>
+                            </div>
+                        </div>
+                     </form><hr style='width:100%'> ";
+            }
         }
     }
 }
@@ -247,6 +255,4 @@ function mostrarRangoMaximo($rango_max){
     if ($rango_max == 9999999 ) return "∞";
     else return $rango_max;
 }
-
-
 ?>

@@ -88,7 +88,7 @@ function categorias(){
 }
 
 function consultarUsuariosPostulados ($id_gauchada){
-	return mysql_query("SELECT * FROM gauchada INNER JOIN postula ON gauchada.id_gauchada = postula.id_gauchada INNER JOIN registrado ON postula.id_registrado = registrado.id_usuario WHERE postula.id_gauchada = '$id_gauchada' ");
+	return mysql_query("SELECT * FROM gauchada INNER JOIN postula ON gauchada.id_gauchada = postula.id_gauchada INNER JOIN registrado ON postula.id_registrado = registrado.id_usuario INNER JOIN reputacion ON registrado.id_rep = reputacion.id_rep WHERE postula.id_gauchada = '$id_gauchada' ");
 }
 
 function consultarGauchada ($id_gauchada){
@@ -106,16 +106,16 @@ function consultaAdeudorCalificacion ($id_registrado){
 }
 
 function consultaUsuarioParaPerfil($id_usuario){
-	$consulta = mysql_query("SELECT * FROM registrado NATURAL JOIN foto WHERE id_usuario = '$id_usuario'");
+	$consulta = mysql_query("SELECT * FROM registrado NATURAL JOIN foto NATURAL JOIN reputacion WHERE id_usuario = '$id_usuario'");
 	return mysql_fetch_array($consulta);
 }
 
 function consultaGauchadaAdeudada ($id_usuario){
-	return mysql_query("SELECT * FROM gauchada NATURAL JOIN foto INNER JOIN registrado ON gauchada.id_aceptado = registrado.id_usuario WHERE gauchada.id_registrado = '$id_usuario' AND id_aceptado IS NOT NULL AND id_calificacion IS NULL");
+	return mysql_query("SELECT * FROM gauchada NATURAL JOIN foto INNER JOIN registrado ON gauchada.id_aceptado = registrado.id_usuario INNER JOIN reputacion ON registrado.id_rep = reputacion.id_rep WHERE gauchada.id_registrado = '$id_usuario' AND id_aceptado IS NOT NULL AND id_calificacion IS NULL");
 }
 
 function consultaGauchadaNoAdeudada ($id_usuario){
-	return mysql_query("SELECT * FROM gauchada NATURAL JOIN foto NATURAL JOIN calificacion INNER JOIN puntuacion ON calificacion.id_puntuacion = puntuacion.id_puntuacion INNER JOIN registrado ON gauchada.id_aceptado = registrado.id_usuario WHERE gauchada.id_registrado = '$id_usuario' AND id_calificacion IS NOT NULL");
+	return mysql_query("SELECT * FROM gauchada NATURAL JOIN foto NATURAL JOIN calificacion INNER JOIN puntuacion ON calificacion.id_puntuacion = puntuacion.id_puntuacion INNER JOIN registrado ON gauchada.id_aceptado = registrado.id_usuario INNER JOIN reputacion ON registrado.id_rep = reputacion.id_rep WHERE gauchada.id_registrado = '$id_usuario' AND id_calificacion IS NOT NULL");
 }
 
 function consultaCalificaion(){
@@ -166,12 +166,11 @@ function eliminarGauchada($id_gauchada){
 
 function consultaPregunta($id_respuesta, $id_usuario){
 	$consulta = mysql_query("SELECT * FROM pregunta WHERE id_respuesta = '$id_respuesta' AND id_registrado = '$id_usuario");
-	return mysql_fetch_array($consulta);
+return mysql_fetch_array($consulta);
 }
 
-function consultaPreguntasYrespuestas(){
-	return mysql_query("SELECT * FROM pregunta INNER JOIN gauchada ON pregunta.id_pregunta = gauchada.id_pregunta ");
-
+function consultaPreguntasYrespuestas($idGauchada){
+	return mysql_query("SELECT * FROM preggau INNER JOIN pregunta ON pregunta.id_pregunta = preggau.id_pregunta LEFT JOIN respuesta ON respuesta.id_respuesta = pregunta.id_respuesta WHERE id_gauchada = '$idGauchada'");
 }
 
 function consultaRespuesta($id_respuesta){
@@ -184,8 +183,8 @@ function consultaIdRespuesta($ans){
 	return mysql_fetch_array($consulta);
 }
 
-function modificarGauchadaRespuesta($idRespuesta, $idUsuario,$id_pregunta){
-	mysql_query("UPDATE pregunta SET id_respuesta = '$idRespuesta' WHERE id_registrado = '$idUsuario' AND id_pregunta = '$id_pregunta' ");
+function modificarGauchadaRespuesta($idRespuesta, $idUsuario,$idPregunta){
+	mysql_query("UPDATE pregunta SET id_respuesta = '$idRespuesta' WHERE id_registrado = '$idUsuario' AND id_pregunta = '$idPregunta' ");
 }
 
 function consultaFechaDeCierre($id_gauchada){
@@ -202,12 +201,16 @@ function consultaIdPregunta ($id_usuario, $question){
 	return mysql_fetch_array($consulta);
 }
 
-function modificarGauchadaPregunta ($id_gauchada, $id_pregun){
-	mysql_query("UPDATE gauchada SET id_pregunta = '$id_pregun' WHERE id_gauchada = '$id_gauchada' ");
+function modificarGauchadaPregunta ($id_gauchada, $id_preggau){
+	mysql_query("UPDATE gauchada SET id_preggau = '$id_preggau' WHERE id_gauchada = '$id_gauchada'");
 }
 
 function agregarPregunta($id_usuario, $question){
 	mysql_query( "INSERT INTO pregunta (id_pregunta,pregunta,id_registrado, id_respuesta) VALUES (NULL,'$question','$id_usuario',NULL)");
+}
+
+function agregarReputacion ($rango_min,$rango_max,$titulo) {
+	mysql_query("INSERT INTO reputacion (id_rep, rango_min, rango_max, descripcion) VALUES (NULL, '$rango_min', '$rango_max', '$titulo')");
 }
 
 function consultaReputacion(){
@@ -227,17 +230,32 @@ function insertarReputacion($rango_min, $rango_max,$titulo){
 	mysql_query("INSERT INTO reputacion (id_rep,rango_min,rango_max,descripcion) VALUES (NULL, '$rango_min','$rango_max', '$titulo')");
 }
 
-function consultaReputacionPorId ($id){
-	$consulta = mysql_query("SELECT * FROM reputacion WHERE id_rep = '$id' ");
+function agregarPreggau($idGauchada, $idPregunta){
+	mysql_query("INSERT INTO preggau (id_preggau,id_gauchada, id_pregunta ) VALUES (NULL, '$idGauchada', '$idPregunta') ");
+}
+
+function consultaIdPreggau($idGauchada, $idPregunta){
+	$consulta = mysql_query("SELECT * FROM preggau WHERE id_gauchada = '$idGauchada' AND id_pregunta = '$idPregunta'");
+	return mysql_fetch_array($consulta);
+}
+function consultaCategorias(){
+	$consulta = mysql_query("SELECT tipocategoria FROM categoria");
 	return mysql_fetch_array($consulta);
 }
 
-function modificarReputacion ($rango_min,$rango_max,$titulo,$id){
-	mysql_query("UPDATE reputacion SET rango_min = '$rango_min', rango_max = '$rango_max', descripcion = '$titulo' WHERE id_rep = '$id' ");
+function existeCategoria($nueva){
+    $consulta = mysql_query("SELECT * FROM categoria WHERE tipocategoria = '$nueva'");
+	return mysql_fetch_array($consulta);
 }
 
-function eliminarTupla($id){
-	mysql_query("DELETE FROM reputacion WHERE id_rep = '$id' ");
+function agregarCategoria($nueva){
+    mysql_query("INSERT INTO categoria(id_cat,tipocategoria) VALUES (NULL, '$nueva')");
+}
+function borrarCategoria($categoria){
+	mysql_query("DELETE FROM categoria WHERE tipocategoria = '$categoria'");
+}
+function updateCategoria($categoria,$modificar){
+	mysql_query("UPDATE categoria SET tipocategoria = '$modificar' WHERE tipocategoria = '$categoria'");
 }
 
 ?>
