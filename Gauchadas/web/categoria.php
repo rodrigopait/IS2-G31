@@ -58,19 +58,19 @@ session_start();?>
             </div>
         </div>
     </header>
-    <div class="container">
-       <i>
-           <a class="adm" href="reputacion.php">Reputacion</a>
-       </i>
-       <i>
-           <a class="adm" href="categoria.php">Categoría</a>
-       </i>
-       <i>
-            <a class="adm" href="#" >Ver mis ganancias</a>            
-       </i>
-       <i>
-            <a class="adm" href="ranking_usuarios.php">Ranking de mejores usuarios</a>
-       </i>
+    <div class="container" style="text-align: -webkit-center;">
+            <i style="margin-right: 5%;"">
+                <a class="adm" href="reputacion.php">Reputacion</a>
+            </i>
+            <i style="margin-right: 5%;"">
+                <a class="adm" href="categoria.php">Categoría</a>
+            </i>
+            <i style="margin-right: 5%;"">
+                <a class="adm" href="#" >Ver mis ganancias</a>            
+            </i>
+            <i style="margin-right: 5%;"">
+                <a class="adm" href="ranking_usuarios.php">Ranking de mejores usuarios</a>
+            </i>
     </div>
     <hr>
     <!-- Post Content -->
