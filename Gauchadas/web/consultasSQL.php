@@ -261,4 +261,18 @@ function updateCategoria($categoria,$modificar){
 function obtenerUsuarios(){
 	return mysql_query("SELECT id_usuario,nombre_usu, puntos FROM `registrado` WHERE tipo_adm = 0  ORDER BY puntos desc");
 }
+
+function consultaReputacionPorId ($id){
+	$consulta = mysql_query("SELECT * FROM reputacion WHERE id_rep = '$id' ");
+	return mysql_fetch_array($consulta);
+}
+
+function modificarReputacion ($rango_min,$rango_max,$titulo,$id){
+	mysql_query("UPDATE reputacion SET rango_min = '$rango_min', rango_max = '$rango_max', descripcion = '$titulo' WHERE id_rep = '$id' ");
+}
+
+function eliminarTupla($id){
+	mysql_query("DELETE FROM reputacion WHERE id_rep = '$id' ");
+}
+
 ?>
