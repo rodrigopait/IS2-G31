@@ -75,7 +75,7 @@ session_start();?>
                         src="<?php echo $tabla['foto'];?>">
                     <a href="misgauchadas.php">Mis Gauchadas</a>
                     <a href="calificaciones.php">Mis Calificaciones</a>
-                    <a href="">Mis postulaciones</a>
+                    <a href="misPostulaciones.php?id_usuario=<?php echo $tabla['id_usuario']?>">Mis postulaciones</a>
                     <a href="modificar_perfil.php?variable=<?php echo $tabla['id_usuario']?>">Modificar Perfil</a>
                 </td>
                 <td>

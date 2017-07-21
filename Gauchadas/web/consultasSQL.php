@@ -84,7 +84,7 @@ function modificarCreditos($id_usuario,$creditos){
 }
 
 function categorias(){
-	return mysql_query("SELECT * FROM categoria");
+	return mysql_query("SELECT * FROM categoria ORDER BY tipocategoria ASC");
 }
 
 function consultarUsuariosPostulados ($id_gauchada){
@@ -260,6 +260,10 @@ function updateCategoria($categoria,$modificar){
 
 function obtenerUsuarios(){
 	return mysql_query("SELECT id_usuario,nombre_usu, puntos FROM `registrado` WHERE tipo_adm = 0  ORDER BY puntos desc");
+}
+
+function misPostulaciones($id_usuario){
+	return  mysql_query("SELECT * FROM gauchada INNER JOIN postula on gauchada.id_gauchada = postula.id_gauchada INNER JOIN foto ON gauchada.id_foto = foto.id_foto WHERE postula.id_registrado = '$id_usuario'");	
 }
 
 function consultaReputacionPorId ($id){

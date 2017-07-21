@@ -52,13 +52,13 @@ session_start();?>
                     <div class="post-heading" style="background-image: url(img/logo-gauchadas.png);
                     background-repeat: repeat-x; background-position: center; width: 90%; margin-left: 7%;
                     padding-bottom: 20%;">
-                        <h1 style=" text-align: center; text-shadow: black;color: #fff;text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Categorías</h1>
+                        <h1 style=" text-align: center; text-shadow: black;color: #fff;text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Ranking de mejores usuarios</h1>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-    <div class="container" style="text-align: -webkit-center;">
+      <div class="container" style="text-align: -webkit-center;">
             <i style="margin-right: 5%;"">
                 <a class="adm" href="reputacion.php">Reputacion</a>
             </i>
@@ -80,14 +80,23 @@ session_start();?>
                 <dt class="col-sm-3" style="padding: "><h5><u>Usuario</u></h5></dt>
                 <dt class="col-sm-3" style="margin-left: 14.5%"><h5><u>reputación</u></h5></dt>
                 <?php $consulta = obtenerUsuarios();
-                while ($tablaUsers = mysql_fetch_array($consulta)){ ?>
-                    <?php $reputacion = calcularReputacion($tablaUsers['id_usuario']);?>
-                    <dt class="col-sm-5 text-muted" style="margin-right: 3.5%"><?php echo $tablaUsers['nombre_usu']; ?></dt>
-                    <dt class="col-sm-2 text-muted" style="margin-left: -6%"><?php echo $reputacion['descripcion']; ?></dt>
-                <?php }?>
+                if(empty($consulta)){
+                    $mensaje = "No se disponen usuarios registrados en este momento, por favor inténtelo mas tarde.";
+                    echo "<script>";
+                    echo "alert('$mensaje');";
+                    echo "window.location = 'categoria.php'";
+                    echo "</script>";
+                }
+                else{
+                    while ($tablaUsers = mysql_fetch_array($consulta)){ ?>
+                        <?php $reputacion = calcularReputacion($tablaUsers['id_usuario']);?>
+                        <dt class="col-sm-5 text-muted" style="margin-right: 3.5%"><?php echo $tablaUsers['nombre_usu']; ?></dt>
+                        <dt class="col-sm-2 text-muted" style="margin-left: -6%"><?php echo $reputacion['descripcion']; ?></dt>
+                <?php }}?>
           </dl>
         </div>
     </div>
+    <hr>
 
     <!-- Footer -->
     <?php include("footer.php");?>

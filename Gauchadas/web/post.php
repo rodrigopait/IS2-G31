@@ -93,7 +93,8 @@ session_start();?>
                     </div>
 
                     <?php if(($tabla['id_preggau'] != NULL)){
-                        mostrarPreguntas($tabla['id_preggau'],$tabla['id_respuesta'], $tabla['id_gauchada']);
+                        $dueño= getUsuario($tabla['id_registrado']);
+                        mostrarPreguntas($tabla['id_preggau'],$tabla['id_respuesta'], $tabla['id_gauchada'],$dueño['nombre_usu'] );
                     }?>
 
                     <?php if(isset($_SESSION['nombreUsuario'])){ ?>

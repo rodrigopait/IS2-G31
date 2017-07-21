@@ -162,7 +162,7 @@ function mostrarEliminarGauchada ($id_gauchada){
          <i class='fa fa-remove' aria-hidden='true' > Eliminar gauchada</i></a>";
 }
 
-function mostrarPreguntas($id_pregunta, $respuestas, $idGauchada){
+function mostrarPreguntas($id_pregunta, $respuestas, $idGauchada, $dueño){
     $preguntasYrespuestas = consultaPreguntasYrespuestas($idGauchada);
     while ($tabla = mysql_fetch_array($preguntasYrespuestas)){
         $nombre = consultaUsuario($tabla['id_registrado']);
@@ -171,7 +171,7 @@ function mostrarPreguntas($id_pregunta, $respuestas, $idGauchada){
                 echo "<p class='post-meta'><b>Respuesta:</b> ".$tabla['respuesta']."</p>" ;
         }
         else{
-            if(isset($_SESSION['nombreUsuario'])){
+            if(isset($_SESSION['nombreUsuario']) && ( $dueño = $_SESSION['nombreUsuario'] )){
                     echo "<form method='POST' action='post-answer-check.php?id_gauchada=".$tabla['id_gauchada']."&&idPregunta=".$tabla['id_pregunta']."' enctype='multipart/form-data'>
                         <div class='control-group'>
                             <div class='form-group floating-label-form-group controls'>
@@ -255,4 +255,5 @@ function mostrarRangoMaximo($rango_max){
     if ($rango_max == 9999999 ) return "∞";
     else return $rango_max;
 }
+
 ?>

@@ -83,14 +83,26 @@ session_start();?>
                 </form>
                 <hr>
                 <form method='POST' action='modificar_categoria.php' style="display: flex;">
-                    <input class="form-control" type="text" name="categoria_vieja" value="" placeholder="Categoría a Modificar" required style="margin-right: 0.5%;">
+                    <input  list="browsers" class="form-control" type="text" name="categoria_vieja" value="" placeholder="Categoría a Modificar" required style="margin-right: 0.5%;">
+                    <datalist id="browsers">
+                        <?php $consulta = categorias();
+                        while ($tabla = mysql_fetch_array($consulta)){?>
+                            <option value="<?php echo $tabla['tipocategoria']?>">
+                        <?php }?> 
+                    </datalist>
                 <form method='POST' action='modificar_categoria.php' style="display: flex;">
                     <input class="form-control" type="text" name="modifica" value="" placeholder="Nuevo nombre de la Categoría" required style="margin-right: 0.5%;">
                     <button class="btn btn-secondary" type="submit">Modificar Categoría</button>
                 </form>
-                <hr>
+                <hr>                
                 <form method='POST' action='baja_categoria.php' style="display: flex;">
-                    <input class="form-control" type="text" name="elimina" value="" placeholder="Categoría a Eliminar" required style="margin-right: 0.5%;">
+                    <input list="browsers" class="form-control" type="text" name="elimina" value="" placeholder="Categoría a Eliminar" required style="margin-right: 0.5%;">
+                    <datalist id="browsers">
+                        <?php $consulta = categorias();
+                        while ($tabla = mysql_fetch_array($consulta)){?>
+                            <option value="<?php echo $tabla['tipocategoria']?>">
+                        <?php }?> 
+                    </datalist>
                     <button class="btn btn-secondary" type="submit">Eliminar Categoría</button>
                 </form>
                 <hr>
@@ -106,7 +118,7 @@ session_start();?>
                         </div>
         </div>
     </div>
-
+    <hr>
     <!-- Footer -->
     <?php include("footer.php");?>
     <!-- jQuery Version 3.1.1 -->

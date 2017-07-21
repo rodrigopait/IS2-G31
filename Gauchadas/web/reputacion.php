@@ -50,7 +50,7 @@ session_start();?>
                     <div class="post-heading" style="background-image: url(img/logo-gauchadas.png);
                     background-repeat: repeat-x; background-position: center; width: 90%; margin-left: 7%;
                     padding-bottom: 20%;">
-                        <h1 style=" text-align: center; text-shadow: black;color: #fff;text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Administrador</h1>
+                        <h1 style=" text-align: center; text-shadow: black;color: #fff;text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Reputación</h1>
                     </div>
                 </div>
             </div>

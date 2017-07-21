@@ -130,7 +130,7 @@ session_start();
                         </button>
                    </div>
         
-                  <?php $input3 = (input type="text" class="form-control")>?>
+                  <?php $input3 = (input type="text" class="form-control")?>
                 
                     <div class="input-group-btn">
                         <button type="button" class="btn btn-search btn-default">
