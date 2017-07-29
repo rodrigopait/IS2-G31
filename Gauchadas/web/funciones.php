@@ -131,6 +131,23 @@ function mostrarGauchada ($consulta){
     }
 }
 
+function mostrarCompra ($fechaInicio, $fechaFin){
+    $compra = getComprasEntreFecha($fechaInicio, $fechaFin);
+    while ($tabla = mysql_fetch_array($compra)){
+        $usuario = getgetTitularCompra($tabla['id_registrado']);
+        echo "
+        <div class='post-preview'>
+                <h2 class='post-title'>".$usuario."
+                </h2>
+                <h3 class='post-subtitle'></h3>
+            </a>
+            <p class='post-meta'>Compro ".$tabla['cant_creditos']."creditos, el ".$tabla['fecha']."</p>
+        </div>
+        <hr>";
+
+    }
+}
+
 function mostrarMisGauchada($consulta, $id_registrado){
     while ($tabla = mysql_fetch_array($consulta)){
         if ($tabla['id_registrado'] == $id_registrado ){

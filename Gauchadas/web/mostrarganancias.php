@@ -2,6 +2,7 @@
 <html lang="en">
 <?php 
 include("conexion.php");
+include("consultasSQL.php");
 session_start();
 ?>
 
@@ -51,7 +52,15 @@ session_start();
     }
     else{
         include("navbarObservador.php");
-    }?>
+    }
+    if(isset($_POST['fechainicio'])){
+        $fechaInicio=$_POST['fechainicio'];
+    }
+    if(isset($_POST['fechafin'])){
+        $fechaFin=$_POST['fechafin'];
+    }
+
+    ?>
 
     <!-- Page Header -->
     <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: cover;
@@ -67,9 +76,8 @@ session_start();
                 </div>
             </div>
         </div>
-    </header>
-    
-    <div class="container" style="text-align: -webkit-center;">
+    </header>   
+      <div class="container" style="text-align: -webkit-center;">
             <i style="margin-right: 5%;"">
                 <a class="adm" href="reputacion.php">Reputacion</a>
             </i>
@@ -77,16 +85,72 @@ session_start();
                 <a class="adm" href="categoria.php">Categoría</a>
             </i>
             <i style="margin-right: 5%;"">
-                <a class="adm" href="vermisganancias.php" >Ver ganancias</a>      
+                <a class="adm" href="vermisganancias.php" >Ver ganancias</a>            
             </i>
             <i style="margin-right: 5%;"">
                 <a class="adm" href="ranking_usuarios.php">Ranking de mejores usuarios</a>
             </i>
     </div>
-    <hr style="margin-bottom: 390px">
-    <!-- Main Content -->
     <hr>
+    <!-- Main Content -->
+    <div class="container">
+                <form method='POST' action='mostrarganancias.php' style="display: flex;">
+                    <input class="form-control" type="date" title="Ingrese una fecha" name="fechainicio" placeholder="Desde:" required style="margin-right: 0.5%;">
+                    <input class="form-control" type="date" title="Ingrese una fecha" name="fechafin" placeholder="Hasta:" required style="margin-right: 0.5%;">
+                    <button class="btn btn-secondary" type="submit">Mostrar Ganancias</button>
+                </form>
+       
 
+         
+          
+                <div class="clearfix">
+           
+                <?php
+                $compra = getComprasEntreFechas($fechaInicio, $fechaFin);
+                if (mysql_num_rows($compra) == 0){
+                    echo "No existen compras";
+                }
+                else{
+                ?>
+            <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Usuario</th> 
+                <th>Creditos</th>
+                <th>Precio Unitario</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+              <?php
+                $total = 0; 
+                while ($tablaComp = mysql_fetch_array($compra)){
+                    $titular = getUsuario($tablaComp['id_registrado']);
+                    $precioUnitario = getPrecioCredito($tablaComp['id_credito']);
+                    $total = $total + $tablaComp['total'];
+                    ?>
+                    <tr>
+                    <td><?php echo $tablaComp['fecha']; ?></td>
+                    <td><?php echo $titular['nombre_usu']; ?></td>
+                    <td><?php echo $tablaComp['cant_creditos'];?></td>
+                    <td><?php echo $precioUnitario['valor'];?></td>
+                    <td><?php echo $tablaComp['total'];?></td>
+                    </tr>
+                    <?php 
+                }?>
+            </table>  
+                
+                    <p>Total: <?php echo $total; ?></p>
+        
+                    <?php
+                    }
+                    ?>
+                   
+
+            </div>
+        </div>
+    </div>
+    <hr style="margin-top: 300px">
     <!-- Footer -->
     <?php include("footer.php");?>
     <!-- jQuery Version 3.1.1 -->

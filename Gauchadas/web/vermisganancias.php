@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<?php include("conexion.php");
-include("funciones.php");
-session_start();?>
+<?php 
+include("conexion.php");
+session_start();
+?>
 
 <head>
-
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+
     <title>Gauchadas</title>
 
     <!-- Bootstrap Core CSS -->
@@ -22,7 +23,7 @@ session_start();?>
 
     <!-- Custom styles for this theme -->
     <link href="css/clean-blog.min.css" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <!-- Temporary navbar container fix until Bootstrap 4 is patched -->
     <style>
     .navbar-toggler {
@@ -41,7 +42,16 @@ session_start();?>
 <body>
 
     <!-- Navigation -->
-    <?php include("navbarAdm.php"); ?>
+    <?php
+    if(isset($_SESSION['nombreUsuario'])){
+        if ($_SESSION['tipo_adm'] == 1){
+            include ("navbarAdm.php");
+        }
+        else include("navbar.php");    
+    }
+    else{
+        include("navbarObservador.php");
+    }?>
 
     <!-- Page Header -->
     <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: cover;
@@ -52,12 +62,13 @@ session_start();?>
                     <div class="post-heading" style="background-image: url(img/logo-gauchadas.png);
                     background-repeat: repeat-x; background-position: center; width: 90%; margin-left: 7%;
                     padding-bottom: 20%;">
-                        <h1 style=" text-align: center; text-shadow: black;color: #fff;text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Ranking de mejores usuarios</h1>
+                        <h1 style=" text-align: center; text-shadow: black;color: #fff;text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Administrador</h1>
                     </div>
                 </div>
             </div>
         </div>
     </header>
+    
       <div class="container" style="text-align: -webkit-center;">
             <i style="margin-right: 5%;"">
                 <a class="adm" href="reputacion.php">Reputacion</a>
@@ -73,31 +84,19 @@ session_start();?>
             </i>
     </div>
     <hr>
-    <!-- Post Content -->
+    <!-- Main Content -->
     <div class="container">
-        <div class="clearfix">
-            <dl class="row" style="margin-left: 7%">
-                <dt class="col-sm-3" style="padding: "><h5><u>Usuario</u></h5></dt>
-                <dt class="col-sm-3" style="margin-left: 14.5%"><h5><u>reputación</u></h5></dt>
-                <?php $consulta = obtenerUsuarios();
-                if(empty($consulta)){
-                    $mensaje = "No se disponen usuarios registrados en este momento, por favor inténtelo mas tarde.";
-                    echo "<script>";
-                    echo "alert('$mensaje');";
-                    echo "window.location = 'categoria.php'";
-                    echo "</script>";
-                }
-                else{
-                    while ($tablaUsers = mysql_fetch_array($consulta)){ ?>
-                        <?php $reputacion = calcularReputacion($tablaUsers['id_usuario']);?>
-                        <dt class="col-sm-5 text-muted" style="margin-right: 3.5%"><?php echo $tablaUsers['nombre_usu']; ?></dt>
-                        <dt class="col-sm-2 text-muted" style="margin-left: -6%"><?php echo $reputacion['descripcion']; ?></dt>
-                <?php }}?>
-          </dl>
+        <div class="row">
+            <div class="col-lg-15 offset-lg-1 col-md-10" style="padding: 0%">
+                <form method='POST' action='mostrarganancias.php' style="display: flex;">
+                    <input class="form-control" type="date" title="Ingrese una fecha" name="fechainicio" placeholder="Desde:" required style="margin-right: 0.5%;">
+                    <input class="form-control" type="date" title="Ingrese una fecha" name="fechafin" placeholder="Hasta:" required style="margin-right: 0.5%;">
+                    <button class="btn btn-secondary" type="submit">Mostrar Ganancias</button>
+                </form>
+            </div>
         </div>
     </div>
-    <hr>
-
+    <hr style="margin-top: 300px">
     <!-- Footer -->
     <?php include("footer.php");?>
     <!-- jQuery Version 3.1.1 -->

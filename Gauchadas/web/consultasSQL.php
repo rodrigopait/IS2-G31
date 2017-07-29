@@ -61,6 +61,20 @@ function getGauchadas(){
 	return mysql_fetch_array($consul_gauchada);
 }
 
+function getPrecioCredito($id_credito){
+	$consulta = mysql_query("SELECT valor FROM credito WHERE credito.id_credito='$id_credito'");
+	return mysql_fetch_array($consulta);
+}
+
+
+function getComprasEntreFechas($fechaInicio, $fechaFin){
+	return mysql_query("SELECT * FROM compra INNER JOIN credito ON compra.id_credito = credito.id_credito WHERE compra.fecha BETWEEN '$fechaInicio' AND '$fechaFin' ");
+	}
+
+function getTitularCompra(){
+	return mysql_query("SELECT nombre_usu FROM registrado INNER JOIN compra ON compra.id_registrado = registrado.id_usuario");
+}
+
 function getUsuario($id_usuario){
 	$consult_usuario = mysql_query("SELECT * FROM registrado WHERE id_usuario = '$id_usuario' ");
 	return mysql_fetch_array($consult_usuario);

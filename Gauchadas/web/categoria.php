@@ -44,7 +44,7 @@ session_start();?>
     <?php include("navbarAdm.php"); ?>
 
     <!-- Page Header -->
-    <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: contain;
+    <header class="intro-header" style="background-image: url(img/fondo-gauchada.png); background-size: cover;
     background-position-y: 0; height: 333px;">
         <div class="container">
             <div class="row">
@@ -58,7 +58,7 @@ session_start();?>
             </div>
         </div>
     </header>
-    <div class="container" style="text-align: -webkit-center;">
+      <div class="container" style="text-align: -webkit-center;">
             <i style="margin-right: 5%;"">
                 <a class="adm" href="reputacion.php">Reputacion</a>
             </i>
@@ -66,7 +66,7 @@ session_start();?>
                 <a class="adm" href="categoria.php">Categoría</a>
             </i>
             <i style="margin-right: 5%;"">
-                <a class="adm" href="#" >Ver mis ganancias</a>            
+                <a class="adm" href="vermisganancias.php" >Ver ganancias</a>            
             </i>
             <i style="margin-right: 5%;"">
                 <a class="adm" href="ranking_usuarios.php">Ranking de mejores usuarios</a>
