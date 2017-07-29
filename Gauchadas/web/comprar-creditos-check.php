@@ -13,7 +13,8 @@ if(isset($_POST['cantCreditos'])){
 	$total = $valorCredito['valor'] * $cantCreditos;
 	$idCredito = $valorCredito['id_credito'];
 	$vencimiento = $_POST['vencimiento'];
-	$agregarDetalle  = agregarDetalleCompra($total,$vencimiento,$cantCreditos,$idCredito,$idUsuario);
+	$hoy = date("Y-m-d");
+	$agregarDetalle  = agregarDetalleCompra($total,$hoy,$cantCreditos,$idCredito,$idUsuario);
 	if (!$agregarDetalle){
 		$mensaje = "La compra no se pudo realizar! Intente de nuevo";
 		echo "<script>";
