@@ -15,9 +15,7 @@ $consultaTitulo = mysql_fetch_array($consulta);
 if (empty($consultaTitulo)){
 	if ($titulo != $titulo_original){
 		modificarReputacion($rango_min_ori,$rango_max_ori,$titulo,$id_original);
-		$consulta_titulo = mysql_query("SELECT * FROM reputacion WHERE id_rep = '$id_original'");
-		$nuevo = mysql_fetch_array($consulta_titulo);
-		$titulo_original = $nuevo['titulo'];
+		$titulo_original = $titulo;
 		$consulta = mysql_query("SELECT * FROM reputacion WHERE rango_min = '$rango_min' AND rango_max = '$rango_max' ");
 		$tabla = mysql_fetch_array($consulta);
 		if (empty($tabla)){
@@ -95,9 +93,9 @@ if (empty($consultaTitulo)){
 						else {
 							$consul = mysql_query("SELECT * FROM reputacion WHERE rango_max < '$rango_min_ori' AND rango_max >= '$rango_min' ORDER BY `rango_min`  ASC");
 							while ($tupla = mysql_fetch_array($consul)) {
-								eliminarTupla($tupla['id_rep']);
 								$last_rango_min = $tupla['rango_min'];
 								$last_name = $tupla['titulo'];
+								eliminarTupla($tupla['id_rep']);
 							}
 							$anterior = $rango_min - 1;
 							agregarReputacion($last_rango_min,$anterior,$last_name);
@@ -132,16 +130,16 @@ if (empty($consultaTitulo)){
 						else {
 							$consul = mysql_query("SELECT * FROM reputacion WHERE rango_min > '$rango_max_ori' AND rango_min <= '$rango_max' ORDER BY `rango_min`  ASC");
 							while ($tupla = mysql_fetch_array($consul)) {
-								eliminarTupla($tupla['id_rep']);
 								$last_rango_max = $tupla['rango_max'];
 								$last_name = $tupla['titulo'];
+								eliminarTupla($tupla['id_rep']);
 							}
 							$proximo = $rango_max + 1;
 							agregarReputacion($proximo,$last_rango_max,$last_name);
 							modificarReputacion($rango_min_ori,$rango_max,$titulo_original,$id_original);
 						}
 					}
-					$mensaje = "Se ha realizado con exito la modificacion de la reputacion";
+					$mensaje = "Se ha realizado con exito la modificacion del nombre y el rango maximo de la reputacion";
 					echo "<script>";
 					echo "alert('$mensaje');";
 					echo "window.location = 'reputacion.php'";
@@ -244,9 +242,9 @@ if (empty($consultaTitulo)){
 						else {
 							$consul = mysql_query("SELECT * FROM reputacion WHERE rango_max < '$rango_min_ori' AND rango_max >= '$rango_min' ORDER BY `rango_min`  ASC");
 							while ($tupla = mysql_fetch_array($consul)) {
-								eliminarTupla($tupla['id_rep']);
 								$last_rango_min = $tupla['rango_min'];
 								$last_name = $tupla['titulo'];
+								eliminarTupla($tupla['id_rep']);
 							}
 							$anterior = $rango_min - 1;
 							agregarReputacion($last_rango_min,$anterior,$last_name);
@@ -254,7 +252,7 @@ if (empty($consultaTitulo)){
 						}
 					}
 				}
-				$mensaje = "Se ha realizado con exito la modificacion de la reputacion";
+				$mensaje = "Se ha realizado con exito la modificacion del rango minimo de la reputacion";
 				echo "<script>";
 				echo "alert('$mensaje');";
 				echo "window.location = 'reputacion.php'";
@@ -281,16 +279,16 @@ if (empty($consultaTitulo)){
 						else {
 							$consul = mysql_query("SELECT * FROM reputacion WHERE rango_min > '$rango_max_ori' AND rango_min <= '$rango_max' ORDER BY `rango_min`  ASC");
 							while ($tupla = mysql_fetch_array($consul)) {
-								eliminarTupla($tupla['id_rep']);
 								$last_rango_max = $tupla['rango_max'];
 								$last_name = $tupla['titulo'];
+								eliminarTupla($tupla['id_rep']);
 							}
 							$proximo = $rango_max + 1;
 							agregarReputacion($proximo,$last_rango_max,$last_name);
 							modificarReputacion($rango_min_ori,$rango_max,$titulo_original,$id_original);
 						}
 					}
-					$mensaje = "Se ha realizado con exito la modificacion de la reputacion";
+					$mensaje = "Se ha realizado con exito la modificacion del rango maximo de la reputacion";
 					echo "<script>";
 					echo "alert('$mensaje');";
 					echo "window.location = 'reputacion.php'";

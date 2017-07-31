@@ -71,16 +71,17 @@ function mostrarBarraDeProgreso($id_rep){
 
 function consultaUsuarioPostulado ($nombreUsuario, $id_usuario, $id_gauchada) {
 	if (isset($nombreUsuario)){
-    	if(0 == consultaPostulado($id_usuario,$id_gauchada)){
+        $tabla = consultaGauchada($id_gauchada);
+        $hoy = date("Y-m-d");
+    	if(0 == consultaPostulado($id_usuario,$id_gauchada) && ($hoy <= $tabla['fecha_fin'])){
   			echo "<a class='btn btn-secondary float-right' href='postularse-check.php?variable=".$id_gauchada."'>Postularse  <i class='fa fa-plus' aria-hidden='true'></i></a>";
         } else {
-                $tabla = consultaGauchada($id_gauchada);
-                if( (0 == consultaPostulado($id_usuario,$id_gauchada)) && (date("Y-m-d") <= $tabla['fecha_fin'])){
-                    echo "<a class='btn btn-secondary float-right' href='postularse-check.php?variable=".$id_gauchada."'>Postularse  <i class='fa fa-plus' aria-hidden='true'></i></a>";
+                if( 0 != consultaPostulado($id_usuario,$id_gauchada)){
+                    echo "<a class='btn btn-secondary float-right' style='background-color: #F27321;'>
+                        Postulado  <i class='fa fa-check' aria-hidden='true'></i></span></a>";
                 }
                  else { 
-                        echo "<a class='btn btn-secondary float-right' style='background-color: #F27321;'>
-                        Postulado  <i class='fa fa-check' aria-hidden='true'></i></span></a>";
+                        
                     }
             }
         }
