@@ -293,4 +293,8 @@ function eliminarTupla($id){
 	mysql_query("DELETE FROM reputacion WHERE id_rep = '$id' ");
 }
 
+function consultaAceptado($id_gauchada){
+	$consulta = mysql_query("SELECT * FROM `gauchada` WHERE id_aceptado is NOT NULL and id_gauchada = '$id_gauchada'");
+	return mysql_fetch_array($consulta);
+}
 ?>

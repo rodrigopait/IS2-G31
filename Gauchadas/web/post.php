@@ -94,7 +94,7 @@ session_start();?>
 
                     <?php if(($tabla['id_preggau'] != NULL)){
                         $dueño= getUsuario($tabla['id_registrado']);
-                        mostrarPreguntas($tabla['id_preggau'],$tabla['id_respuesta'], $tabla['id_gauchada'],$dueño['nombre_usu'] );
+                        mostrarPreguntas($tabla['id_preggau'],$tabla['id_respuesta'], $tabla['id_gauchada'], $dueño['nombre_usu'] );
                     }?>
 
                     <?php if(isset($_SESSION['nombreUsuario'])){ ?>
@@ -116,9 +116,14 @@ session_start();?>
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-secondary">Realizar pregunta</button>
                                             </div>
+                                        <?php }?>
+                                        <?php if( (empty(consultaAceptado($tabla['id_gauchada']))) && ($fecha['fecha_fin'] >= $hoy ) && (!empty($calificaciones['id_aceptado'])) && (!empty($consultaCalificacion['id_calificacion'])) ){?>
+                                            <div class="form-group">
+                                                    <button type="submit" class="btn btn-secondary">Realizar pregunta</button>
+                                                </div>
                                         <?php }
                                         else{  ?>
-                                            <?php if($fecha['fecha_fin'] >= $hoy ) {?>
+                                            <?php if( (empty(consultaAceptado($tabla['id_gauchada']))) && ($fecha['fecha_fin'] >= $hoy ) && (!empty($calificaciones['id_aceptado'])) && (!empty($consultaCalificacion['id_calificacion'])) ) {?>
                                                 <div class="form-group">
                                                     <button type="submit" class="btn btn-secondary">Realizar pregunta</button>
                                                 </div>

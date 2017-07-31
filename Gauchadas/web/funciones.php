@@ -189,7 +189,8 @@ function mostrarPreguntas($id_pregunta, $respuestas, $idGauchada, $dueño){
                 echo "<p class='post-meta'><b>Respuesta:</b> ".$tabla['respuesta']."</p>" ;
         }
         else{
-            if(isset($_SESSION['nombreUsuario']) && ( $dueño = $_SESSION['nombreUsuario'] )){
+            if(isset($_SESSION['nombreUsuario'])) {
+                if($_SESSION['nombreUsuario'] == $dueño){
                     echo "<form method='POST' action='post-answer-check.php?id_gauchada=".$tabla['id_gauchada']."&&idPregunta=".$tabla['id_pregunta']."' enctype='multipart/form-data'>
                         <div class='control-group'>
                             <div class='form-group floating-label-form-group controls'>
@@ -197,10 +198,11 @@ function mostrarPreguntas($id_pregunta, $respuestas, $idGauchada, $dueño){
                                 <textarea type='text' rows='2' class='form-control' placeholder='Escribe una respuesta a esta pregunta' required title='Por favor ingrese una respuesta' name='answer' value=''></textarea>  
                             </div>
                             <div class='form-group'>
-                                <button type='submit' class='btn btn-secondary'>Contestar pregunta</button>
+                                <button type='submit' class='btn btn-secondary'> Contestar pregunta</button>
                             </div>
                         </div>
                      </form><hr style='width:100%'> ";
+                }
             }
         }
     }
@@ -217,8 +219,16 @@ function mostrarMensajeErrorPregunta($id_usuario, $id_gauchada, $fecha, $hoy){
         if ( (!empty($consultaCalificacion['id_aceptado'])) && (empty($consultaCalificacion['id_calificacion'])) ){
             echo "<div class='alert alert-danger' style='text-align:center'>
             <button type='button' class='close' data-dismiss='alert'></button>
-            <strong>Usted adeuda calificaciones de gauchadas, no puedes publicar preguntas.</strong>
+            <strong>La gauchada ya tiene un usuario postulado que fue aceptado, no puedes publicar preguntas.</strong>
             </div>";
+        }
+        else{
+            if (!empty(consultaAceptado($id_gauchada))){
+                 echo "<div class='alert alert-danger' style='text-align:center'>
+                    <button type='button' class='close' data-dismiss='alert'></button>
+                    <strong>La gauchada ya tiene un usuario postulado que fue aceptado, no puedes publicar preguntas.</strong>
+                     </div>";
+            }
         }
     }
 }
@@ -274,4 +284,23 @@ function mostrarRangoMaximo($rango_max){
     else return $rango_max;
 }
 
+
+function mostrarMisPostulaciones($consulta, $id_registrado){
+    while ($tabla = mysql_fetch_array($consulta)){
+        if ($tabla['id_registrado'] == $id_registrado ){
+            echo "
+        <div class='post-preview'>
+            <a href='post.php?variable= ".$tabla['id_gauchada']."'>
+                <h2 class='post-title'> ".$tabla['titulo']."
+                    <img href='post.php?variable=".$tabla['id_gauchada']."'
+                    src='".$tabla['foto']."' width='120' height='100' style='position: absolute;right: 40px;'>
+                </h2>
+                <h3 class='post-subtitle'></h3>
+            </a>
+            <p class='post-meta'>Publicado en ".$tabla['ciudad']." el ".$tabla['fecha_ini']."</p>
+            </div>";
+            echo "<hr>";
+        }
+    }
+}
 ?>
