@@ -94,7 +94,7 @@ if (empty($consultaTitulo)){
 							$consul = mysql_query("SELECT * FROM reputacion WHERE rango_max < '$rango_min_ori' AND rango_max >= '$rango_min' ORDER BY `rango_min`  ASC");
 							while ($tupla = mysql_fetch_array($consul)) {
 								$last_rango_min = $tupla['rango_min'];
-								$last_name = $tupla['titulo'];
+								$last_name = $tupla['descripcion'];
 								eliminarTupla($tupla['id_rep']);
 							}
 							$anterior = $rango_min - 1;
@@ -131,7 +131,7 @@ if (empty($consultaTitulo)){
 							$consul = mysql_query("SELECT * FROM reputacion WHERE rango_min > '$rango_max_ori' AND rango_min <= '$rango_max' ORDER BY `rango_min`  ASC");
 							while ($tupla = mysql_fetch_array($consul)) {
 								$last_rango_max = $tupla['rango_max'];
-								$last_name = $tupla['titulo'];
+								$last_name = $tupla['descripcion'];
 								eliminarTupla($tupla['id_rep']);
 							}
 							$proximo = $rango_max + 1;
@@ -243,7 +243,7 @@ if (empty($consultaTitulo)){
 							$consul = mysql_query("SELECT * FROM reputacion WHERE rango_max < '$rango_min_ori' AND rango_max >= '$rango_min' ORDER BY `rango_min`  ASC");
 							while ($tupla = mysql_fetch_array($consul)) {
 								$last_rango_min = $tupla['rango_min'];
-								$last_name = $tupla['titulo'];
+								$last_name = $tupla['descripcion'];
 								eliminarTupla($tupla['id_rep']);
 							}
 							$anterior = $rango_min - 1;
@@ -280,7 +280,7 @@ if (empty($consultaTitulo)){
 							$consul = mysql_query("SELECT * FROM reputacion WHERE rango_min > '$rango_max_ori' AND rango_min <= '$rango_max' ORDER BY `rango_min`  ASC");
 							while ($tupla = mysql_fetch_array($consul)) {
 								$last_rango_max = $tupla['rango_max'];
-								$last_name = $tupla['titulo'];
+								$last_name = $tupla['descripcion'];
 								eliminarTupla($tupla['id_rep']);
 							}
 							$proximo = $rango_max + 1;
