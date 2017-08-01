@@ -43,14 +43,16 @@ if (empty($consultaTitulo)){
 							modificarReputacion($rango_min,$rango_max,$titulo_original,$id_original);
 						}
 						else { //fijarse si hay una sola tupla o mas, como dejar la BD consistente
-							$consul = mysql_query("SELECT * FROM reputacion WHERE rango_min > '$rango_min' AND rango_max < '$rango_max' ");
+							$consul = mysql_query("SELECT * FROM reputacion WHERE rango_min > '$rango_min' AND rango_max < '$rango_max' AND id_rep != '$id_original' ");
 							while ($tupla = mysql_fetch_array($consul)) {
 								eliminarTupla($tupla['id_rep']);
 							}
-							$anterior = $rango_min - 1;
-							$proximo = $rango_max + 1;
-							mysql_query("UPDATE reputacion SET rango_max = '$anterior' WHERE rango_min < '$rango_min' AND rango_max >= '$rango_min' ");
-							mysql_query("UPDATE reputacion SET rango_min = '$proximo' WHERE rango_min <= '$proximo' AND rango_max > '$proximo' ");
+							$anterior = $rango_min_ori - 1;
+							$nuevoRangoMin = $rango_min - 1;
+							$proximo = $rango_max_ori + 1;
+							$nuevoRangoMax = $rango_max + 1;
+							mysql_query("UPDATE reputacion SET rango_max = '$nuevoRangoMin' WHERE rango_min <= '$rango_min' AND rango_max >= '$rango_min' ");
+							mysql_query("UPDATE reputacion SET rango_min = '$nuevoRangoMax' WHERE rango_min <= '$rango_max' AND rango_max >= '$rango_max' ");
 							modificarReputacion($rango_min,$rango_max,$titulo_original,$id_original);
 						}
 					}
@@ -144,14 +146,16 @@ if (empty($consultaTitulo)){
 							modificarReputacion($rango_min,$rango_max,$titulo_original,$id_original);
 						}
 						else { //fijarse si hay una sola tupla o mas, como dejar la BD consistente
-							$consul = mysql_query("SELECT * FROM reputacion WHERE rango_min > '$rango_min' AND rango_max < '$rango_max' ");
+							$consul = mysql_query("SELECT * FROM reputacion WHERE rango_min > '$rango_min' AND rango_max < '$rango_max' AND id_rep != '$id_original' ");
 							while ($tupla = mysql_fetch_array($consul)) {
 								eliminarTupla($tupla['id_rep']);
 							}
-							$anterior = $rango_min - 1;
-							$proximo = $rango_max + 1;
-							mysql_query("UPDATE reputacion SET rango_max = '$anterior' WHERE rango_min < '$rango_min' AND rango_max >= '$rango_min' ");
-							mysql_query("UPDATE reputacion SET rango_min = '$proximo' WHERE rango_min <= '$proximo' AND rango_max > '$proximo' ");
+							$anterior = $rango_min_ori - 1;
+							$nuevoRangoMin = $rango_min - 1;
+							$proximo = $rango_max_ori + 1;
+							$nuevoRangoMax = $rango_max + 1;
+							mysql_query("UPDATE reputacion SET rango_max = '$nuevoRangoMin' WHERE rango_min <= '$rango_min' AND rango_max >= '$rango_min' ");
+							mysql_query("UPDATE reputacion SET rango_min = '$nuevoRangoMax' WHERE rango_min <= '$rango_max' AND rango_max >= '$rango_max' ");
 							modificarReputacion($rango_min,$rango_max,$titulo_original,$id_original);
 						}
 					}
