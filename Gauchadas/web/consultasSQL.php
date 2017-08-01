@@ -89,6 +89,11 @@ function consultaUsuario($id_usuario){
 	return mysql_fetch_array($consulta);
 }
 
+function dueñoGauchada($id_gauchada){
+	$consulta = mysql_query("SELECT * FROM gauchada WHERE id_gauchada = '$id_gauchada'");
+	return mysql_fetch_array($consulta);
+}
+
 function consultaCalificaciones($id_usuario){
 	return mysql_query("SELECT id_aceptado,id_calificacion FROM gauchada NATURAL JOIN registrado WHERE id_usuario = '$id_usuario'");
 }
@@ -197,8 +202,8 @@ function consultaIdRespuesta($ans){
 	return mysql_fetch_array($consulta);
 }
 
-function modificarGauchadaRespuesta($idRespuesta, $idUsuario,$idPregunta){
-	mysql_query("UPDATE pregunta SET id_respuesta = '$idRespuesta' WHERE id_registrado = '$idUsuario' AND id_pregunta = '$idPregunta' ");
+function modificarGauchadaRespuesta($idRespuesta, $idPregunta){
+	mysql_query("UPDATE pregunta SET id_respuesta = '$idRespuesta' WHERE id_pregunta = '$idPregunta' ");
 }
 
 function consultaFechaDeCierre($id_gauchada){
@@ -207,7 +212,7 @@ function consultaFechaDeCierre($id_gauchada){
 }
 
 function agregarRespuesta($ans){
-	mysql_query( "INSERT INTO respuesta (id_respuesta, respuesta) VALUES (NULL,'$ans')");
+	mysql_query( "INSERT INTO respuesta (id_respuesta,respuesta) VALUES (NULL,'$ans')");
 }
 
 function consultaIdPregunta ($id_usuario, $question){
@@ -217,6 +222,10 @@ function consultaIdPregunta ($id_usuario, $question){
 
 function modificarGauchadaPregunta ($id_gauchada, $id_preggau){
 	mysql_query("UPDATE gauchada SET id_preggau = '$id_preggau' WHERE id_gauchada = '$id_gauchada'");
+}
+
+function agregarRespuestaAPregunta($idPregunta, $idRespuesta){
+	mysql_query("UPDATE pregunta SET id_respuesta = '$idRespuesta' WHERE id_pregunta = 'id_pregunta'");
 }
 
 function agregarPregunta($id_usuario, $question){

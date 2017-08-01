@@ -72,7 +72,9 @@ session_start();?>
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1" style="text-align: justify;line-height: 2;">
                     <div class="caption text-muted" style="text-align: left;"> Fecha de creación:
                         <?php echo $tabla['fecha_ini'];?> <i style="margin-left: 40%">Categoria : <?php echo $tabla['tipocategoria']?></i></div>
-                        <?php echo $tabla['descripcion']?>
+                        <?php echo $tabla['descripcion'];
+                            $dueño = dueñoGauchada($tabla['id_gauchada']);
+                        ?>
                     <br />
                     <a href="post.php?variable=<?php echo $tabla['id_gauchada'];?>&&postulado=0">
                         <img class="img-responsive" style="margin-bottom: 2%; max-width: 750px; max-height: 850px;" 
@@ -87,14 +89,12 @@ session_start();?>
                             <?php }
                             else{
                                 consultaUsuarioPostulado($_SESSION['nombreUsuario'],$_SESSION['id_usuario'],
-                                $tabla['id_gauchada']);
+                                $tabla['id_registrado']);
                             }
                         }?> 
                     </div>
-
                     <?php if(($tabla['id_preggau'] != NULL)){
-                        $dueño= getUsuario($tabla['id_registrado']);
-                        mostrarPreguntas($tabla['id_preggau'],$tabla['id_respuesta'], $tabla['id_gauchada'], $dueño['nombre_usu'] );
+                        mostrarPreguntas($tabla['id_preggau'],$tabla['id_respuesta'], $tabla['id_gauchada'], $dueño['id_registrado'] );
                     }?>
 
                     <?php if(isset($_SESSION['nombreUsuario'])){ ?>

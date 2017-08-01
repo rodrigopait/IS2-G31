@@ -189,9 +189,9 @@ function mostrarPreguntas($id_pregunta, $respuestas, $idGauchada, $dueño){
                 echo "<p class='post-meta'><b>Respuesta:</b> ".$tabla['respuesta']."</p>" ;
         }
         else{
-            if(isset($_SESSION['nombreUsuario'])) {
-                if($_SESSION['nombreUsuario'] == $dueño){
-                    echo "<form method='POST' action='post-answer-check.php?id_gauchada=".$tabla['id_gauchada']."&&idPregunta=".$tabla['id_pregunta']."' enctype='multipart/form-data'>
+            if(isset($_SESSION['nombreUsuario'])){
+                if($_SESSION['id_usuario'] == $dueño) {
+                    echo "<form method='POST' action='post-answer-check.php?id_gauchada=".$tabla['id_gauchada']."&&idPregunta=".$tabla['id_pregunta']."' '>
                         <div class='control-group'>
                             <div class='form-group floating-label-form-group controls'>
                                 <label><i class='fa fa-question-circle' aria-hidden='true'></i> Respuesta</label>
