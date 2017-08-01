@@ -70,12 +70,12 @@ session_start();?>
                     <div>
                         <?php $consulta = consultaGauchadaAdeudada($_SESSION['id_usuario']);
                         $consultaVacio = consultaGauchadaAdeudada($_SESSION['id_usuario']);
-                        $reputacionUsuario = calcularReputacion($_SESSION['id_usuario']);
                         if (empty(mysql_fetch_array($consultaVacio))){ ?>
-                            <h3 class="caption text-muted">No se encuantran publicaciones</h3>
+                            <h3 class="caption text-muted">No se encuentran publicaciones</h3>
                         <?php }
                         while ($tupla = mysql_fetch_array($consulta)){ ?>
                             <div class="post-preview">
+                                <?php $reputacionUsuario = calcularReputacion($tupla['id_aceptado']);?>
                                 <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>">
                                     <h2 class="post-title">
                                         <?php echo $tupla['titulo'];?>
@@ -92,7 +92,7 @@ session_start();?>
                                 <h2 class="post-title" style="display:flow-root;">
                                 <?php echo $tupla['nombre_usu'];?></h2>
                                 <div class="progress">
-                                    <?php mostrarBarraDeProgreso($reputacionUsuario['id_rep']);?>
+                                    <!--<?php mostrarBarraDeProgreso($reputacionUsuario['id_rep']);?>-->
                                 </div>
                                 <a style="color:#777">Reputacion :  </a><?php echo $reputacionUsuario['descripcion'];?>
                                 <p class="post-meta">Vive en :  
@@ -132,9 +132,10 @@ session_start();?>
                         <?php $consulta = consultaGauchadaNoAdeudada($_SESSION['id_usuario']);
                         $consultaVacio = consultaGauchadaNoAdeudada($_SESSION['id_usuario']);
                         if (empty(mysql_fetch_array($consultaVacio))){ ?>
-                            <h3 class="caption text-muted">No se encuantran publicaciones</h3>
+                            <h3 class="caption text-muted">No se encuentran publicaciones</h3>
                         <?php }
                         while ($tupla = mysql_fetch_array($consulta)){ ?>
+                            <?php $reputacionUsuario = calcularReputacion($tupla['id_aceptado']);?>
                             <div class="post-preview">
                                 <a href="post.php?variable=<?php echo $tupla['id_gauchada'];?>">
                                     <h2 class="post-title">
@@ -152,7 +153,7 @@ session_start();?>
                                 <h2 class="post-title" style="display:flow-root;">
                                 <?php echo $tupla['nombre_usu'];?></h2>
                                 <div class="progress">
-                                    <?php mostrarBarraDeProgreso($reputacionUsuario['id_rep']);?>
+                                   <!-- <?php mostrarBarraDeProgreso($reputacionUsuario['id_rep']);?>-->
                                 </div>
                                 <a style="color:#777">Reputacion :  </a><?php echo $reputacionUsuario['descripcion'];?>
                                 <p class="post-meta">Vive en :  

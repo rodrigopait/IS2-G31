@@ -56,7 +56,7 @@ session_start();?>
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                     <div class="post-heading" style="text-align: center;">
-                        <h1 style="text-shadow: black;color: #fff;text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"> <?php echo $tabla['nombre_usu'];?> </h1>
+                        <h1 style="text-shadow: black;color: #fff;text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;"> <?php echo "Mis Postulaciones";?> </h1>
                         <h2 class="subheading"></h2>
                     </div>
                 </div>
@@ -69,7 +69,7 @@ session_start();?>
         <div class="row">
             <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
                 <?php $consulta = misPostulaciones($id_usuario);
-                mostrarMisGauchada($consulta, $id_usuario);?>
+                mostrarMisPostulaciones($consulta, $id_usuario);?>
             </div>
         </div>
     </div>

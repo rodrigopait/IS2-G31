@@ -58,7 +58,7 @@ session_start();?>
             </div>
         </div>
     </header>
-      <div class="container" style="text-align: -webkit-center;">
+    <div class="container" style="text-align: -webkit-center;">
             <i style="margin-right: 5%;"">
                 <a class="adm" href="reputacion.php">Reputacion</a>
             </i>
@@ -66,7 +66,7 @@ session_start();?>
                 <a class="adm" href="categoria.php">Categoría</a>
             </i>
             <i style="margin-right: 5%;"">
-                <a class="adm" href="vermisganancias.php" >Ver ganancias</a>            
+                <a class="adm" href="vermisganancias.php" >Ver mis ganancias</a>            
             </i>
             <i style="margin-right: 5%;"">
                 <a class="adm" href="ranking_usuarios.php">Ranking de mejores usuarios</a>

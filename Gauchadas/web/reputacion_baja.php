@@ -18,8 +18,8 @@ else {
 		eliminarTupla($id_original);
 	}
 	else {
-		mysql_query("UPDATE reputacion SET rango_min = '$rango_max_ori' WHERE rango_min = '$proximo' ");
-		mysql_query("UPDATE reputacion SET rango_max = '$rango_min_ori' WHERE rango_max = '$anterior' ");
+		mysql_query("UPDATE reputacion SET rango_min = '$rango_min_ori' WHERE rango_min = '$proximo' ");
+		
 		eliminarTupla($id_original);
 	}
 }

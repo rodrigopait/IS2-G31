@@ -93,6 +93,7 @@ session_start();?>
                             }
                         }?> 
                     </div>
+
                     <?php if(($tabla['id_preggau'] != NULL)){
                         mostrarPreguntas($tabla['id_preggau'],$tabla['id_respuesta'], $tabla['id_gauchada'], $dueño['id_registrado'] );
                     }?>

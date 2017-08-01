@@ -42,20 +42,14 @@ if (empty($consultaTitulo)){
 					$id = $tupla['id_rep'];
 					$newMinAnt = $rango_min - 1;
 					$newMaxProx = $rango_max + 1;
-					if ($anterior == 0 ){
-						mysql_query("UPDATE reputacion SET rango_max = '$newMinAnt' WHERE id_rep = '$id' ");
-						mysql_query("UPDATE reputacion SET rango_min = '$newMaxProx' WHERE rango_min = '$proximo' ");
+					$funcion = calcularTablaAModifcar($rango_min,$rango_max,$tupla['rango_min'],$tupla['rango_max']);
+					if ($funcion == $rango_min){
+						mysql_query("UPDATE reputacion SET rango_max = '$newMinAnt' WHERE rango_max = '$anterior' ");
+						mysql_query("UPDATE reputacion SET rango_min = '$newMaxProx' WHERE id_rep = '$id' ");
 					}
 					else {
-						$funcion = calcularTablaAModifcar($rango_min,$rango_max,$tupla['rango_min'],$tupla['rango_max']);
-						if ($funcion == $rango_min){
-							mysql_query("UPDATE reputacion SET rango_max = '$newMinAnt' WHERE rango_max = '$anterior' ");
-							mysql_query("UPDATE reputacion SET rango_min = '$newMaxProx' WHERE id_rep = '$id' ");
-						}
-						else {
-							mysql_query("UPDATE reputacion SET rango_min = '$newMaxProx' WHERE rango_min = '$proximo' ");
-							mysql_query("UPDATE reputacion SET rango_max = '$newMinAnt' WHERE id_rep = '$id' ");	
-						}
+						mysql_query("UPDATE reputacion SET rango_min = '$newMaxProx' WHERE rango_min = '$proximo' ");
+						mysql_query("UPDATE reputacion SET rango_max = '$newMinAnt' WHERE id_rep = '$id' ");	
 					}
 					insertarReputacion($rango_min,$rango_max,$titulo);
 				}

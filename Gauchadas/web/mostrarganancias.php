@@ -107,11 +107,12 @@ session_start();
            
                 <?php
                 $compra = getComprasEntreFechas($fechaInicio, $fechaFin);
-                if (mysql_num_rows($compra) == 0){
-                    echo "No existen compras";
-                }
+                if (mysql_num_rows($compra) == 0){ ?>
+                    <h3 style="text-align: center;margin-top: 3%;">No existen compras entre <?php echo $fechaInicio;?> y <?php echo $fechaFin;?> </h3>
+                <?php }
                 else{
                 ?>
+                <h5 style="text-align: center;margin-top: 3%;">Ganancias entre <?php echo $fechaInicio;?> y <?php echo $fechaFin;?></h5>
             <table class="table table-hover">
             <thead>
               <tr>

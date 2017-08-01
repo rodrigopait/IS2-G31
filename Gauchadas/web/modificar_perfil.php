@@ -109,7 +109,7 @@ comprobarSession();
                     <br>
                     <div id="success"></div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-secondary">Modifdicar</button>
+                        <button type="submit" class="btn btn-secondary">Modificar</button>
                         <button type="reset" class="btn btn-secondary">Restablecer</button>
                     </div>
                     <?php ?>

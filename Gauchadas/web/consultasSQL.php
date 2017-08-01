@@ -27,7 +27,7 @@ function consultaPostulado($id_registrado,$id_gauchada){
 	$consulta = mysql_query("SELECT * FROM postula WHERE id_gauchada = '$id_gauchada' AND id_registrado = '$id_registrado'");
 	return mysql_fetch_array($consulta);
 	
-}
+}		
 
 function postularse($id_registrado,$id_gauchada){
 	return mysql_query("INSERT INTO postula (id_registrado, id_gauchada) VALUES ('$id_registrado','$id_gauchada')");
@@ -130,11 +130,19 @@ function consultaUsuarioParaPerfil($id_usuario){
 }
 
 function consultaGauchadaAdeudada ($id_usuario){
-	return mysql_query("SELECT * FROM gauchada NATURAL JOIN foto INNER JOIN registrado ON gauchada.id_aceptado = registrado.id_usuario INNER JOIN reputacion ON registrado.id_rep = reputacion.id_rep WHERE gauchada.id_registrado = '$id_usuario' AND id_aceptado IS NOT NULL AND id_calificacion IS NULL");
+	return mysql_query("SELECT * FROM gauchada NATURAL JOIN foto INNER JOIN registrado ON gauchada.id_aceptado = registrado.id_usuario WHERE gauchada.id_registrado = '$id_usuario' AND id_aceptado IS NOT NULL AND id_calificacion IS NULL");
+}
+
+function consultaAdeudada($id_usuario){
+	return mysql_query("SELECT * FROM gauchada WHERE gauchada.id_registrado = '$id_usuario' AND id_aceptado IS NOT NULL AND id_calificacion IS NULL ");
+}
+
+function postulado($id_gauchada){
+	mysql_query("SELECT * FROM postula WHERE postula.id_gauchada = '$id_gauchada' ");
 }
 
 function consultaGauchadaNoAdeudada ($id_usuario){
-	return mysql_query("SELECT * FROM gauchada NATURAL JOIN foto NATURAL JOIN calificacion INNER JOIN puntuacion ON calificacion.id_puntuacion = puntuacion.id_puntuacion INNER JOIN registrado ON gauchada.id_aceptado = registrado.id_usuario INNER JOIN reputacion ON registrado.id_rep = reputacion.id_rep WHERE gauchada.id_registrado = '$id_usuario' AND id_calificacion IS NOT NULL");
+	return mysql_query("SELECT * FROM gauchada NATURAL JOIN foto NATURAL JOIN calificacion INNER JOIN puntuacion ON calificacion.id_puntuacion = puntuacion.id_puntuacion INNER JOIN registrado ON gauchada.id_aceptado = registrado.id_usuario WHERE gauchada.id_registrado = '$id_usuario' AND id_calificacion IS NOT NULL");
 }
 
 function consultaCalificaion(){

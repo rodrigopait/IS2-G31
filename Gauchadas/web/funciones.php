@@ -246,8 +246,9 @@ function calcularReputacion ($id_registrado){
 function agregarCalificacionUsuario($id_registrado,$puntuacion){
     switch ($puntuacion) {
         case 1:
-            $puntos = 1;
-            $creditos = 1;
+            $usuario = getUsuario($id_registrado);
+            $puntos = $usuario['puntos'] + 1;
+            $creditos = $usuario['creditos'] + 1;
             break;
         case 2:
             $usuario = getUsuario($id_registrado);
@@ -286,21 +287,28 @@ function mostrarRangoMaximo($rango_max){
 
 
 function mostrarMisPostulaciones($consulta, $id_registrado){
-    while ($tabla = mysql_fetch_array($consulta)){
-        if ($tabla['id_registrado'] == $id_registrado ){
-            echo "
-        <div class='post-preview'>
-            <a href='post.php?variable= ".$tabla['id_gauchada']."'>
-                <h2 class='post-title'> ".$tabla['titulo']."
-                    <img href='post.php?variable=".$tabla['id_gauchada']."'
-                    src='".$tabla['foto']."' width='120' height='100' style='position: absolute;right: 40px;'>
-                </h2>
-                <h3 class='post-subtitle'></h3>
-            </a>
-            <p class='post-meta'>Publicado en ".$tabla['ciudad']." el ".$tabla['fecha_ini']."</p>
-            </div>";
-            echo "<hr>";
-        }
+    if(empty(mysql_fetch_array($consulta))){
+        echo "<h3 class='caption text-muted'>Aún no te has postulado en ninguna gauchada.</h3>";
     }
+    else{
+        while ($tabla = mysql_fetch_array($consulta)){
+            if ($tabla['id_registrado'] == $id_registrado ){
+                echo "
+            <div class='post-preview'>
+                <a href='post.php?variable= ".$tabla['id_gauchada']."'>
+                    <h2 class='post-title'> ".$tabla['titulo']."
+                        <img href='post.php?variable=".$tabla['id_gauchada']."'
+                        src='".$tabla['foto']."' width='120' height='100' style='position: absolute;right: 40px;'>
+                    </h2>
+                    <h3 class='post-subtitle'></h3>
+                </a>
+                <p class='post-meta'>Publicado en ".$tabla['ciudad']." el ".$tabla['fecha_ini']."</p>
+                </div>";
+                echo "<hr>";
+            }
+        }
+    }    
 }
+
+
 ?>

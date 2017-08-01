@@ -4,6 +4,7 @@ include ("conexion.php");
 include ("consultasSQL.php");
 session_start();
 $idusu = $_GET['usuario'];
+$nombre = $_POST['nombreusuario'];
 $password = $_POST['password'];
 $email = $_POST['email'];
 $ciudad = $_POST['ciudad'];
@@ -22,7 +23,7 @@ if ($_FILES['image']['name']){
 else{
 	$id_foto['id_foto'] = '7';
 }
-modificarUsuario($idusu, $password, $email, $ciudad, $telefono );
+modificarUsuario($idusu, $nombre, $password, $email, $ciudad, $telefono );
 if ($_FILES['image']['name']){
 	modificarFotoUsuario($idusu, $id_foto['id_foto']);
 }
@@ -31,5 +32,6 @@ $mensaje = "Se ha modificado el perfil correctamente.";
 		echo "alert('$mensaje');";
 		echo "window.location = 'perfil.php?id_usuario=$idusu.php'";
 		echo "</script>";
+
 
 ?>

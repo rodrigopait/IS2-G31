@@ -7,7 +7,7 @@ if(empty(existeCategoria($nuevaCategoria))){
 	$mensaje = "Se ha realizado con éxito el alta de la categoria"; 
 }
 else{
-	$mensaje = "No se puede dar de alta la categoría. El titulo que quiere utulizar ya se encuentra en uso.";
+	$mensaje = "No se puede dar de alta la categoría. El titulo que quiere utilizar ya se encuentra en uso.";
 }
 echo "<script>";
 echo "alert('$mensaje');";
