@@ -89,7 +89,7 @@ session_start();?>
                             <?php }
                             else{
                                 consultaUsuarioPostulado($_SESSION['nombreUsuario'],$_SESSION['id_usuario'],
-                                $tabla['id_registrado']);
+                                $id);
                             }
                         }?> 
                     </div>
