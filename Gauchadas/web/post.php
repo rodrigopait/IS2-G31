@@ -123,7 +123,7 @@ session_start();?>
                                                 </div>
                                         <?php }
                                         else{  ?>
-                                            <?php if( (empty(consultaAceptado($tabla['id_gauchada']))) && ($fecha['fecha_fin'] >= $hoy ) && (!empty($calificaciones['id_aceptado'])) && (!empty($consultaCalificacion['id_calificacion'])) ) {?>
+                                            <?php if( (empty(consultaAceptado($tabla['id_gauchada']))) && ($fecha['fecha_fin'] >= $hoy )){?>
                                                 <div class="form-group">
                                                     <button type="submit" class="btn btn-secondary">Realizar pregunta</button>
                                                 </div>

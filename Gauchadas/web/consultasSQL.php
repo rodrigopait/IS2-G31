@@ -148,8 +148,8 @@ function modificarCategoria($id_categoria, $id_gauchada){
 	mysql_query("UPDATE categau SET id_categoria = '$id_categoria' WHERE id_gauchada = '$id_gauchada' ");
 }
 
-function modificarUsuario($idusu, $nombre, $password, $email, $ciudad, $telefono ){
-	mysql_query("UPDATE registrado SET nombre_usu = '$nombre', password = '$password', mail = '$email', ciudad = '$ciudad', telefono = '$telefono' WHERE id_usuario = '$idusu' ");
+function modificarUsuario($idusu, $password, $email, $ciudad, $telefono ){
+	mysql_query("UPDATE registrado SET password = '$password', mail = '$email', ciudad = '$ciudad', telefono = '$telefono' WHERE id_usuario = '$idusu' ");
 }
 
 function modificarFotoUsuario($idusu, $id_foto){

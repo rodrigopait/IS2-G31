@@ -70,7 +70,7 @@ comprobarSession();
                         <div class="form-group floating-label-form-group controls">
                             <label><i class="fa fa-font" aria-hidden="true"></i> Nombre</label>
                             <input type="text" class="form-control" required
-                            title="Por favor ingrese un nombre" name="nombreusuario" value="<?php echo $usuario['nombre_usu'] ?>">
+                            title="Por favor ingrese un nombre" name="nombreusuario" value="<?php echo $usuario['nombre_usu'] ?>" disabled>
                         </div>
                     </div>
                     <div class="control-group">
