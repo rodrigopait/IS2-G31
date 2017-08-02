@@ -67,14 +67,15 @@ session_start();?>
                 if (empty($tabla)){?>
                 <h3 style="text-align:center;color:#F27321">No se encuantran postulados hasta el momento</h3>
                 <?php } $consul_gauchada = consultarUsuariosPostulados($_GET['id_gauchada']);
-                while ($tupla = mysql_fetch_array($consul_gauchada)){?>
+                while ($tupla = mysql_fetch_array($consul_gauchada)){
+                    $reputacion = calcularReputacion($tupla['id_usuario'])?>
                     <div class="post-preview">
                     <h2 class="post-title" style="display: flow-root;"><?php echo  $tupla['nombre_usu'];?>
                     <?php mostrarBotonesPostulado($tupla['id_aceptado'],$tupla['id_registrado'],$_GET['id_gauchada']);?></h2>
                     <div class="progress">
-                      <?php mostrarBarraDeProgreso($tupla['id_rep']);?>
-                    </div>
-                    <a style="color: #777">Reputacion :  </a><?php echo $tupla['descripcion'] ;?>
+<!--                       <?php mostrarBarraDeProgreso($tupla['id_rep']);?>
+ -->                    </div>
+                    <a style="color: #777">Reputacion :  </a><?php echo $reputacion['descripcion'] ;?>
                     <h3 class="post-subtitle"></h3>
                     <p class="post-meta">Vive en :  
                         <a style="margin-right: 10%"> <?php echo $tupla['ciudad'];?></a>Email : <a> <?php echo $tupla['mail']; ?></a>
