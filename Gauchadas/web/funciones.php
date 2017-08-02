@@ -287,7 +287,7 @@ function mostrarRangoMaximo($rango_max){
 
 
 function mostrarMisPostulaciones($consulta, $id_registrado){
-    if(empty(mysql_fetch_array($consulta))){
+    if(mysql_num_rows($consulta) == 0){
         echo "<h3 class='caption text-muted'>Aún no te has postulado en ninguna gauchada.</h3>";
     }
     else{
@@ -306,8 +306,8 @@ function mostrarMisPostulaciones($consulta, $id_registrado){
                 </div>";
                 echo "<hr>";
             }
-        }
-    }    
+        }    
+    }
 }
 
 
