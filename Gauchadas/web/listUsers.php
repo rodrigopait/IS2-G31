@@ -71,7 +71,7 @@ session_start();?>
                     $reputacion = calcularReputacion($tupla['id_usuario'])?>
                     <div class="post-preview">
                     <h2 class="post-title" style="display: flow-root;"><?php echo  $tupla['nombre_usu'];?>
-                    <?php mostrarBotonesPostulado($tupla['id_aceptado'],$tupla['id_registrado'],$_GET['id_gauchada']);?></h2>
+                    <?php mostrarBotonesPostulado($tupla['id_aceptado'],$tupla[0],$_GET['id_gauchada']);?></h2>
                     <div class="progress">
 <!--                       <?php mostrarBarraDeProgreso($tupla['id_rep']);?>
  -->                    </div>

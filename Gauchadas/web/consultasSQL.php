@@ -107,7 +107,7 @@ function categorias(){
 }
 
 function consultarUsuariosPostulados ($id_gauchada){
-	return mysql_query("SELECT * FROM postula INNER JOIN registrado ON postula.id_registrado = registrado.id_usuario WHERE postula.id_gauchada = '$id_gauchada' ");
+	return mysql_query("SELECT * FROM postula INNER JOIN registrado ON postula.id_registrado = registrado.id_usuario INNER JOIN gauchada ON gauchada.id_gauchada = postula.id_gauchada WHERE postula.id_gauchada = '$id_gauchada' ");
 }
 
 function consultarGauchada ($id_gauchada){
