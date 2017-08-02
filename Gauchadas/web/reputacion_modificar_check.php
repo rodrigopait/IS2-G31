@@ -10,6 +10,14 @@ $rango_min_ori = $original['rango_min'];
 $rango_max_ori = $original['rango_max'];
 $titulo_original = $original['descripcion'];
 
+if ($rango_max < $rango_min ){
+	$mensaje = "No se puede modificar la reputacion. El rango maximo debe ser mayor que el rango minimo";
+	echo "<script>";
+	echo "alert('$mensaje');";
+	echo "window.location = 'reputacion_modificar.php?id_rep=".$id_original."'";
+	echo "</script>";
+}
+else {
 $consulta = mysql_query("SELECT * FROM reputacion WHERE descripcion = '$titulo' AND id_rep != '$id_original' ");
 $consultaTitulo = mysql_fetch_array($consulta);
 if (empty($consultaTitulo)){
@@ -274,5 +282,6 @@ else {
 	echo "alert('$mensaje');";
 	echo "window.location = 'reputacion_modificar.php?id_rep=".$id_original."'";
 	echo "</script>";
+}
 }
 ?>

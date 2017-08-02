@@ -13,7 +13,7 @@ if ( $rango_min > $rango_max ){
 $consulta = mysql_query("SELECT * FROM reputacion WHERE descripcion = '$titulo' ");
 $consultaTitulo = mysql_fetch_array($consulta);
 if (empty($consultaTitulo)){
-	if ( ($rango_min > 0) && ($rango_max > 0) ){
+	if ( $rango_max > $rango_min ){
 		$queryExiste = mysql_query("SELECT * FROM reputacion WHERE rango_min = '$rango_min' AND rango_max = '$rango_max'");
 		$existe = mysql_fetch_array($queryExiste);
 		if ( empty($existe) ){
@@ -120,7 +120,7 @@ if (empty($consultaTitulo)){
 		}
 	}
 	else {
-		$mensaje = "No se puede dar de alta la reputacion. Alguno de los elementos ingresados son negativos";
+		$mensaje = "No se puede dar de alta la reputacion. El rango maximo debe ser mayor que el rango minimo";
 	}
 }
 else {
