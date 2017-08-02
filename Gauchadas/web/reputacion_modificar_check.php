@@ -68,9 +68,22 @@ if (empty($consultaTitulo)){
 						echo "</script>";
 					}
 					else {
-						$anterior = $rango_min_ori - 1;
-						$nuevoRango = $rango_min - 1 ;
-						mysql_query("UPDATE reputacion SET rango_max = '$nuevoRango' WHERE rango_max = '$anterior' ");
+						$consulta = mysql_query("SELECT * FROM reputacion WHERE rango_min >= '$rango_min' AND rango_max <= '$rango_max' AND id_rep != '$id_original' ");
+						if (!empty($consulta)){
+							while ($tupla = mysql_fetch_array($consulta)) {
+								eliminarTupla($tupla['id_rep']);
+							}
+							$consulta = mysql_query("SELECT * FROM reputacion WHERE id_rep != '$id_original' AND id_rep != 2 AND rango_min <= '$rango_min' AND rango_max >= '$rango_min' ");
+							if (!empty($consulta)){
+								$nuevoRango = $rango_min - 1 ;
+								mysql_query("UPDATE reputacion SET rango_max = '$nuevoRango' WHERE id_rep != '$id_original' AND id_rep != 2 AND rango_min <= '$rango_min' AND rango_max >= '$rango_min' ");
+							}
+						}
+						else {
+							$anterior = $rango_min_ori - 1;
+							$nuevoRango = $rango_min - 1 ;
+							mysql_query("UPDATE reputacion SET rango_max = '$nuevoRango' WHERE rango_max = '$anterior' ");
+						}
 						modificarReputacion($rango_min,$rango_max_ori,$titulo_original,$id_original);
 					}
 				}
@@ -90,9 +103,22 @@ if (empty($consultaTitulo)){
 						echo "</script>";
 					}
 					else {
-						$proximo = $rango_max_ori + 1;
-						$nuevoRango = $rango_max + 1;
-						mysql_query("UPDATE reputacion SET rango_min = '$nuevoRango' WHERE rango_min = '$proximo' ");
+						$consulta = mysql_query("SELECT * FROM reputacion WHERE rango_min >= '$rango_min' AND rango_max <= '$rango_max' AND id_rep != '$id_original' ");
+						if (!empty($consulta)){
+							while ($tupla = mysql_fetch_array($consulta)) {
+								eliminarTupla($tupla['id_rep']);
+							}
+							$consulta = mysql_query("SELECT * FROM reputacion WHERE id_rep != '$id_original' AND rango_min <= '$rango_max' AND rango_max >= '$rango_max' ");
+							if (!empty($consulta)){
+								$nuevoRango = $rango_max + 1;
+								mysql_query("UPDATE reputacion SET rango_min = '$nuevoRango' WHERE id_rep != '$id_original' AND rango_min <= '$rango_max' AND rango_max >= '$rango_max' ");
+							}
+						}
+						else {
+							$proximo = $rango_max_ori + 1;
+							$nuevoRango = $rango_max + 1;
+							mysql_query("UPDATE reputacion SET rango_min = '$nuevoRango' WHERE rango_min = '$proximo' ");
+						}
 						modificarReputacion($rango_min_ori,$rango_max,$titulo_original,$id_original);
 					}
 					$mensaje = "Se ha realizado con exito la modificacion del rango maximo y el nombre la reputacion";
@@ -171,9 +197,23 @@ if (empty($consultaTitulo)){
 						echo "</script>";
 					}
 					else {
-						$anterior = $rango_min_ori - 1;
-						$nuevoRango = $rango_min - 1 ;
-						mysql_query("UPDATE reputacion SET rango_max = '$nuevoRango' WHERE rango_max = '$anterior' ");
+						$consulta = mysql_query("SELECT * FROM reputacion WHERE rango_min >= '$rango_min' AND rango_max <= '$rango_max' AND id_rep != '$id_original' ");
+						if (!empty($consulta)){
+							while ($tupla = mysql_fetch_array($consulta)) {
+								eliminarTupla($tupla['id_rep']);
+							}
+							$consulta = mysql_query("SELECT * FROM reputacion WHERE id_rep != '$id_original' AND id_rep != 2 AND rango_min <= '$rango_min' AND rango_max >= '$rango_min' ");
+							if (!empty($consulta)){
+								$anterior = $rango_min_ori - 1;
+								$nuevoRango = $rango_min - 1 ;
+								mysql_query("UPDATE reputacion SET rango_max = '$nuevoRango' WHERE rango_max = '$anterior' ");
+							}
+						}
+						else {
+							$anterior = $rango_min_ori - 1;
+							$nuevoRango = $rango_min - 1 ;
+							mysql_query("UPDATE reputacion SET rango_max = '$nuevoRango' WHERE rango_max = '$anterior' ");
+						}
 						modificarReputacion($rango_min,$rango_max_ori,$titulo_original,$id_original);
 					}
 				}
@@ -193,9 +233,22 @@ if (empty($consultaTitulo)){
 						echo "</script>";
 					}
 					else {
-						$proximo = $rango_max_ori + 1;
-						$nuevoRango = $rango_max + 1;
-						mysql_query("UPDATE reputacion SET rango_min = '$nuevoRango' WHERE rango_min = '$proximo' ");
+						$consulta = mysql_query("SELECT * FROM reputacion WHERE rango_min >= '$rango_min' AND rango_max <= '$rango_max' AND id_rep != '$id_original' ");
+						if (!empty($consulta)){
+							while ($tupla = mysql_fetch_array($consulta)) {
+								eliminarTupla($tupla['id_rep']);
+							}
+							$consulta = mysql_query("SELECT * FROM reputacion WHERE id_rep != '$id_original' AND rango_min <= '$rango_max' AND rango_max >= '$rango_max' ");
+							if (!empty($consulta)){
+								$nuevoRango = $rango_max + 1;
+								mysql_query("UPDATE reputacion SET rango_min = '$nuevoRango' WHERE id_rep != '$id_original' AND rango_min <= '$rango_max' AND rango_max >= '$rango_max' ");
+							}
+						}
+						else {
+							$proximo = $rango_max_ori + 1;
+							$nuevoRango = $rango_max + 1;
+							mysql_query("UPDATE reputacion SET rango_min = '$nuevoRango' WHERE rango_min = '$proximo' ");
+						}
 						modificarReputacion($rango_min_ori,$rango_max,$titulo_original,$id_original);
 					}
 					$mensaje = "Se ha realizado con exito la modificacion de la reputacion";

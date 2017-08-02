@@ -63,9 +63,9 @@ session_start();?>
             <div class="col-lg-15 offset-lg-1 col-md-10" style="padding: 0%">
                 <?php $reputacion = consultaReputacionPorId($_GET['id_rep']); ?>
                 <form method='POST' action="reputacion_modificar_check.php?id=<?php echo $_GET['id_rep']; ?>" style="display: flex;">
-                    <input class="form-control" type="number" min="1" max="9999999" name="rango_min" value="" placeholder="<?php echo $reputacion['rango_min']; ?>" required style="margin-right: 0.5%;">
-                    <input class="form-control" min="1" max="9999999" type="number" name="rango_max" value="" placeholder="<?php echo $reputacion['rango_max']; ?>" required style="margin-right: 0.5%;">
-                    <input class="form-control" type="text" name="titulo" value="" placeholder="<?php echo $reputacion['descripcion']; ?>" required style="margin-right: 0.5%;">
+                    <input class="form-control" type="number" min="1" max="9999999" name="rango_min" value="<?php echo $reputacion['rango_min']; ?>"required style="margin-right: 0.5%;">
+                    <input class="form-control" min="1" max="9999999" type="number" name="rango_max" value="<?php echo $reputacion['rango_max']; ?>" required style="margin-right: 0.5%;">
+                    <input class="form-control" type="text" name="titulo" value="<?php echo $reputacion['descripcion']; ?>" required style="margin-right: 0.5%;">
                     <button class="btn btn-secondary" type="submit">Modificar Reputacion</button>
                 </form>
             </div>
