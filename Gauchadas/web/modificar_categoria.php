@@ -5,7 +5,7 @@ $categoria = $_POST['categoria_vieja'];
 $idCategoria = categoriaGeneral($categoria);
  
 if( (!empty(existeCategoria($categoria))) && (empty(existeCategoria($modificar))) && ($idCategoria['id_cat'] == 1) ) {
-		$mensaje = "Las reglas del sistema no permiten dar de baja la categoría General, intételo nuevamente con otra categoría";
+		$mensaje = "Las reglas del sistema no permiten modificar la categoría General, intételo nuevamente con otra categoría";
 }
 else{
 	if( (!empty(existeCategoria($categoria))) && (empty(existeCategoria($modificar))) ) {
