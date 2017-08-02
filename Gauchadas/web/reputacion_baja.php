@@ -19,7 +19,6 @@ else {
 	}
 	else {
 		mysql_query("UPDATE reputacion SET rango_min = '$rango_min_ori' WHERE rango_min = '$proximo' ");
-		
 		eliminarTupla($id_original);
 	}
 }

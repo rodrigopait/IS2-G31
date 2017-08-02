@@ -96,10 +96,14 @@ session_start();?>
                                     <dd class="col-sm-3 text-muted"><?php echo $tablaRep['descripcion']; ?></dd>
                                     <?php if (($tablaRep['id_rep'] == 1 ) OR ($tablaRep['id_rep'] == 2)){?>
                                         <dd class="col-sm-2" ></dd>
-                                    <?php } else {?>
+                                    <?php } else {
+                                        $consulta = mysql_query("SELECT * FROM reputacion WHERE rango_min > 0 ");
+                                        if (mysql_num_rows($consulta) == 1) {?>
+                                            <dd class="col-sm-2" ></dd>
+                                        <?php } else { ?>
                                         <button onclick="window.location.href='reputacion_modificar.php?id_rep=<?php echo $tablaRep['id_rep'];?>'" class="btn btn-secondary" style="margin-right: 0.5%; margin-bottom: 0.5%;">Modificar</button>
                                         <button onclick="window.location.href='reputacion_baja.php?id_rep=<?php echo $tablaRep['id_rep'];?>'" class="btn btn-secondary" style="margin-bottom: 0.5%" >Eliminar</button>
-                                <?php }}?>
+                                <?php }}}?>
                             </dl>
                         </div>
                 </div>
