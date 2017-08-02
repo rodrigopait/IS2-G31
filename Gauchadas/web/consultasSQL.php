@@ -314,4 +314,14 @@ function consultaAceptado($id_gauchada){
 	$consulta = mysql_query("SELECT * FROM `gauchada` WHERE id_aceptado is NOT NULL and id_gauchada = '$id_gauchada'");
 	return mysql_fetch_array($consulta);
 }
+
+function categoriaGeneral($categoria){
+    $consulta = mysql_query("SELECT * FROM categoria WHERE tipocategoria = '$categoria'");
+    return mysql_fetch_array($consulta);
+}
+
+function cambiarCategoriaAGeneral($id_cat){
+	mysql_query("UPDATE categau SET id_categoria = 1 WHERE id_categoria = '$id_cat' ");
+}
+
 ?>

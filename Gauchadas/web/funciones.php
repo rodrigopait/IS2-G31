@@ -306,8 +306,8 @@ function mostrarMisPostulaciones($consulta, $id_registrado){
                 </div>";
                 echo "<hr>";
             }
-        }    
-    }
+        }
+    }    
 }
 
 
