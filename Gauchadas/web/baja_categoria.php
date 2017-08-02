@@ -11,6 +11,7 @@ else{
 	if(!empty(existeCategoria($eliminarCategoria))){
 		cambiarCategoriaAGeneral($idCategoria['id_cat']);
 		borrarCategoria($eliminarCategoria);
+		borrarRelacionCategoria($eliminarCategoria);
 		$mensaje = "Se ha realizado con éxito la baja de la categoria " ;
 	}
 	else{
