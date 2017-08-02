@@ -15,6 +15,8 @@ $consultaTitulo = mysql_fetch_array($consulta);
 if (empty($consultaTitulo)){
 	if ($titulo != $titulo_original){
 		modificarReputacion($rango_min_ori,$rango_max_ori,$titulo,$id_original);
+		$viejoTitulo = $titulo_original;
+		$titulo_original = $titulo;
 		$consulta = mysql_query("SELECT * FROM reputacion WHERE rango_min = '$rango_min' AND rango_max = '$rango_max' ");
 		$tabla = mysql_fetch_array($consulta);
 		if (empty($tabla)){
@@ -33,7 +35,7 @@ if (empty($consultaTitulo)){
 						modificarReputacion($rango_min,$rango_max,$titulo_original,$id_original);
 					}
 					else { //hay tuplas en el medio
-						if ($medio['id_rep'] == $id_original){
+						if ((mysql_num_rows($consultaMedio) == 1) && $medio['id_rep'] == $id_original){
 							$anterior = $rango_min_ori - 1;
 							$nuevoRangoMin = $rango_min - 1;
 							$proximo = $rango_max_ori + 1;
@@ -72,7 +74,7 @@ if (empty($consultaTitulo)){
 						modificarReputacion($rango_min,$rango_max_ori,$titulo_original,$id_original);
 					}
 				}
-				$mensaje = "Se ha realizado con exito la modificacion de el/los rango/s de la reputacion";
+				$mensaje = "Se ha realizado con exito la modificacion de el/los rango/s y el nombre de la reputacion";
 				echo "<script>";
 				echo "alert('$mensaje');";
 				echo "window.location = 'reputacion.php'";
@@ -93,7 +95,7 @@ if (empty($consultaTitulo)){
 						mysql_query("UPDATE reputacion SET rango_min = '$nuevoRango' WHERE rango_min = '$proximo' ");
 						modificarReputacion($rango_min_ori,$rango_max,$titulo_original,$id_original);
 					}
-					$mensaje = "Se ha realizado con exito la modificacion de la reputacion";
+					$mensaje = "Se ha realizado con exito la modificacion del rango maximo y el nombre la reputacion";
 					echo "<script>";
 					echo "alert('$mensaje');";
 					echo "window.location = 'reputacion.php'";
@@ -102,7 +104,7 @@ if (empty($consultaTitulo)){
 			}
 		}
 		else {
-			if ($titulo != $titulo_original){
+			if ($viejoTitulo != $titulo){
 				$mensaje = "Se ha realizado con exito la modificacion del nombre de la reputacion";
 				echo "<script>";
 				echo "alert('$mensaje');";
