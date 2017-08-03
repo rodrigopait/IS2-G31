@@ -3,7 +3,7 @@ include ("funciones.php");
 $rango_min = $_POST['rango_min'];
 $rango_max = $_POST['rango_max'];
 $titulo = $_POST['titulo'];
-if ( $rango_min > $rango_max ){
+if ( $rango_min >= $rango_max ){
 	$mensaje = "No se puede dar de alta la reputacion, el rango maximo debe ser mayor al rango minimo";
 	echo "<script>";
 	echo "alert('$mensaje');";
