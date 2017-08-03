@@ -72,8 +72,10 @@ function mostrarBarraDeProgreso($id_rep){
 function consultaUsuarioPostulado ($nombreUsuario, $id_usuario, $id_gauchada) {
 	if (isset($nombreUsuario)){
         $tabla = consultaGauchada($id_gauchada);
+        $consulta = mysql_query("SELECT * FROM gauchada WHERE id_gauchada = '$id_gauchada' AND id_aceptado IS NOT NULL ");
+        $aceptado = mysql_fetch_array($consulta);
         $hoy = date("Y-m-d");
-    	if(0 == consultaPostulado($id_usuario,$id_gauchada) && ($hoy <= $tabla['fecha_fin'])){
+    	if(0 == consultaPostulado($id_usuario,$id_gauchada) && ($hoy <= $tabla['fecha_fin']) && (0 == $aceptado) ){
   			echo "<a class='btn btn-secondary float-right' href='postularse-check.php?variable=".$id_gauchada."'>Postularse  <i class='fa fa-plus' aria-hidden='true'></i></a>";
         } else {
                 if( 0 != consultaPostulado($id_usuario,$id_gauchada)){

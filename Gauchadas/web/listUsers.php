@@ -65,7 +65,7 @@ session_start();?>
                 $consulta = consultarUsuariosPostulados($_GET['id_gauchada']);
                 $tabla = mysql_fetch_array($consulta);
                 if (empty($tabla)){?>
-                <h3 style="text-align:center;color:#F27321">No se encuantran postulados hasta el momento</h3>
+                <h3 style="text-align:center;color:#F27321">No se encuentran postulados hasta el momento</h3>
                 <?php } $consul_gauchada = consultarUsuariosPostulados($_GET['id_gauchada']);
                 while ($tupla = mysql_fetch_array($consul_gauchada)){
                     $reputacion = calcularReputacion($tupla['id_usuario'])?>

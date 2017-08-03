@@ -214,7 +214,7 @@ if (empty($consultaTitulo)){
 							if (!empty($consulta)){
 								$anterior = $rango_min_ori - 1;
 								$nuevoRango = $rango_min - 1 ;
-								mysql_query("UPDATE reputacion SET rango_max = '$nuevoRango' WHERE rango_max = '$anterior' ");
+								mysql_query("UPDATE reputacion SET rango_max = '$nuevoRango' WHERE id_rep != '$id_original' AND id_rep != 2 AND rango_min <= '$rango_min' AND rango_max >= '$rango_min' ");
 							}
 						}
 						else {
