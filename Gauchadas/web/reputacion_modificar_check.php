@@ -10,8 +10,18 @@ $rango_min_ori = $original['rango_min'];
 $rango_max_ori = $original['rango_max'];
 $titulo_original = $original['descripcion'];
 
-if ($rango_max < $rango_min ){
-	$mensaje = "No se puede modificar la reputacion. El rango maximo debe ser mayor que el rango minimo";
+if (($rango_max < $rango_min) || ($rango_min_ori == 1 && $rango_max == $rango_max_ori && $titulo == $titulo_original) || ( $rango_max_ori == 9999999 && $rango_min_ori == $rango_min && $titulo == $titulo_original) ){
+	if ($rango_max < $rango_min){
+		$mensaje = "No se puede modificar la reputacion. El rango maximo debe ser mayor que el rango minimo";
+	}
+	else {
+		if ($rango_min_ori == 1){
+			$mensaje = "No se puede modificar la reputacion. El rango minimo no puede ser modificado";
+		}
+		else {
+			$mensaje = "No se puede modificar la reputacion. El rango maximo no puede ser modificado";
+		}
+	}
 	echo "<script>";
 	echo "alert('$mensaje');";
 	echo "window.location = 'reputacion_modificar.php?id_rep=".$id_original."'";
@@ -77,7 +87,7 @@ if (empty($consultaTitulo)){
 					}
 					else {
 						$consulta = mysql_query("SELECT * FROM reputacion WHERE rango_min >= '$rango_min' AND rango_max <= '$rango_max' AND id_rep != '$id_original' ");
-						if (!empty($consulta)){
+						if (mysql_num_rows($consulta) != 0){
 							while ($tupla = mysql_fetch_array($consulta)) {
 								eliminarTupla($tupla['id_rep']);
 							}
@@ -112,7 +122,7 @@ if (empty($consultaTitulo)){
 					}
 					else {
 						$consulta = mysql_query("SELECT * FROM reputacion WHERE rango_min >= '$rango_min' AND rango_max <= '$rango_max' AND id_rep != '$id_original' ");
-						if (!empty($consulta)){
+						if (mysql_num_rows($consulta) != 0){
 							while ($tupla = mysql_fetch_array($consulta)) {
 								eliminarTupla($tupla['id_rep']);
 							}
@@ -206,7 +216,7 @@ if (empty($consultaTitulo)){
 					}
 					else {
 						$consulta = mysql_query("SELECT * FROM reputacion WHERE rango_min >= '$rango_min' AND rango_max <= '$rango_max' AND id_rep != '$id_original' ");
-						if (!empty($consulta)){
+						if (mysql_num_rows($consulta) != 0){
 							while ($tupla = mysql_fetch_array($consulta)) {
 								eliminarTupla($tupla['id_rep']);
 							}
@@ -242,7 +252,7 @@ if (empty($consultaTitulo)){
 					}
 					else {
 						$consulta = mysql_query("SELECT * FROM reputacion WHERE rango_min >= '$rango_min' AND rango_max <= '$rango_max' AND id_rep != '$id_original' ");
-						if (!empty($consulta)){
+						if (mysql_num_rows($consulta) != 0){
 							while ($tupla = mysql_fetch_array($consulta)) {
 								eliminarTupla($tupla['id_rep']);
 							}
